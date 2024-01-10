@@ -18,7 +18,7 @@ export default function Class(props: Section) {
 
     return (
         <button
-            className={'px-6 py-3 rounded border text-left' + (selected ? ' border-black' : '')}
+            className={'px-6 py-3 rounded border text-left transition duration-150 ' + (selected ? 'border-theme' : 'hover:border-theme')}
             onClick={toggleSelected}
         >
             <section className="flex gap-2">

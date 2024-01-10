@@ -7,7 +7,11 @@ module.exports = {
   ],
   darkMode: 'class',
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        theme: '#F8C537'
+      }
+    },
     container: {
       center: true,
       padding: {
