@@ -13,7 +13,7 @@ export default function Class(props: Section) {
                     ))}
                 </div>
 
-                <div className="bg-zinc-800 text-white text-xs px-2 pt-0.5 pb-1 mt-1 h-max rounded-full font-semibold">
+                <div className="bg-zinc-800 text-white text-xs px-2 py-0.5 mt-0.5 h-max rounded-full font-semibold">
                     {props.type}
                 </div>
             </section>
