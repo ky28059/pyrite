@@ -12,8 +12,8 @@ export default function Class(props: Section) {
                 ))}
             </section>
 
-            {props.instructors?.map(i => (
-                <p className="font-light text-sm">
+            {props.instructors?.map((i) => (
+                <p className="font-light text-sm" key={i.formattedName}>
                     {i.firstName} {i.lastName}{i.email && (
                         <> (<a href={`mailto:${i.email}`} className="text-blue-500 font-normal hover:underline">{i.email}</a>)</>
                     )}
