@@ -7,7 +7,7 @@ export default function Class(props: Section) {
             <section className="flex gap-2">
                 <div className="flex flex-col">
                     {props.sections.map((id, i) => (
-                        <h3 className="font-medium font-lg" key={id}>
+                        <h3 className="font-semibold font-lg" key={id}>
                             {props.names[i]}: {props.titles[i]} ({id})
                         </h3>
                     ))}

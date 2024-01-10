@@ -1,11 +1,14 @@
 import type {ReactNode} from 'react';
 import {Inter} from 'next/font/google';
 
-import './globals.css';
+// Components
 import Sidebar from '@/app/Sidebar';
+import UserDataProvider from '@/components/UserDataProvider';
+
+import './globals.css';
+
 
 const inter = Inter({ subsets: ['latin'] });
-
 
 export const metadata = {
     title: {
@@ -20,8 +23,10 @@ export default function Layout(props: { children: ReactNode }) {
         <html lang="en">
             <body className={inter.className}>
             <main className="flex">
-                <Sidebar />
-                {props.children}
+                <UserDataProvider>
+                    <Sidebar />
+                    {props.children}
+                </UserDataProvider>
             </main>
             </body>
         </html>
