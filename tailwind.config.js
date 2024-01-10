@@ -9,7 +9,23 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        theme: '#F8C537'
+        theme: '#F8C537',
+        secondary: {
+          DEFAULT: '#757575',
+          dark: '#777777',
+        },
+        tertiary: {
+          DEFAULT: 'rgb(229 231 235)',
+          dark: '#404040'
+        },
+        content: {
+          DEFAULT: '#ffffff',
+          dark: '#1b1b1b'
+        },
+        'content-secondary': {
+          DEFAULT: '',
+          dark: '#0B0B0B'
+        }
       }
     },
     container: {

@@ -28,10 +28,10 @@ export default function Classes(props: {classes: {[id: string]: Section}}) {
                     type="text"
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
-                    className="border rounded px-3 py-1.5 focus:outline-none focus-visible:ring-[3px] w-full mb-1"
+                    className="border border-tertiary dark:border-tertiary-dark rounded px-3 py-1.5 focus:outline-none focus-visible:ring-[3px] w-full mb-1 dark:bg-content-secondary-dark placeholder:text-secondary dark:placeholder:text-secondary-dark"
                     placeholder="Search classes by name (SCLA 101) or title (Multivariate Calculus)"
                 />
-                <p className="text-xs font-light">
+                <p className="text-xs font-light text-secondary dark:text-secondary-dark">
                     Viewing {Math.min(100, filtered.length)} of {filtered.length} courses.
                 </p>
             </section>
