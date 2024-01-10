@@ -15,12 +15,12 @@ export default function Class(props: Section) {
         const newIds = selected
             ? data.courseIds.filter(s => s !== props.sections[0])
             : [...data.courseIds, props.sections[0]]
-        setData({courseIds: newIds});
+        setData({...data, courseIds: newIds});
     }
 
     return (
         <button
-            className={'px-6 py-3 rounded border text-left transition duration-150 ' + (selected ? 'border-theme' : 'border-tertiary dark:border-secondary-dark hover:!border-theme')}
+            className={'px-6 py-3 rounded border text-left transition duration-150 ' + (selected ? 'bg-theme/20 border-theme' : 'border-tertiary dark:border-secondary-dark hover:!border-theme')}
             onClick={toggleSelected}
         >
             <section className="flex gap-2">
