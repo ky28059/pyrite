@@ -10,8 +10,8 @@ export default function HomeClock() {
     const mounted = useIsMounted();
 
     return (
-        <div>
-            {mounted ? time.toISOTime() : ''}
+        <div className="text-3xl text-center font-semibold mb-4">
+            {mounted ? time.toFormat('h:mm:ss a') : ''}
         </div>
     )
 }

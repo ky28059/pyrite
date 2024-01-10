@@ -20,7 +20,7 @@ export default function YourClasses(props: {classes: {[id: string]: Section}}) {
                     No classes to show. Add classes by selecting them on the left.
                 </p>
             ) : (
-                <div className="flex flex-col gap-4">
+                <div className="flex flex-col gap-3">
                     {data.courseIds.map((id) => (
                         <Class {...props.classes[id]} key={id} />
                     ))}
