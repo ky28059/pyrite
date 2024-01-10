@@ -4,6 +4,7 @@ import {Inter} from 'next/font/google';
 // Components
 import Sidebar from '@/app/Sidebar';
 import UserDataProvider from '@/components/UserDataProvider';
+import CurrentTimeProvider from '@/components/CurrentTimeProvider';
 
 import './globals.css';
 
@@ -24,8 +25,10 @@ export default function Layout(props: { children: ReactNode }) {
             <body className={inter.className}>
             <main className="flex">
                 <UserDataProvider>
-                    <Sidebar />
-                    {props.children}
+                    <CurrentTimeProvider>
+                        <Sidebar />
+                        {props.children}
+                    </CurrentTimeProvider>
                 </UserDataProvider>
             </main>
             </body>

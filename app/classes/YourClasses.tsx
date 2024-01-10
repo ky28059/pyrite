@@ -1,9 +1,11 @@
 'use client'
 
 import {useContext} from 'react';
-import {UserDataContext} from '@/contexts/UserDataContext';
-import type {Section} from '@/util/unitime';
 import Class from '@/app/classes/Class';
+
+// Utils
+import UserDataContext from '@/contexts/UserDataContext';
+import type {Section} from '@/util/unitime';
 
 
 export default function YourClasses(props: {classes: {[id: string]: Section}}) {

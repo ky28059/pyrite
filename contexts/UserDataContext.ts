@@ -14,7 +14,8 @@ type UserDataContext = {
     setData: (d: UserData) => void
 }
 
-export const UserDataContext = createContext<UserDataContext>({
+const UserDataContext = createContext<UserDataContext>({
     data: defaultUserData,
     setData: () => {}
 });
+export default UserDataContext;

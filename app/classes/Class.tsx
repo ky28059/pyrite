@@ -1,7 +1,9 @@
 'use client'
 
 import {useContext} from 'react';
-import {UserDataContext} from '@/contexts/UserDataContext';
+
+// Utils
+import UserDataContext from '@/contexts/UserDataContext';
 import type {Section} from '@/util/unitime';
 
 

@@ -1,7 +1,7 @@
 'use client'
 
 import {ReactNode, useLayoutEffect, useState} from 'react';
-import {defaultUserData, UserData, UserDataContext} from '@/contexts/UserDataContext';
+import UserDataContext, {defaultUserData, UserData} from '@/contexts/UserDataContext';
 
 
 // Local-caching & cloud-backed algorithm borrowed from
