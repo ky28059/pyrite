@@ -1,6 +1,5 @@
 import HomeClock from '@/app/(home)/HomeClock';
-import HomeDatePicker from '@/app/(home)/HomeDatePicker';
-import Calendar from '@/app/(home)/Calendar';
+import Schedule from '@/app/(home)/Schedule';
 
 import {loadClasses} from '@/util/unitime';
 
@@ -11,9 +10,7 @@ export default async function Home() {
     return (
         <main className="container py-24">
             <HomeClock />
-            <HomeDatePicker />
-
-            <Calendar classes={classes} />
+            <Schedule classes={classes} />
         </main>
     )
 }

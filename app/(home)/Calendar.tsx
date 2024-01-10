@@ -1,16 +1,8 @@
-'use client'
-
-import {useContext} from 'react';
 import ScheduleClass from '@/app/(home)/ScheduleClass';
-
-// Utils
-import UserDataContext from '@/contexts/UserDataContext';
 import type {Section} from '@/util/unitime';
 
 
-export default function Calendar(props: {classes: {[id: string]: Section}}) {
-    const {data} = useContext(UserDataContext);
-
+export default function Calendar(props: {classes: Section[]}) {
     return (
         <div className="relative grid grid-rows-[repeat(144,_0.5rem)] grid-cols-[4rem_1fr_2rem]">
             {/* Hour labels */}
@@ -29,9 +21,8 @@ export default function Calendar(props: {classes: {[id: string]: Section}}) {
             </div>
 
             {/* Classes */}
-            {/* TODO: sort by weekday */}
-            {data.courseIds.map((id) => (
-                <ScheduleClass {...props.classes[id]} key={id} />
+            {props.classes.map(c => (
+                <ScheduleClass {...c} key={c.sections[0]} />
             ))}
         </div>
     )
