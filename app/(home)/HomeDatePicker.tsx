@@ -1,6 +1,7 @@
 'use client'
 
 import {DateTime} from 'luxon';
+import {useHotkeys} from 'react-hotkeys-hook';
 import {FaChevronLeft, FaChevronRight} from 'react-icons/fa';
 
 
@@ -18,6 +19,9 @@ export default function HomeDatePicker(props: HomeDatePickerProps) {
     function incDay() {
         setViewDate(viewDate.plus({day: 1}));
     }
+
+    useHotkeys('left', decDay, [viewDate]);
+    useHotkeys('right', incDay, [viewDate]);
 
     return (
         <div className="flex gap-2 justify-center mb-10">
