@@ -2,6 +2,7 @@ import type {ReactNode} from 'react';
 import {Inter} from 'next/font/google';
 
 import './globals.css';
+import Sidebar from '@/app/Sidebar';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -18,7 +19,10 @@ export default function Layout(props: { children: ReactNode }) {
     return (
         <html lang="en">
             <body className={inter.className}>
+            <main className="flex">
+                <Sidebar />
                 {props.children}
+            </main>
             </body>
         </html>
     )
