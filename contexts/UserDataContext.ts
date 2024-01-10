@@ -2,11 +2,17 @@ import {createContext} from 'react';
 
 
 export type UserData = {
-    courseIds: string[]
+    courseIds: string[],
+    options: {
+        theme: 'light' | 'dark'
+    }
 }
 
 export const defaultUserData: UserData = {
-    courseIds: []
+    courseIds: [],
+    options: {
+        theme: 'light'
+    }
 }
 
 type UserDataContext = {
