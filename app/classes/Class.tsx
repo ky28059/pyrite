@@ -1,9 +1,26 @@
+'use client'
+
+import {useContext} from 'react';
+import {UserDataContext} from '@/contexts/UserDataContext';
 import type {Section} from '@/util/unitime';
 
 
 export default function Class(props: Section) {
+    const {data, setData} = useContext(UserDataContext);
+    const selected = data.courseIds.includes(props.sections[0]);
+
+    function toggleSelected() {
+        const newIds = selected
+            ? data.courseIds.filter(s => s !== props.sections[0])
+            : [...data.courseIds, props.sections[0]]
+        setData({courseIds: newIds});
+    }
+
     return (
-        <div className="px-6 py-3 rounded border">
+        <button
+            className={'px-6 py-3 rounded border text-left' + (selected ? ' border-black' : '')}
+            onClick={toggleSelected}
+        >
             <section className="flex gap-2">
                 <div className="flex flex-col">
                     {props.sections.map((id, i) => (
@@ -29,6 +46,6 @@ export default function Class(props: Section) {
                     )}
                 </p>
             ))}
-        </div>
+        </button>
     )
 }

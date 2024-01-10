@@ -9,4 +9,12 @@ export const defaultUserData: UserData = {
     courseIds: []
 }
 
-export const UserDataContext = createContext<UserData>(defaultUserData);
+type UserDataContext = {
+    data: UserData,
+    setData: (d: UserData) => void
+}
+
+export const UserDataContext = createContext<UserDataContext>({
+    data: defaultUserData,
+    setData: () => {}
+});

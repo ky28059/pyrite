@@ -22,13 +22,13 @@ export default function Classes(props: {classes: {[id: string]: Section}}) {
     }, [query])
 
     return (
-        <div>
+        <div className="flex-grow">
             <section className="mb-6">
                 <input
                     type="text"
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
-                    className="border rounded px-3 py-1.5 focus:outline-none focus-visible:ring-[3px] w-[36rem] mb-1"
+                    className="border rounded px-3 py-1.5 focus:outline-none focus-visible:ring-[3px] w-full mb-1"
                     placeholder="Search classes by name (SCLA 101) or title (Multivariate Calculus)"
                 />
                 <p className="text-xs font-light">

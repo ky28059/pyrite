@@ -1,6 +1,9 @@
-import type {Metadata} from 'next';
 import Classes from '@/app/classes/Classes';
+import YourClasses from '@/app/classes/YourClasses';
+
+// Utils
 import {loadClasses} from '@/util/unitime';
+import type {Metadata} from 'next';
 
 
 export const metadata: Metadata = {
@@ -16,7 +19,10 @@ export default async function ClassesPage() {
                 Classes
             </h1>
 
-            <Classes classes={classes} />
+            <div className="flex gap-16">
+                <Classes classes={classes} />
+                <YourClasses classes={classes} />
+            </div>
         </main>
     )
 }
