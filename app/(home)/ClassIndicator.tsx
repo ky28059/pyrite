@@ -8,10 +8,11 @@ type ClassIndicatorProps = {
     classes: Section[]
 }
 export default function ClassIndicator(props: ClassIndicatorProps) {
-    const {prev, next, span, length, toStart, toEnd} = useNextPeriod(props.classes);
+    const {next, span, length, toStart, toEnd} = useNextPeriod(props.classes);
     if (!next) return null;
 
     // If we're past the start of the next period, display "in progress" text.
+    // Display minutes when > 1 minute remaining, seconds in the last minute.
     if (toStart <= 0) {
         const endQuantity = toEnd < 1
             ? Math.ceil(toEnd * 60)

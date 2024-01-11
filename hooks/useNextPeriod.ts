@@ -3,7 +3,13 @@ import CurrentTimeContext from '@/contexts/CurrentTimeContext';
 import {Section} from '@/util/unitime';
 
 
-// See https://github.com/GunnWATT/watt/blob/main/shared/util/schedule.ts
+/**
+ * Get the next period (and info about relative times for it) from a list of classes.
+ * Original logic borrowed from {@link https://github.com/GunnWATT/watt/blob/main/shared/util/schedule.ts WATT}.
+ *
+ * @param classes The (sorted) list of classes on that given day.
+ * @returns The next period, the minutes to its start and end, and its length and length of break preceding it.
+ */
 export function useNextPeriod(classes: Section[]) {
     const time = useContext(CurrentTimeContext);
 
@@ -11,8 +17,8 @@ export function useNextPeriod(classes: Section[]) {
     const midnight = localized.startOf('day');
     const minutes = localized.diff(midnight, 'minutes').minutes;
 
-    let prev = null, next = null, span = 0, length = 0, toStart = 0, toEnd = 0;
-    if (!classes.length) return {prev, next, span, length, toStart, toEnd};
+    if (!classes.length)
+        return {next: null, span: 0, length: 0, toStart: 0, toEnd: 0};
 
     // Loop through all periods, finding the index of the first period for which the current time is less
     // than the end time.
@@ -22,28 +28,25 @@ export function useNextPeriod(classes: Section[]) {
     }
 
     // If no period exists that has an end time after the current time, no next period exists.
-    if (currPd >= classes.length) {
-        prev = classes[classes.length - 1];
+    if (currPd >= classes.length)
+        return {next: null, span: 0, length: 0, toStart: 0, toEnd: 0};
 
-        toEnd = minutes - parseTimeMinutes(prev.end);
-    } else if (currPd > 0) {
-        prev = classes[currPd - 1];
-        next = classes[currPd];
+    const next = classes[currPd];
+    const prev = classes[currPd - 1];
 
-        span = parseTimeMinutes(next.start) - parseTimeMinutes(prev.end);
-        toStart = parseTimeMinutes(next.start) - minutes;
-        toEnd = parseTimeMinutes(next.end) - minutes;
-        length = parseTimeMinutes(next.end) - parseTimeMinutes(next.start);
-    } else {
-        next = classes[currPd];
+    // Span = minutes between previous and next period
+    const span = prev
+        ? parseTimeMinutes(next.start) - parseTimeMinutes(prev.end)
+        : 30;
 
-        span = 30;
-        toStart = parseTimeMinutes(next.start) - minutes;
-        toEnd = parseTimeMinutes(next.end) - minutes;
-        length = parseTimeMinutes(next.end) - parseTimeMinutes(next.start);
-    }
+    // Length = length (in minutes) of next period
+    const length = parseTimeMinutes(next.end) - parseTimeMinutes(next.start);
 
-    return {prev, next, span, length, toStart, toEnd}
+    // Minutes to start and end of next period
+    const toStart = parseTimeMinutes(next.start) - minutes;
+    const toEnd = parseTimeMinutes(next.end) - minutes;
+
+    return {next, span, length, toStart, toEnd}
 }
 
 function parseTimeMinutes(time: string) {
