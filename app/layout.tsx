@@ -3,6 +3,7 @@ import {Inter} from 'next/font/google';
 
 // Components
 import Sidebar from '@/app/Sidebar';
+import FirebaseProviders from '@/components/FirebaseProviders';
 import UserDataProvider from '@/components/UserDataProvider';
 import CurrentTimeProvider from '@/components/CurrentTimeProvider';
 
@@ -23,14 +24,16 @@ export default function Layout(props: { children: ReactNode }) {
     return (
         <html lang="en">
             <body className="bg-content dark:bg-content-dark dark:text-white" style={inter.style}>
-            <main className="flex">
+            <FirebaseProviders>
                 <UserDataProvider>
                     <CurrentTimeProvider>
-                        <Sidebar />
-                        {props.children}
+                        <main className="flex">
+                            <Sidebar />
+                            {props.children}
+                        </main>
                     </CurrentTimeProvider>
                 </UserDataProvider>
-            </main>
+            </FirebaseProviders>
             </body>
         </html>
     )
