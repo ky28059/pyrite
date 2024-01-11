@@ -17,11 +17,13 @@ export const defaultUserData: UserData = {
 
 type UserDataContext = {
     data: UserData,
-    setData: (d: UserData) => void
+    setData: (d: UserData) => void,
+    setLocalData: (d: UserData) => void,
 }
 
 const UserDataContext = createContext<UserDataContext>({
     data: defaultUserData,
-    setData: () => {}
+    setData: () => {},
+    setLocalData: () => {}
 });
 export default UserDataContext;

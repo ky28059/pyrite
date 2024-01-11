@@ -2,12 +2,17 @@
 
 import {ReactNode, useLayoutEffect, useState} from 'react';
 import UserDataContext, {defaultUserData, UserData} from '@/contexts/UserDataContext';
+import {useFirestore, useUser} from 'reactfire';
+import {doc, setDoc} from 'firebase/firestore';
 
 
 // Local-caching & cloud-backed algorithm borrowed from
 // https://github.com/SVWEFSBRWHWBCOTSEID/game-website/blob/main/components/PreferencesProvider.tsx
 export default function UserDataProvider(props: {children: ReactNode}) {
     const [data, setData] = useState(defaultUserData);
+
+    const firestore = useFirestore();
+    const {data: user} = useUser();
 
     // Load saved preferences from `localStorage` on mount
     useLayoutEffect(() => {
@@ -25,13 +30,26 @@ export default function UserDataProvider(props: {children: ReactNode}) {
         document.documentElement.className = data.options.theme;
     }, [data.options.theme]);
 
+    /**
+     * Update the user's Firestore data if logged in; otherwise, directly edit the `localStorage` cache instead.
+     * @param newData The new user data.
+     */
+    function updateUserData(newData: UserData) {
+        if (!user) return setLocalData(newData);
+        void setDoc(doc(firestore, 'users', user.uid), newData);
+    }
+
+    /**
+     * Update the `localStorage` user data cache with new data.
+     * @param newData The new user data.
+     */
     function setLocalData(newData: UserData) {
         localStorage.setItem('data', JSON.stringify(newData));
         setData(newData);
     }
 
     return (
-        <UserDataContext.Provider value={{data, setData: setLocalData}}>
+        <UserDataContext.Provider value={{data, setData: updateUserData, setLocalData}}>
             {props.children}
         </UserDataContext.Provider>
     )
