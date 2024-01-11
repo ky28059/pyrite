@@ -12,11 +12,15 @@ module.exports = {
     extend: {
       colors: {
         theme: '#F8C537',
-        secondary: {
+        primary: { // Primary text color
+          DEFAULT: '#212121',
+          dark: '#ffffff'
+        },
+        secondary: { // Secondary text color
           DEFAULT: '#757575',
           dark: '#777777',
         },
-        tertiary: {
+        tertiary: { // Tertiary text color
           DEFAULT: 'rgb(229 231 235)',
           dark: '#404040'
         },

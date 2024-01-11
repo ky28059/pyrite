@@ -56,7 +56,7 @@ function ProgressBar(props: {value: number}) {
     return (
         <div className="flex overflow-hidden bg-tertiary dark:bg-tertiary-dark h-2 rounded">
             <div
-                className="bg-black dark:bg-white transition-[width] duration-700"
+                className="bg-primary dark:bg-primary-dark transition-[width] duration-700"
                 style={{width: `${props.value}%`}}
             />
         </div>

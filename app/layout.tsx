@@ -23,7 +23,7 @@ export const metadata = {
 export default function Layout(props: { children: ReactNode }) {
     return (
         <html lang="en">
-            <body className="bg-content dark:bg-content-dark dark:text-white" style={inter.style}>
+            <body className="bg-content dark:bg-content-dark text-primary dark:text-primary-dark" style={inter.style}>
             <FirebaseProviders>
                 <UserDataProvider>
                     <CurrentTimeProvider>
