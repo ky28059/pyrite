@@ -41,7 +41,7 @@ export default function ScheduleClass(props: Section) {
  * @param time The string to parse.
  * @returns The number of grid rows this time represents.
  */
-function parseTime(time: string) {
+export function parseTime(time: string) {
     if (time === 'noon') return 61;
 
     // Parse AM/PM time string, subtracting 84 because the grid starts at 7:00 AM and adding one for indexing.
