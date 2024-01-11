@@ -1,8 +1,11 @@
 'use client'
 
-import type {Section} from '@/util/unitime';
 import {useState} from 'react';
 import CenteredModal from '@/components/CenteredModal';
+
+// Utils
+import type {Section} from '@/util/unitime';
+import {parseUnitimeMinutes} from '@/hooks/useNextPeriod';
 
 
 export default function ScheduleClass(props: Section) {
@@ -11,7 +14,7 @@ export default function ScheduleClass(props: Section) {
     return (
         <>
             <button
-                style={{gridRowStart: parseTime(props.start), gridRowEnd: parseTime(props.end), gridColumnStart: 2}}
+                style={{gridRowStart: parseGridRows(props.start), gridRowEnd: parseGridRows(props.end), gridColumnStart: 2}}
                 className="bg-theme text-left text-white rounded px-4 py-3 hover:ring-4 hover:ring-yellow-500/30 transition duration-100"
                 onClick={() => setOpen(true)}
             >
@@ -82,12 +85,7 @@ export default function ScheduleClass(props: Section) {
  * @param time The string to parse.
  * @returns The number of grid rows this time represents.
  */
-export function parseTime(time: string) {
-    if (time === 'noon') return 61;
-
-    // Parse AM/PM time string, subtracting 84 because the grid starts at 7:00 AM and adding one for indexing.
-    let [hour, minute] = time.slice(0, time.length - 1).split(':').map(s => Number(s));
-    if (time.endsWith('p') && hour != 12) hour += 12;
-
-    return (hour * 60 + minute) / 5 - 84 + 1;
+export function parseGridRows(time: string) {
+    const minutes = parseUnitimeMinutes(time);
+    return minutes / 5 - 84 + 1;
 }

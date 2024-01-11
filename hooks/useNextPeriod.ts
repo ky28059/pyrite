@@ -24,7 +24,7 @@ export function useNextPeriod(classes: Section[]) {
     // than the end time.
     let currPd;
     for (currPd = 0; currPd < classes.length; currPd++) {
-        if (minutes < parseTimeMinutes(classes[currPd].end)) break;
+        if (minutes < parseUnitimeMinutes(classes[currPd].end)) break;
     }
 
     // If no period exists that has an end time after the current time, no next period exists.
@@ -36,20 +36,25 @@ export function useNextPeriod(classes: Section[]) {
 
     // Span = minutes between previous and next period
     const span = prev
-        ? parseTimeMinutes(next.start) - parseTimeMinutes(prev.end)
+        ? parseUnitimeMinutes(next.start) - parseUnitimeMinutes(prev.end)
         : 30;
 
     // Length = length (in minutes) of next period
-    const length = parseTimeMinutes(next.end) - parseTimeMinutes(next.start);
+    const length = parseUnitimeMinutes(next.end) - parseUnitimeMinutes(next.start);
 
     // Minutes to start and end of next period
-    const toStart = parseTimeMinutes(next.start) - minutes;
-    const toEnd = parseTimeMinutes(next.end) - minutes;
+    const toStart = parseUnitimeMinutes(next.start) - minutes;
+    const toEnd = parseUnitimeMinutes(next.end) - minutes;
 
     return {next, span, length, toStart, toEnd}
 }
 
-function parseTimeMinutes(time: string) {
+/**
+ * Parses a UniTime time string into its corresponding number of minutes from 12:00 AM.
+ * @param time The string to parse.
+ * @returns The number of minutes from midnight this string represents.
+ */
+export function parseUnitimeMinutes(time: string) {
     if (time === 'noon') return 720;
 
     // Parse AM/PM time string, subtracting 84 because the grid starts at 7:00 AM and adding one for indexing.

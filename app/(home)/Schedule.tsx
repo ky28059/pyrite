@@ -6,12 +6,12 @@ import {DateTime} from 'luxon';
 // Components
 import HomeDatePicker from '@/app/(home)/HomeDatePicker';
 import Calendar from '@/app/(home)/Calendar';
+import ClassIndicator from '@/app/(home)/ClassIndicator';
 
 // Utils
 import UserDataContext from '@/contexts/UserDataContext';
-import {parseTime} from '@/app/(home)/ScheduleClass';
+import {parseUnitimeMinutes} from '@/hooks/useNextPeriod';
 import type {Section} from '@/util/unitime';
-import ClassIndicator from '@/app/(home)/ClassIndicator';
 
 
 export default function Schedule(props: {classes: {[id: string]: Section}}) {
@@ -28,7 +28,7 @@ export default function Schedule(props: {classes: {[id: string]: Section}}) {
             case 5: return c.dayOfWeek.includes('F');
         }
         return false;
-    }).sort((a, b) => parseTime(a.start) - parseTime(b.start));
+    }).sort((a, b) => parseUnitimeMinutes(a.start) - parseUnitimeMinutes(b.start));
 
     return (
         <div>

@@ -1,4 +1,4 @@
-import {parseTime} from '@/app/(home)/ScheduleClass';
+import {parseGridRows} from '@/app/(home)/ScheduleClass';
 
 
 type ScheduleBackgroundBlockProps = {
@@ -8,7 +8,7 @@ type ScheduleBackgroundBlockProps = {
 export default function ScheduleBackgroundBlock(props: ScheduleBackgroundBlockProps) {
     return (
         <div
-            style={{gridRowStart: parseTime(props.start), gridRowEnd: parseTime(props.end), gridColumnStart: 1, gridColumnEnd: 4}}
+            style={{gridRowStart: parseGridRows(props.start), gridRowEnd: parseGridRows(props.end), gridColumnStart: 1, gridColumnEnd: 4}}
             className="-z-10 bg-content-secondary dark:bg-content-secondary-dark rounded-l"
         />
     )
