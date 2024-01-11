@@ -5,25 +5,29 @@ export default function ScheduleClass(props: Section) {
     return (
         <div
             style={{gridRowStart: parseTime(props.start), gridRowEnd: parseTime(props.end), gridColumnStart: 2}}
-            className="bg-theme text-white rounded px-4 py-2"
+            className="bg-theme text-white rounded px-4 py-3"
         >
-            <section className="flex gap-2">
+            <section className="flex gap-2 sm:gap-4">
                 <div className="flex flex-col">
                     {props.sections.map((id, i) => (
-                        <h3 className="font-semibold font-lg" key={id}>
+                        <h3 className="font-semibold font-lg line-clamp-1" key={id}>
                             {props.names[i]}: {props.titles[i]} ({id})
                         </h3>
                     ))}
                 </div>
 
-                {/*<div className="bg-zinc-800 dark:bg-content-secondary-dark text-white text-xs px-2 py-0.5 mt-0.5 h-max rounded-full font-semibold">*/}
-                {/*    {props.type}*/}
-                {/*</div>*/}
+                <div className="flex gap-1 flex-none text-xs font-semibold">
+                    <p className="hidden sm:block rounded-full bg-yellow-500 text-yellow-700 px-2 py-1 flex-none">
+                        {props.type}
+                    </p>
+                    <p className="hidden sm:block rounded-full bg-yellow-500 text-yellow-700 px-2 py-1 flex-none">
+                        {props.start}-{props.end}
+                    </p>
+                    <p className="rounded-full bg-yellow-500 text-yellow-700 px-2 py-1 flex-none">
+                        {props.location}
+                    </p>
+                </div>
             </section>
-
-            <p className="font-light text-sm">
-                {props.start}-{props.end}
-            </p>
 
             {props.instructors?.map((name, i) => (
                 <p className="font-light text-sm" key={name}>

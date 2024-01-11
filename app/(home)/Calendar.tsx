@@ -5,12 +5,12 @@ import ScheduleBackgroundBlock from '@/app/(home)/ScheduleBackgroundBlock';
 
 export default function Calendar(props: {classes: Section[]}) {
     return (
-        <div className="relative grid grid-rows-[repeat(144,_0.5rem)] grid-cols-[5rem_1fr_2rem]">
+        <div className="relative grid grid-rows-[repeat(144,_0.5rem)] grid-cols-[3.75rem_1fr_0.5rem] sm:grid-cols-[4.75rem_1fr_2rem]">
             {/* Hour labels */}
             {Array(12).fill(0).map((_, i) => (
                 <p
                     style={{gridRowStart: i * 12 + 1, gridColumnStart: 1}}
-                    className="text-sm text-secondary dark:text-secondary-dark pl-5 -mt-2"
+                    className="text-sm text-secondary dark:text-secondary-dark -mt-2 text-right pr-6"
                     key={i}
                 >
                     {i + 7}:00
@@ -23,7 +23,7 @@ export default function Calendar(props: {classes: Section[]}) {
 
             {/* Horizontal rules (one every two grid rows, or 10 minutes) */}
             {/* TODO: incredibly hacky */}
-            <div className="-z-10 absolute inset-0 flex flex-col pl-16">
+            <div className="-z-10 absolute inset-0 flex flex-col pl-12 sm:pl-16">
                 {Array(72).fill(0).map((_, i) => (
                     <hr className="h-4 border-t border-tertiary dark:border-tertiary-dark" key={i} />
                 ))}
