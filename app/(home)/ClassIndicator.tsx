@@ -45,7 +45,7 @@ export default function ClassIndicator(props: ClassIndicatorProps) {
         <div className="mb-8">
             <p className="mb-1">
                 <strong>{next.names[0]}</strong>{' '}
-                starting in {quantity} {unit}.
+                starting in {quantity} {unit} at <strong>{next.location}</strong>.
             </p>
             <ProgressBar value={(span - toStart) / span * 100} />
         </div>
