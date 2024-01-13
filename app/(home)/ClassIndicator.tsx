@@ -11,6 +11,10 @@ export default function ClassIndicator(props: ClassIndicatorProps) {
     const {next, span, length, toStart, toEnd} = useNextPeriod(props.classes);
     if (!next) return null;
 
+    // If the time to the next period is greater than `span`, we're the first period of the day and before
+    // the time we should display the progress bar.
+    if (toStart > span) return null;
+
     // If we're past the start of the next period, display "in progress" text.
     // Display minutes when > 1 minute remaining, seconds in the last minute.
     if (toStart <= 0) {
