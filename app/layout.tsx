@@ -1,4 +1,5 @@
 import type {ReactNode} from 'react';
+import type {Metadata, Viewport} from 'next';
 import {Inter} from 'next/font/google';
 
 // Components
@@ -12,12 +13,33 @@ import './globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
 
-export const metadata = {
+const APP_NAME = 'Purdue App';
+const APP_DESC = 'A student-made schedule app for Purdue University!';
+
+export const metadata: Metadata = {
+    applicationName: APP_NAME,
     title: {
         template: '%s | Purdue App',
-        absolute: 'Purdue App'
+        absolute: APP_NAME
     },
-    description: 'A student-made schedule app for Purdue University!',
+    description: APP_DESC,
+    manifest: '/manifest.json',
+    appleWebApp: {
+        capable: true,
+        title: APP_NAME
+    },
+    openGraph: {
+        type: 'website',
+        siteName: APP_NAME,
+        description: APP_DESC
+    },
+    twitter: {
+        description: APP_DESC
+    },
+}
+
+export const viewport: Viewport = {
+    themeColor: '#ffffff'
 }
 
 export default function Layout(props: { children: ReactNode }) {

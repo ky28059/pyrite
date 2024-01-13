@@ -30,7 +30,7 @@ export default function ClassIndicator(props: ClassIndicatorProps) {
                     <strong>{next.names[0]}</strong>{' '}
                     ending in {endQuantity} {endUnit}, started {startQuantity} {startUnit} ago.
                 </p>
-                <ProgressBar value={toEnd / length * 100} />
+                <ProgressBar value={(length - toEnd) / length * 100} />
             </div>
         )
     }
