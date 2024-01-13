@@ -52,7 +52,7 @@ export default function ScheduleClass(props: Section) {
             <CenteredModal
                 isOpen={open}
                 setIsOpen={setOpen}
-                className="relative flex flex-col bg-white rounded-md w-[48rem] max-h-[90%] mx-2 py-6 px-8 sm:px-10 shadow-xl"
+                className="relative flex flex-col bg-content dark:bg-content-dark rounded-md w-[48rem] max-h-[90%] mx-2 py-6 px-8 sm:px-10 shadow-xl"
             >
                 <div className="flex flex-col mb-1">
                     {props.sections.map((id, i) => (
