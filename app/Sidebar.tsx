@@ -17,7 +17,7 @@ export default function Sidebar() {
     const {data: user, status} = useUser();
 
     return (
-        <aside className="hidden w-[12rem] flex-none pl-3 pt-24 pb-12 border-r border-tertiary dark:border-tertiary-dark md:flex flex-col sticky top-0 h-screen gap-1 bg-content-secondary dark:bg-content-secondary-dark">
+        <aside className="fixed bottom-0 w-screen sm:w-[12rem] flex-none px-4 sm:pl-3 sm:pr-0 py-2 sm:pt-24 sm:pb-12 border-r border-tertiary dark:border-tertiary-dark flex gap-4 sm:gap-1 justify-center sm:justify-start sm:flex-col sm:sticky sm:top-0 sm:h-screen z-10 bg-content-secondary dark:bg-content-secondary-dark">
             <SidebarItem href="/" icon={FaCalendar}>
                 Home
             </SidebarItem>
@@ -35,7 +35,7 @@ export default function Sidebar() {
                     <SignInButton />
                 ) : (
                     <button
-                        className="w-full px-2 py-1 -ml-1 mr-2 rounded flex gap-2 items-center font-semibold text-secondary dark:text-secondary-dark hover:bg-theme/30 transition duration-200"
+                        className="w-full px-2 py-1 sm:-ml-1 sm:mr-2 rounded flex gap-2 items-center font-semibold text-secondary dark:text-secondary-dark hover:bg-theme/30 transition duration-200"
                         onClick={() => signOut(auth)}
                     >
                         <FirebaseUserDataUpdater />
@@ -44,7 +44,9 @@ export default function Sidebar() {
                             {user.displayName?.[0].toUpperCase()}
                         </div>
 
-                        {user.displayName}
+                        <span className="hidden sm:block">
+                            {user.displayName}
+                        </span>
                     </button>
                 )}
             </div>

@@ -44,10 +44,11 @@ export default function SignInButton() {
 
     return (
         <button
-            className="flex gap-2 items-center w-full pl-4 py-2 rounded-l hover:bg-theme/30 font-semibold text-secondary dark:text-secondary-dark hover:!text-inherit transition duration-200 text-left"
+            className="flex gap-2 text-lg sm:text-base items-center w-full px-4 sm:pr-0 py-2 rounded sm:rounded-r-none hover:bg-theme/30 font-semibold text-secondary dark:text-secondary-dark hover:!text-inherit transition duration-200 text-left"
             onClick={signInWithMicrosoft}
         >
-            <MdLogin className="flex-none" /> Sign In
+            <MdLogin className="flex-none" />
+            <span className="hidden sm:block">Sign In</span>
         </button>
     )
 }
