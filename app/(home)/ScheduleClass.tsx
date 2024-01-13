@@ -15,7 +15,7 @@ export default function ScheduleClass(props: Section) {
         <>
             <button
                 style={{gridRowStart: parseGridRows(props.start), gridRowEnd: parseGridRows(props.end), gridColumnStart: 2}}
-                className="bg-theme text-left text-white rounded px-4 py-3 hover:ring-4 hover:ring-yellow-500/30 transition duration-100"
+                className="z-10 bg-theme text-left text-white rounded px-4 py-3 hover:ring-4 hover:ring-yellow-500/30 transition duration-100"
                 onClick={() => setOpen(true)}
             >
                 <section className="flex gap-2 sm:gap-4">

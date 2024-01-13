@@ -56,7 +56,10 @@ export default function Schedule(props: {classes: {[id: string]: Section}}) {
             />
 
             <ClassIndicator classes={sorted} />
-            <Calendar classes={filtered} />
+            <Calendar
+                viewDate={viewDate}
+                classes={filtered}
+            />
         </div>
     )
 }
