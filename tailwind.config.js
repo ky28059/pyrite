@@ -30,7 +30,7 @@ module.exports = {
         },
         'content-secondary': {
           DEFAULT: colors.gray['100'],
-          dark: '#0B0B0B'
+          dark: '#131313'
         }
       }
     },

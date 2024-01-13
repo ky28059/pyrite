@@ -43,7 +43,7 @@ export default function ScheduleClass(props: Section) {
                 {props.instructors?.map((name, i) => (
                     <p className="font-light text-sm" key={name}>
                         {name}{props.emails[i] && (
-                            <> (<a href={`mailto:${props.emails[i]}`} className="font-normal hover:underline">{props.emails[i]}</a>)</>
+                            <> ({props.emails[i]})</>
                         )}
                     </p>
                 ))}

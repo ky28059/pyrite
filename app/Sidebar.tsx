@@ -40,7 +40,7 @@ export default function Sidebar() {
                     >
                         <FirebaseUserDataUpdater />
 
-                        <div className="w-10 h-10 rounded-full bg-gray-200 dark:bg-content-dark flex items-center justify-center text-lg">
+                        <div className="size-10 rounded-full bg-gray-200 dark:bg-content-dark flex items-center justify-center text-lg">
                             {user.displayName?.[0].toUpperCase()}
                         </div>
 
