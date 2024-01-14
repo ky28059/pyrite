@@ -1,4 +1,5 @@
 const colors = require('tailwindcss/colors');
+const plugin = require('tailwindcss/plugin');
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -47,5 +48,9 @@ module.exports = {
   },
   plugins: [
     require('@headlessui/tailwindcss'),
+    plugin(({addVariant}) => {
+      addVariant('scrollbar', ['&::-webkit-scrollbar']);
+      addVariant('scrollbar-thumb', ['&::-webkit-scrollbar-thumb']);
+    })
   ]
 }
