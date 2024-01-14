@@ -11,6 +11,7 @@ export default function HomeClock() {
 
     return (
         <div className="text-3xl text-center font-semibold mb-2">
+            {/* TODO: loading UI */}
             {mounted ? time.toFormat('h:mm:ss a') : ''}
         </div>
     )

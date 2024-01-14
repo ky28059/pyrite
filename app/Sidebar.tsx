@@ -30,6 +30,7 @@ export default function Sidebar() {
 
             <div className="mt-auto">
                 {status === 'loading' ? (
+                    // TODO: loading UI
                     <div>...</div>
                 ) : !user ? (
                     <SignInButton />
