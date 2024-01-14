@@ -12,7 +12,7 @@ export default function YourClasses(props: {classes: {[id: string]: Section}}) {
     const {data} = useContext(UserDataContext);
 
     return (
-        <div className="hidden sm:sticky w-96 h-max top-24">
+        <div className="hidden sm:block sticky w-96 h-max top-24">
             <h2 className="text-2xl font-bold mb-4">Your classes</h2>
 
             {data.courseIds.length === 0 ? (

@@ -36,7 +36,7 @@ export default function Sidebar() {
                     <SignInButton />
                 ) : (
                     <button
-                        className="w-full px-2 py-1 sm:-ml-1 sm:mr-2 rounded flex gap-2 items-center font-semibold text-secondary dark:text-secondary-dark hover:bg-theme/30 transition duration-200"
+                        className="w-full px-2 py-1 sm:-ml-1 sm:mr-2 rounded flex gap-2 items-center font-semibold text-secondary dark:text-secondary-dark hover:bg-theme/30 dark:hover:bg-theme-dark/30 transition duration-200"
                         onClick={() => signOut(auth)}
                     >
                         <FirebaseUserDataUpdater />

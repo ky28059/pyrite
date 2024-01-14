@@ -12,7 +12,10 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        theme: '#F8C537',
+        theme: {
+          DEFAULT: '#F8C537',
+          dark: '#f1b42f'
+        },
         primary: { // Primary text color
           DEFAULT: '#212121',
           dark: '#ffffff'
