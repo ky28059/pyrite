@@ -33,9 +33,9 @@ export default function Calendar(props: CalendarProps) {
 
     return (
         <div className="relative grid grid-rows-[repeat(144,_0.5rem)] grid-cols-[3.75rem_1fr_0.5rem] sm:grid-cols-[4.75rem_1fr_2rem]">
-            <ScheduleMeal start="7:00a" end="10:00a" meal="Breakfast" meals={meals} />
-            <ScheduleMeal start="11:00a" end="2:00p" meal="Lunch" meals={meals} />
-            <ScheduleMeal start="5:00p" end="9:00p" meal="Dinner" meals={meals} />
+            <ScheduleMeal start="7:00a" end="10:00a" meal="Breakfast" meals={meals} viewDate={props.viewDate} />
+            <ScheduleMeal start="11:00a" end="2:00p" meal="Lunch" meals={meals} viewDate={props.viewDate} />
+            <ScheduleMeal start="5:00p" end="9:00p" meal="Dinner" meals={meals} viewDate={props.viewDate} />
 
             {/* Hour labels */}
             {Array(12).fill(0).map((_, i) => (
