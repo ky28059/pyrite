@@ -8,7 +8,7 @@ import ScheduleClass from '@/app/(home)/ScheduleClass';
 import ScheduleMeal from '@/app/(home)/ScheduleMeal';
 
 // Utils
-import {getMenu, MealsResponse} from '@/util/menus';
+import type {MealsResponse} from '@/util/menus';
 import type {Section} from '@/util/unitime';
 
 
@@ -19,13 +19,7 @@ type CalendarProps = {
 export default function Calendar(props: CalendarProps) {
     const [meals, setMeals] = useState<MealsResponse[] | null>(null);
     useEffect(() => {
-        Promise.all([
-            getMenu(props.viewDate, 'Wiley'),
-            getMenu(props.viewDate, 'Ford'),
-            getMenu(props.viewDate, 'Hillenbrand'),
-            getMenu(props.viewDate, 'Earhart'),
-            getMenu(props.viewDate, 'Windsor'),
-        ]).then(res => {
+        fetch(`/api/menu/${props.viewDate.toISODate()}`).then(res => res.json()).then(res => {
             console.log(res);
             setMeals(res);
         });

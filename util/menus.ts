@@ -41,7 +41,7 @@ type Allergen = {
     Value: string
 }
 
-export async function getMenu(date: DateTime, location: DiningCourt) {
-    const res = await (await fetch(`https://api.hfs.purdue.edu/menus/v2/locations/${location}/${date.toISODate()}`)).json();
+export async function getMenu(date: string, location: DiningCourt) {
+    const res = await (await fetch(`https://api.hfs.purdue.edu/menus/v2/locations/${location}/${date}`)).json();
     return res as MealsResponse;
 }
