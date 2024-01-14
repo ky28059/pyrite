@@ -31,7 +31,7 @@ export default function ScheduleMeal(props: ScheduleBackgroundBlockProps) {
             <CenteredModal
                 isOpen={open}
                 setIsOpen={setOpen}
-                className="relative flex flex-col bg-content dark:bg-content-dark rounded-md w-[36rem] max-h-[90%] mx-2 py-6 px-8 shadow-xl"
+                className="relative flex flex-col bg-content dark:bg-content-dark rounded-md w-[36rem] max-h-[90%] mx-2 py-6 px-8 shadow-xl overflow-y-auto"
             >
                 <h1 className="font-bold text-2xl mb-4">
                     {props.meal}
