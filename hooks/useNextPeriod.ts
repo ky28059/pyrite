@@ -1,6 +1,9 @@
 import {useContext} from 'react';
 import CurrentTimeContext from '@/contexts/CurrentTimeContext';
-import {Section} from '@/util/unitime';
+
+// Utils
+import type {Section} from '@/util/unitime';
+import {ZONE} from '@/util/schedule';
 
 
 /**
@@ -13,7 +16,7 @@ import {Section} from '@/util/unitime';
 export function useNextPeriod(classes: Section[]) {
     const time = useContext(CurrentTimeContext);
 
-    const localized = time.setZone('America/Indiana/Indianapolis');
+    const localized = time.setZone(ZONE);
     const midnight = localized.startOf('day');
     const minutes = localized.diff(midnight, 'minutes').minutes;
 

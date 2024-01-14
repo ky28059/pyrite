@@ -3,7 +3,7 @@
 import {DateTime} from 'luxon';
 import {useHotkeys} from 'react-hotkeys-hook';
 import {FaChevronLeft, FaChevronRight} from 'react-icons/fa';
-import {useIsMounted} from '@/hooks/useIsMounted';
+import DatePicker from '@/app/(home)/DatePicker';
 
 
 type HomeDatePickerProps = {
@@ -12,7 +12,6 @@ type HomeDatePickerProps = {
 }
 export default function HomeDatePicker(props: HomeDatePickerProps) {
     const {viewDate, setViewDate} = props;
-    const mounted = useIsMounted();
 
     function decDay() {
         setViewDate(viewDate.minus({day: 1}));
@@ -31,10 +30,7 @@ export default function HomeDatePicker(props: HomeDatePickerProps) {
                 <FaChevronLeft />
             </button>
 
-            <button className="w-64">
-                {/* TODO: loading UI */}
-                {mounted ? props.viewDate.toLocaleString(DateTime.DATE_HUGE) : ''}
-            </button>
+            <DatePicker viewDate={viewDate} setViewDate={setViewDate} />
 
             <button className="text-secondary dark:text-secondary-dark p-2" onClick={incDay}>
                 <FaChevronRight />
