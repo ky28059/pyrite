@@ -49,10 +49,12 @@ export default function Layout(props: { children: ReactNode }) {
             <FirebaseProviders>
                 <UserDataProvider>
                     <CurrentTimeProvider>
-                        <main className="flex">
+                        <div className="flex">
                             <Sidebar />
-                            {props.children}
-                        </main>
+                            <main className="container pt-16 pb-24 sm:pt-24">
+                                {props.children}
+                            </main>
+                        </div>
                     </CurrentTimeProvider>
                 </UserDataProvider>
             </FirebaseProviders>

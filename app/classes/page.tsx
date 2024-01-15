@@ -14,7 +14,7 @@ export default async function ClassesPage() {
     const classes = await loadClasses();
 
     return (
-        <main className="container py-24">
+        <>
             <h1 className="text-4xl font-bold mb-3">
                 Classes
             </h1>
@@ -23,6 +23,6 @@ export default async function ClassesPage() {
                 <Classes classes={classes} />
                 <YourClasses classes={classes} />
             </div>
-        </main>
+        </>
     )
 }

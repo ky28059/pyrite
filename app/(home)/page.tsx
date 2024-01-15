@@ -8,9 +8,9 @@ export default async function Home() {
     const classes = await loadClasses();
 
     return (
-        <main className="container py-24">
+        <>
             <HomeClock />
             <Schedule classes={classes} />
-        </main>
+        </>
     )
 }
