@@ -15,8 +15,14 @@ export default function PreferencesContent() {
         setData(newData);
     }
 
+    function changeTime(time: UserData['options']['time']) {
+        const newData = {...data};
+        newData.options.time = time;
+        setData(newData);
+    }
+
     return (
-        <div>
+        <div className="space-y-6">
             <RadioGroup value={data.options.theme} onChange={changeTheme} className="flex flex-col">
                 <RadioGroup.Label className="mb-2 font-semibold">
                     Color theme
@@ -28,6 +34,21 @@ export default function PreferencesContent() {
                     </RadioOption>
                     <RadioOption value="dark">
                         <BsMoonFill /> Dark
+                    </RadioOption>
+                </div>
+            </RadioGroup>
+
+            <RadioGroup value={data.options.time} onChange={changeTime} className="flex flex-col">
+                <RadioGroup.Label className="mb-2 font-semibold">
+                    Time format
+                </RadioGroup.Label>
+
+                <div className="flex gap-2">
+                    <RadioOption value="12">
+                        12 hour
+                    </RadioOption>
+                    <RadioOption value="24">
+                        24 hour
                     </RadioOption>
                 </div>
             </RadioGroup>

@@ -4,14 +4,16 @@ import {createContext} from 'react';
 export type UserData = {
     courseIds: string[],
     options: {
-        theme: 'light' | 'dark'
+        theme: 'light' | 'dark',
+        time: '12' | '24'
     }
 }
 
 export const defaultUserData: UserData = {
     courseIds: [],
     options: {
-        theme: 'light'
+        theme: 'light',
+        time: '12'
     }
 }
 

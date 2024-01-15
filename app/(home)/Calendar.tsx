@@ -1,6 +1,6 @@
 'use client'
 
-import {useEffect, useState} from 'react';
+import {useContext, useEffect, useState} from 'react';
 import {DateTime} from 'luxon';
 
 // Components
@@ -8,6 +8,7 @@ import ScheduleClass from '@/app/(home)/ScheduleClass';
 import ScheduleMeal from '@/app/(home)/ScheduleMeal';
 
 // Utils
+import UserDataContext from '@/contexts/UserDataContext';
 import type {MealsResponse} from '@/util/menus';
 import type {Section} from '@/util/unitime';
 
@@ -17,6 +18,8 @@ type CalendarProps = {
     classes: Section[]
 };
 export default function Calendar(props: CalendarProps) {
+    const {data} = useContext(UserDataContext);
+
     const [meals, setMeals] = useState<MealsResponse[] | null>(null);
     useEffect(() => {
         fetch(`/api/menu/${props.viewDate.toISODate()}`).then(res => res.json()).then(res => {
@@ -38,7 +41,11 @@ export default function Calendar(props: CalendarProps) {
                     className="text-sm text-secondary dark:text-secondary-dark -mt-2 text-right pr-6 select-none pointer-events-none"
                     key={i}
                 >
-                    {i + 7}:00
+                    {data.options.time === '12' ? (
+                        `${i + 7 > 12 ? i - 5 : i + 7}:00 ${i + 7 >= 12 ? 'PM' : 'AM'}`
+                    ) : (
+                        `${i + 7}:00`
+                    )}
                 </p>
             ))}
 
