@@ -26,7 +26,7 @@ export default function DatePicker(props: DatePickerProps) {
                 {/* TODO: loading UI */}
                 {mounted ? props.viewDate.toLocaleString(DateTime.DATE_HUGE) : ''}
             </Popover.Button>
-            <AnimatedPopover className="flex justify-center">
+            <AnimatedPopover className="flex justify-center z-20">
                 <Calendar
                     className="top-[calc(100%_+_10px)]"
                     currTime={props.viewDate}
