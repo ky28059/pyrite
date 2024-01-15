@@ -1,7 +1,7 @@
 'use client'
 
 import {useAuth, useUser} from 'reactfire';
-import {signOut} from 'firebase/auth';
+import {Auth, signOut} from 'firebase/auth';
 
 // Components
 import SidebarItem from '@/app/SidebarItem';
@@ -37,7 +37,7 @@ export default function Sidebar() {
                 ) : (
                     <button
                         className="w-full px-2 py-1 sm:-ml-1 sm:mr-2 rounded flex gap-2 items-center font-semibold text-secondary dark:text-secondary-dark hover:bg-theme/30 dark:hover:bg-theme-dark/30 transition duration-200"
-                        onClick={() => signOut(auth)}
+                        onClick={() => signOutAndClearCache(auth)}
                     >
                         <FirebaseUserDataUpdater />
 
@@ -53,4 +53,19 @@ export default function Sidebar() {
             </div>
         </aside>
     )
+}
+
+function signOutAndClearCache(auth: Auth) {
+    void signOut(auth);
+
+    // Clear firebase cache to prevent re-signing-in as the same user from crashing the app immediately
+    // due to "missing permission" errors in `FirebaseUserDataUpdater`.
+    // See https://github.com/FirebaseExtended/reactfire/issues/485
+    // and https://github.com/FirebaseExtended/reactfire/discussions/228#discussioncomment-182830.
+    // @ts-ignore
+    const map = globalThis['_reactFirePreloadedObservables'];
+    Array.from(map.keys()).forEach(
+        // @ts-ignore
+        (key) => key.includes('firestore') && map.delete(key),
+    );
 }

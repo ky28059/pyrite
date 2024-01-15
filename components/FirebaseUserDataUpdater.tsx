@@ -1,6 +1,6 @@
 'use client'
 
-import {useEffect, useContext} from 'react';
+import {useEffect, useContext, useLayoutEffect} from 'react';
 import {deepmerge} from '@/components/UserDataProvider';
 
 // Firestore
@@ -23,7 +23,7 @@ export default function FirebaseUserDataUpdater() {
 
     // Update localStorage to be up to date with firestore changes
     // TODO: currently, this always replaces localStorage with firebase data; we may want to support merges
-    useEffect(() => {
+    useLayoutEffect(() => {
         if (status !== 'success') return;
 
         // If the user doesn't have a firestore doc, create one for them
