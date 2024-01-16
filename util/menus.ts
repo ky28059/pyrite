@@ -27,15 +27,15 @@ type Station = {
     Notes: null
 }
 type Item = {
-    Allergens: Allergen[],
+    Allergens?: Allergen[],
     ID: string,
     IsVegetarian: boolean,
     Name: string,
     NutritionReady: boolean
 }
-type Allergen = {
+export type Allergen = {
     Name: string,
-    Value: string
+    Value: boolean
 }
 
 export async function getMenu(date: string, location: DiningCourt) {
