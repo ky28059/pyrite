@@ -13,13 +13,14 @@ import './globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
 
-const APP_NAME = 'Purdue App';
+const APP_NAME = 'Pyrite';
 const APP_DESC = 'A student-made schedule app for Purdue University!';
+const TITLE_TEMPLATE = `%s | ${APP_NAME}`;
 
 export const metadata: Metadata = {
     applicationName: APP_NAME,
     title: {
-        template: '%s | Purdue App',
+        template: TITLE_TEMPLATE,
         absolute: APP_NAME
     },
     description: APP_DESC,
@@ -31,6 +32,10 @@ export const metadata: Metadata = {
     openGraph: {
         type: 'website',
         siteName: APP_NAME,
+        title: {
+            template: TITLE_TEMPLATE,
+            absolute: APP_NAME
+        },
         description: APP_DESC
     },
     twitter: {

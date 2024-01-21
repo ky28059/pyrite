@@ -6,7 +6,7 @@ import {DateTime} from 'luxon';
 // Components
 import HomeDatePicker from '@/app/(home)/HomeDatePicker';
 import Calendar from '@/app/(home)/Calendar';
-import ClassIndicator from '@/app/(home)/ClassIndicator';
+import NextClassProgressBar from '@/app/(home)/NextClassProgressBar';
 
 // Contexts
 import UserDataContext from '@/contexts/UserDataContext';
@@ -55,7 +55,7 @@ export default function Schedule(props: {classes: {[id: string]: Section}}) {
                 setViewDate={setViewDate}
             />
 
-            <ClassIndicator classes={sorted} />
+            <NextClassProgressBar classes={sorted} />
             <Calendar
                 viewDate={viewDate}
                 classes={filtered}

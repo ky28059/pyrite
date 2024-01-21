@@ -4,10 +4,10 @@ import type {Section} from '@/util/unitime';
 import {useNextPeriod} from '@/hooks/useNextPeriod';
 
 
-type ClassIndicatorProps = {
+type NextClassProgressBarProps = {
     classes: Section[]
 }
-export default function ClassIndicator(props: ClassIndicatorProps) {
+export default function NextClassProgressBar(props: NextClassProgressBarProps) {
     const {next, span, length, toStart, toEnd} = useNextPeriod(props.classes);
     if (!next) return null;
 

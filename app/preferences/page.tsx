@@ -3,7 +3,10 @@ import PreferencesContent from '@/app/preferences/PreferencesContent';
 
 
 export const metadata: Metadata = {
-    title: 'Preferences'
+    title: 'Preferences',
+    openGraph: {
+        title: 'Preferences'
+    }
 }
 
 export default function Preferences() {

@@ -7,7 +7,10 @@ import type {Metadata} from 'next';
 
 
 export const metadata: Metadata = {
-    title: 'Classes'
+    title: 'Classes',
+    openGraph: {
+        title: 'Classes'
+    }
 }
 
 export default async function ClassesPage() {
