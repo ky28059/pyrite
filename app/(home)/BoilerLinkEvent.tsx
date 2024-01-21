@@ -23,7 +23,7 @@ export default function BoilerLinkEvent(props: BoilerLinkEventData) {
                 />
 
                 <div className="px-4 py-2 flex-grow">
-                    <h5 className="font-medium">{props.name}</h5>
+                    <h5 className="font-medium line-clamp-2">{props.name}</h5>
 
                     <p className="text-xs text-secondary dark:text-secondary-dark">
                         {props.organizationName}
@@ -49,6 +49,16 @@ export default function BoilerLinkEvent(props: BoilerLinkEventData) {
                     <h1 className="font-bold text-2xl mb-2">
                         {props.name}
                     </h1>
+
+                    {props.categoryNames.length > 0 && (
+                        <div className="flex gap-1 text-xs font-semibold mb-1.5">
+                            {props.categoryNames.map((c) => (
+                                <p className="rounded-full bg-yellow-500 text-yellow-700 px-2 py-1 flex-none" key={c}>
+                                    {c}
+                                </p>
+                            ))}
+                        </div>
+                    )}
 
                     <p className="text-sm text-secondary dark:text-secondary-dark">
                         <strong>Organized by:</strong> {props.organizationName}
