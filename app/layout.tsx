@@ -7,6 +7,10 @@ import Sidebar from '@/app/Sidebar';
 import FirebaseProviders from '@/components/FirebaseProviders';
 import UserDataProvider from '@/components/UserDataProvider';
 import CurrentTimeProvider from '@/components/CurrentTimeProvider';
+import ClassesProvider from '@/components/ClassesProvider';
+
+// Utils
+import {loadClasses} from '@/util/unitime';
 
 import './globals.css';
 
@@ -47,19 +51,23 @@ export const viewport: Viewport = {
     themeColor: '#131313'
 }
 
-export default function Layout(props: { children: ReactNode }) {
+export default async function Layout(props: { children: ReactNode }) {
+    const classes = await loadClasses();
+
     return (
         <html lang="en">
             <body className="bg-content dark:bg-content-dark text-primary dark:text-primary-dark" style={inter.style}>
             <FirebaseProviders>
                 <UserDataProvider>
                     <CurrentTimeProvider>
-                        <div className="flex">
-                            <Sidebar />
-                            <main className="container pt-16 pb-24 sm:pt-24">
-                                {props.children}
-                            </main>
-                        </div>
+                        <ClassesProvider classes={classes}>
+                            <div className="flex">
+                                <Sidebar />
+                                <main className="container pt-16 pb-24 sm:pt-24">
+                                    {props.children}
+                                </main>
+                            </div>
+                        </ClassesProvider>
                     </CurrentTimeProvider>
                 </UserDataProvider>
             </FirebaseProviders>

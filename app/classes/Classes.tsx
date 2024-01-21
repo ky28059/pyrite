@@ -1,24 +1,25 @@
 'use client'
 
-import {useMemo, useState} from 'react';
+import {useContext, useMemo, useState} from 'react';
 import Class from '@/app/classes/Class';
-import type {Section} from '@/util/unitime';
+import ClassesContext from '@/contexts/ClassesContext';
 
 
-export default function Classes(props: {classes: {[id: string]: Section}}) {
+export default function Classes() {
+    const classes = useContext(ClassesContext);
     const [query, setQuery] = useState('');
 
     const filtered = useMemo(() => {
         // Allow filtering by course name (e.g. "SCLA 101"), course title (e.g. "Crit Think & Com"), and section ID.
-        const classes = query === ''
-            ? Object.values(props.classes)
-            : Object.values(props.classes).filter(c => c.titles.some((t) => t.toLowerCase().includes(query.toLowerCase()))
+        const f = query === ''
+            ? Object.values(classes)
+            : Object.values(classes).filter(c => c.titles.some((t) => t.toLowerCase().includes(query.toLowerCase()))
                 || c.names.some((n) => n.toLowerCase().includes(query.toLowerCase()))
                 || c.sections.some((s) => s.toLowerCase().includes(query.toLowerCase())))
 
         // Sort first by course name (e.g. "SCLA 101"), then by section id (e.g. "10670-P09"). Assumedly, two courses
         // with the same name also have the same title.
-        return classes.sort((a, b) => a.names[0].localeCompare(b.names[0])
+        return f.sort((a, b) => a.names[0].localeCompare(b.names[0])
             || a.sections[0].localeCompare(b.sections[0]));
     }, [query])
 

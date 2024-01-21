@@ -3,12 +3,13 @@
 import {useContext} from 'react';
 import Class from '@/app/classes/Class';
 
-// Utils
+// Contexts
 import UserDataContext from '@/contexts/UserDataContext';
-import type {Section} from '@/util/unitime';
+import ClassesContext from '@/contexts/ClassesContext';
 
 
-export default function YourClasses(props: {classes: {[id: string]: Section}}) {
+export default function YourClasses() {
+    const classes = useContext(ClassesContext);
     const {data} = useContext(UserDataContext);
 
     return (
@@ -22,7 +23,7 @@ export default function YourClasses(props: {classes: {[id: string]: Section}}) {
             ) : (
                 <div className="flex flex-col gap-3">
                     {data.courseIds.map((id) => (
-                        <Class {...props.classes[id]} key={id} />
+                        <Class {...classes[id]} key={id} />
                     ))}
                 </div>
             )}

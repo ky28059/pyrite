@@ -11,20 +11,21 @@ import NextClassProgressBar from '@/app/(home)/NextClassProgressBar';
 // Contexts
 import UserDataContext from '@/contexts/UserDataContext';
 import CurrentTimeContext from '@/contexts/CurrentTimeContext';
+import ClassesContext from '@/contexts/ClassesContext';
 
 // Utils
 import {parseUnitimeMinutes} from '@/hooks/useNextPeriod';
-import type {Section} from '@/util/unitime';
 
 
-export default function Schedule(props: {classes: {[id: string]: Section}}) {
+export default function Schedule() {
     const [viewDate, setViewDate] = useState(DateTime.now().startOf('day'));
 
+    const classes = useContext(ClassesContext);
     const {data} = useContext(UserDataContext);
     const time = useContext(CurrentTimeContext)
 
     // Filtered `viewDate` classes by weekday
-    const filtered = data.courseIds.map((id) => props.classes[id]).filter((c) => {
+    const filtered = data.courseIds.map((id) => classes[id]).filter((c) => {
         switch (viewDate.weekday) {
             case 1: return c.dayOfWeek.includes('M');
             case 2: return /T(?!h)/.test(c.dayOfWeek);
@@ -37,7 +38,7 @@ export default function Schedule(props: {classes: {[id: string]: Section}}) {
 
     // Sorted current-day classes for progress indicator
     // TODO: better name for this and above perhaps
-    const sorted = data.courseIds.map((id) => props.classes[id]).filter((c) => {
+    const sorted = data.courseIds.map((id) => classes[id]).filter((c) => {
         switch (time.weekday) {
             case 1: return c.dayOfWeek.includes('M');
             case 2: return /T(?!h)/.test(c.dayOfWeek);
