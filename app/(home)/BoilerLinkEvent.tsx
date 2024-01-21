@@ -70,6 +70,15 @@ export default function BoilerLinkEvent(props: BoilerLinkEventData) {
                     <div className="text-sm space-y-2 mt-4">
                         {decodeBoilerLinkDescription(props.description)}
                     </div>
+
+                    <a
+                        className="block mt-4 text-sm text-secondary dark-text-secondary-dark italic hover:underline"
+                        href={`https://boilerlink.purdue.edu/event/${props.id}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        View event on BoilerLink
+                    </a>
                 </div>
             </CenteredModal>
         </>
