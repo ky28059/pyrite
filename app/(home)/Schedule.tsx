@@ -1,16 +1,20 @@
 'use client'
 
-import {useContext, useState} from 'react';
+import {useContext, useEffect, useState} from 'react';
 import {DateTime} from 'luxon';
 
 // Components
 import HomeDatePicker from '@/app/(home)/HomeDatePicker';
 import Calendar from '@/app/(home)/Calendar';
 import NextClassProgressBar from '@/app/(home)/NextClassProgressBar';
+import BoilerLinkEvent from '@/app/(home)/BoilerLinkEvent';
 
 // Contexts
 import UserDataContext from '@/contexts/UserDataContext';
 import ClassesContext from '@/contexts/ClassesContext';
+
+// Utils
+import type {BoilerLinkEventData, EventsResponse} from '@/util/boilerlink';
 
 
 export default function Schedule() {
@@ -31,6 +35,14 @@ export default function Schedule() {
         return false;
     });
 
+    // BoilerLink events
+    const [events, setEvents] = useState<BoilerLinkEventData[]>([]);
+    useEffect(() => {
+        fetch(`/api/events/${viewDate.toISO()}`)
+            .then((res) => res.json())
+            .then((res: EventsResponse) => setEvents(res.value))
+    }, [viewDate]);
+
     return (
         <div>
             <HomeDatePicker
@@ -38,11 +50,21 @@ export default function Schedule() {
                 setViewDate={setViewDate}
             />
 
-            <NextClassProgressBar />
-            <Calendar
-                viewDate={viewDate}
-                classes={filtered}
-            />
+            <div className="flex gap-10">
+                <div className="flex-grow">
+                    <NextClassProgressBar />
+                    <Calendar
+                        viewDate={viewDate}
+                        classes={filtered}
+                    />
+                </div>
+
+                <div className="flex flex-col gap-2 w-80">
+                    {events.map((e) => (
+                        <BoilerLinkEvent {...e} key={e.id} />
+                    ))}
+                </div>
+            </div>
         </div>
     )
 }
