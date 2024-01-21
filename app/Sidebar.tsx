@@ -10,7 +10,7 @@ import SignInButton from '@/components/SignInButton';
 import FirebaseUserDataUpdater from '@/components/FirebaseUserDataUpdater';
 
 // Icons
-import {FaBookmark, FaCalendar, FaGear} from 'react-icons/fa6';
+import {FaBookmark, FaCalendar, FaCircleInfo, FaGear} from 'react-icons/fa6';
 
 
 export default function Sidebar() {
@@ -26,6 +26,9 @@ export default function Sidebar() {
             </SidebarItem>
             <SidebarItem href="/classes" icon={FaBookmark}>
                 Classes
+            </SidebarItem>
+            <SidebarItem href="/about" icon={FaCircleInfo}>
+                About
             </SidebarItem>
             <SidebarItem href="/preferences" icon={FaGear}>
                 Preferences

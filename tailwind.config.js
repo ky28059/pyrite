@@ -22,7 +22,7 @@ module.exports = {
         },
         secondary: { // Secondary text color
           DEFAULT: '#757575',
-          dark: '#777777',
+          dark: '#898989',
         },
         tertiary: { // Tertiary text color
           DEFAULT: 'rgb(229 231 235)',
