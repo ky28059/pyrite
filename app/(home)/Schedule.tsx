@@ -36,11 +36,13 @@ export default function Schedule() {
     });
 
     // BoilerLink events
-    const [events, setEvents] = useState<BoilerLinkEventData[]>([]);
+    // TODO: caching?
+    const [events, setEvents] = useState<BoilerLinkEventData[] | null>(null);
     useEffect(() => {
+        setEvents(null);
         fetch(`/api/events/${viewDate.toISO()}`)
             .then((res) => res.json())
-            .then((res: EventsResponse) => setEvents(res.value))
+            .then((res: EventsResponse) => setEvents(res.value));
     }, [viewDate]);
 
     return (
@@ -50,7 +52,7 @@ export default function Schedule() {
                 setViewDate={setViewDate}
             />
 
-            <div className="flex gap-12">
+            <div className="flex flex-col xl:flex-row gap-12">
                 <div className="flex-grow">
                     <NextClassProgressBar />
                     <Calendar
@@ -59,8 +61,21 @@ export default function Schedule() {
                     />
                 </div>
 
-                <div className="flex flex-col gap-2 w-80">
-                    {events.map((e) => (
+                <div className="flex flex-col gap-2 flex-none xl:w-80">
+                    <h3 className="font-semibold text-lg mb-1">
+                        BoilerLink Events{' '}
+                        <span className="font-normal text-base">({viewDate.toLocaleString()})</span>
+                    </h3>
+
+                    {!events ? (
+                        <p className="text-sm text-secondary dark:text-secondary-dark">
+                            Loading events...
+                        </p>
+                    ) : events.length === 0 ? (
+                        <p className="text-sm text-secondary dark:text-secondary-dark">
+                            No events to show.
+                        </p>
+                    ) : events.map((e) => (
                         <BoilerLinkEvent {...e} key={e.id} />
                     ))}
                 </div>
