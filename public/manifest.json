@@ -1,6 +1,6 @@
 {
-  "name": "Purdue App",
-  "short_name": "Purdue App",
+  "name": "Pyrite",
+  "short_name": "Pyrite",
   "icons": [
     {
       "src": "/icons/maskable-192x192.png",
@@ -9,9 +9,10 @@
       "purpose": "any maskable"
     },
     {
-      "src": "/icons/512x512.png",
+      "src": "/icons/maskable-512x512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
       "src": "/icon.svg",
