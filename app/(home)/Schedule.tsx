@@ -50,7 +50,7 @@ export default function Schedule() {
                 setViewDate={setViewDate}
             />
 
-            <div className="flex gap-10">
+            <div className="flex gap-12">
                 <div className="flex-grow">
                     <NextClassProgressBar />
                     <Calendar
