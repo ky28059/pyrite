@@ -2,6 +2,7 @@
 
 import {useAuth, useUser} from 'reactfire';
 import {Auth, signOut} from 'firebase/auth';
+import {useIsMounted} from '@/hooks/useIsMounted';
 
 // Components
 import SidebarItem from '@/app/SidebarItem';
@@ -16,6 +17,8 @@ export default function Sidebar() {
     const auth = useAuth();
     const {data: user, status} = useUser();
 
+    const mounted = useIsMounted();
+
     return (
         <aside className="fixed bottom-0 w-screen sm:w-[12rem] flex-none px-4 sm:pl-3 sm:pr-0 py-2 sm:pt-24 sm:pb-12 border-r border-tertiary dark:border-tertiary-dark flex gap-4 sm:gap-1 justify-center sm:justify-start sm:flex-col sm:sticky sm:top-0 sm:h-screen z-30 bg-content-secondary dark:bg-content-secondary-dark">
             <SidebarItem href="/" icon={FaCalendar}>
@@ -29,7 +32,7 @@ export default function Sidebar() {
             </SidebarItem>
 
             <div className="mt-auto">
-                {status === 'loading' ? (
+                {!mounted || status === 'loading' ? (
                     // TODO: loading UI
                     <div>...</div>
                 ) : !user ? (
