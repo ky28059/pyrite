@@ -1,14 +1,10 @@
 'use client'
 
-import type {Section} from '@/util/unitime';
 import {useNextPeriod} from '@/hooks/useNextPeriod';
 
 
-type NextClassProgressBarProps = {
-    classes: Section[]
-}
-export default function NextClassProgressBar(props: NextClassProgressBarProps) {
-    const {next, span, length, toStart, toEnd} = useNextPeriod(props.classes);
+export default function NextClassProgressBar() {
+    const {next, span, length, toStart, toEnd} = useNextPeriod();
     if (!next) return null;
 
     // If the time to the next period is greater than `span`, we're the first period of the day and before

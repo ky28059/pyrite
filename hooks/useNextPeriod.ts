@@ -1,41 +1,57 @@
 import {useContext} from 'react';
+
+// Contexts
 import CurrentTimeContext from '@/contexts/CurrentTimeContext';
+import UserDataContext from '@/contexts/UserDataContext';
+import ClassesContext from '@/contexts/ClassesContext';
 
 // Utils
-import type {Section} from '@/util/unitime';
 import {ZONE} from '@/util/schedule';
 
 
 /**
- * Get the next period (and info about relative times for it) from a list of classes.
+ * Get the next period (and info about relative times for it) for the current user.
  * Original logic borrowed from {@link https://github.com/GunnWATT/watt/blob/main/shared/util/schedule.ts WATT}.
  *
- * @param classes The (sorted) list of classes on that given day.
  * @returns The next period, the minutes to its start and end, and its length and length of break preceding it.
  */
-export function useNextPeriod(classes: Section[]) {
+export function useNextPeriod() {
+    const classes = useContext(ClassesContext);
+    const {data} = useContext(UserDataContext);
     const time = useContext(CurrentTimeContext);
+
+    // The user's classes for the current date, sorted ascending by start time.
+    const sorted = data.courseIds.map((id) => classes[id]).filter((c) => {
+        switch (time.weekday) {
+            case 1: return c.dayOfWeek.includes('M');
+            case 2: return /T(?!h)/.test(c.dayOfWeek);
+            case 3: return c.dayOfWeek.includes('W');
+            case 4: return c.dayOfWeek.includes('Th');
+            case 5: return c.dayOfWeek.includes('F');
+        }
+        return false;
+    }).sort((a, b) => parseUnitimeMinutes(a.start) - parseUnitimeMinutes(b.start));
 
     const localized = time.setZone(ZONE);
     const midnight = localized.startOf('day');
     const minutes = localized.diff(midnight, 'minutes').minutes;
 
-    if (!classes.length)
+    if (!sorted.length)
         return {next: null, span: 0, length: 0, toStart: 0, toEnd: 0};
 
     // Loop through all periods, finding the index of the first period for which the current time is less
     // than the end time.
     let currPd;
-    for (currPd = 0; currPd < classes.length; currPd++) {
-        if (minutes < parseUnitimeMinutes(classes[currPd].end)) break;
+    for (currPd = 0; currPd < sorted.length; currPd++) {
+        if (minutes < parseUnitimeMinutes(sorted[currPd].end)) break;
     }
 
     // If no period exists that has an end time after the current time, no next period exists.
-    if (currPd >= classes.length)
+    if (currPd >= sorted.length)
         return {next: null, span: 0, length: 0, toStart: 0, toEnd: 0};
 
-    const next = classes[currPd];
-    const prev = classes[currPd - 1];
+    const next = sorted[currPd];
+    const prev = sorted[currPd - 1];
 
     // Span = minutes between previous and next period
     const span = prev
