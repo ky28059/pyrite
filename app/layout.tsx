@@ -8,6 +8,7 @@ import FirebaseProviders from '@/components/FirebaseProviders';
 import UserDataProvider from '@/components/UserDataProvider';
 import CurrentTimeProvider from '@/components/CurrentTimeProvider';
 import ClassesProvider from '@/components/ClassesProvider';
+import FaviconHandler from '@/components/FaviconHandler';
 
 // Utils
 import {loadClasses} from '@/util/unitime';
@@ -66,6 +67,8 @@ export default async function Layout(props: { children: ReactNode }) {
                                 <main className="container pt-16 pb-24 sm:pt-24">
                                     {props.children}
                                 </main>
+
+                                <FaviconHandler />
                             </div>
                         </ClassesProvider>
                     </CurrentTimeProvider>
