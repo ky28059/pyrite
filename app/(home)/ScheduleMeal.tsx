@@ -6,6 +6,7 @@ import {DateTime} from 'luxon';
 // Components
 import DiningCourtMeal from '@/app/(home)/DiningCourtMeal';
 import CenteredModal from '@/components/CenteredModal';
+import CloseButton from '@/components/CloseButton';
 
 // Utils
 import {parseGridRows} from '@/app/(home)/ScheduleClass';
@@ -37,8 +38,14 @@ export default function ScheduleMeal(props: ScheduleBackgroundBlockProps) {
                 setIsOpen={setOpen}
                 className="relative flex flex-col bg-content dark:bg-content-dark rounded-md w-[36rem] max-h-[90%] mx-2 py-6 px-8 shadow-xl overflow-y-auto scrollbar:w-1 scrollbar-thumb:bg-tertiary dark:scrollbar-thumb:bg-tertiary-dark"
             >
+
                 <h1 className="flex gap-2.5 items-center font-bold text-2xl mb-4">
                     {props.meal} <span className="font-normal text-lg">({props.viewDate.toLocaleString()})</span>
+
+                    <CloseButton
+                        className="ml-auto"
+                        onClick={() => setOpen(false)}
+                    />
                 </h1>
 
                 {!props.meals ? (

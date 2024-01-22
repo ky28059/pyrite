@@ -1,7 +1,10 @@
 'use client'
 
 import {useState} from 'react';
+
+// Components
 import CenteredModal from '@/components/CenteredModal';
+import CloseButton from '@/components/CloseButton';
 
 // Utils
 import type {Section} from '@/util/unitime';
@@ -58,9 +61,14 @@ export default function ScheduleClass(props: Section) {
                 setIsOpen={setOpen}
                 className="relative flex flex-col bg-content dark:bg-content-dark rounded-md w-[48rem] max-h-[90%] mx-2 py-6 px-8 sm:px-10 shadow-xl"
             >
-                <div className="flex flex-col mb-1">
+                <CloseButton
+                    className="absolute right-6 top-5"
+                    onClick={() => setOpen(false)}
+                />
+
+                <div className="flex flex-col mb-1 pr-8">
                     {props.sections.map((id, i) => (
-                        <h1 className="font-bold text-2xl" key={id}>
+                        <h1 className="font-bold text-2xl text-pretty" key={id}>
                             {props.names[i]}: {props.titles[i]} ({id})
                         </h1>
                     ))}

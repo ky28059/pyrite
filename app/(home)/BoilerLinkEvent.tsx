@@ -2,8 +2,11 @@
 
 import {useState} from 'react';
 import he from 'he';
-import CenteredModal from '@/components/CenteredModal';
 import type {BoilerLinkEventData} from '@/util/boilerlink';
+
+// Components
+import CenteredModal from '@/components/CenteredModal';
+import CloseButton from '@/components/CloseButton';
 
 // Icons
 import {FaLocationDot} from 'react-icons/fa6';
@@ -43,6 +46,11 @@ export default function BoilerLinkEvent(props: BoilerLinkEventData) {
                 setIsOpen={setOpen}
                 className="relative flex flex-col bg-content dark:bg-content-dark rounded-md w-[48rem] max-h-[90%] mx-2 shadow-xl"
             >
+                <CloseButton
+                    className="absolute right-5 top-3"
+                    onClick={() => setOpen(false)}
+                />
+
                 <img
                     src={imageSrc}
                     className="w-full h-48 object-cover object-center rounded-t-md"
