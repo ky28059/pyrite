@@ -35,3 +35,35 @@ export type BoilerLinkEventData = {
     recScore: null,
     '@search.score': number
 }
+
+type OrganizationsResponse = {
+    '@odata.context': string,
+    '@odata.count': number,
+    '@search.coverage': number,
+
+    value: BoilerLinkOrganizationData[]
+}
+
+export type BoilerLinkOrganizationData = {
+    '@search.score': number,
+
+    BranchId: number,
+    CategoryIds: number[],
+    CategoryNames: string[],
+    Description: string,
+    Id: string,
+    InstitutionId: number,
+    Name: string,
+    ParentOrganizationId: number,
+    ProfilePicture: string | null,
+    ShortName: string | null,
+    Status: 'Active',
+    Summary: string,
+    Visibility: 'Public',
+    WebsiteKey: 'abc'
+}
+
+export async function fetchOrganizations() {
+    const data = await (await fetch('https://boilerlink.purdue.edu/api/discovery/search/organizations?orderBy%5B0%5D=UpperName%20asc&filter=&query=&skip=0&top=2000')).json()
+    return data as OrganizationsResponse;
+}

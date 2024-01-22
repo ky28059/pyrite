@@ -11,6 +11,7 @@ import FirebaseUserDataUpdater from '@/components/FirebaseUserDataUpdater';
 
 // Icons
 import {FaBookmark, FaCalendar, FaCircleInfo, FaGear} from 'react-icons/fa6';
+import {BsPeopleFill} from 'react-icons/bs';
 
 
 export default function Sidebar() {
@@ -27,14 +28,17 @@ export default function Sidebar() {
             <SidebarItem href="/classes" icon={FaBookmark}>
                 Classes
             </SidebarItem>
-            <SidebarItem href="/about" icon={FaCircleInfo}>
-                About
+            <SidebarItem href="/organizations" icon={BsPeopleFill}>
+                Organizations
             </SidebarItem>
 
             <SidebarItem href="/" icon={FaCalendar} mobileOnly />
 
             <SidebarItem href="/preferences" icon={FaGear}>
                 Preferences
+            </SidebarItem>
+            <SidebarItem href="/about" icon={FaCircleInfo} desktopOnly>
+                About
             </SidebarItem>
 
             <div className="mt-auto">
