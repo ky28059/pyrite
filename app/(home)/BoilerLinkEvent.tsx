@@ -50,11 +50,16 @@ export default function BoilerLinkEvent(props: BoilerLinkEventData) {
                         {props.name}
                     </h1>
 
-                    {props.categoryNames.length > 0 && (
+                    {(props.categoryNames.length > 0 || props.benefitNames.length > 0) && (
                         <div className="flex gap-1 text-xs font-semibold mb-1.5">
                             {props.categoryNames.map((c) => (
-                                <p className="rounded-full bg-yellow-500 text-yellow-700 px-2 py-1 flex-none" key={c}>
+                                <p className="rounded-full bg-yellow-500/30 text-theme dark:text-theme-dark px-2 py-1 flex-none" key={c}>
                                     {c}
+                                </p>
+                            ))}
+                            {props.benefitNames.map((b) => (
+                                <p className="rounded-full bg-yellow-500/30 text-theme dark:text-theme-dark px-2 py-1 flex-none" key={b}>
+                                    {b}
                                 </p>
                             ))}
                         </div>

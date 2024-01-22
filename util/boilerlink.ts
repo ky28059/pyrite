@@ -26,7 +26,7 @@ export type BoilerLinkEventData = {
     imagePath?: string,
     categoryIds: string[],
     categoryNames: string[],
-    benefitNames: [],
+    benefitNames: string[],
     visibility: 'Public',
     status: 'Approved',
     latitude: null,
