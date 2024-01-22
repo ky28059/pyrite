@@ -16,7 +16,8 @@ export default function About() {
             </h1>
 
             <p className="mb-5">
-                Pyrite is an app for managing class schedules (and hopefully a lot more) made by freshman in CS <a href="https://github.com/ky28059" target="_blank" rel="noopener noreferrer" className="text-theme dark:text-theme-dark hover:underline">Kevin Yu</a>{' '}
+                Pyrite is an app for managing class schedules, joining clubs, finding events, and hopefully a whole lot
+                more made by freshman in CS <a href="https://github.com/ky28059" target="_blank" rel="noopener noreferrer" className="text-theme dark:text-theme-dark hover:underline">Kevin Yu</a>{' '}
                 (that's me!).
             </p>
 

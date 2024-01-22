@@ -17,7 +17,7 @@ export default function FaviconHandler() {
 
     // TODO: use timeouts
     const date = useContext(CurrentTimeContext);
-    const {next, toStart, toEnd} = useNextPeriod();
+    const {next, toStart, toEnd, span} = useNextPeriod();
 
     // Reference to the favicon element
     const favicon = useRef<HTMLLinkElement>();
@@ -37,7 +37,7 @@ export default function FaviconHandler() {
         }
 
         // If there's no period to display, set favicon and tab title back to defaults
-        if (!next) {
+        if (!next || toStart > span) {
             const titleElement = document.querySelector('meta[property="og:title"]') as HTMLMetaElement;
             document.title = titleElement.content;
 
