@@ -5,6 +5,10 @@ import he from 'he';
 import CenteredModal from '@/components/CenteredModal';
 import type {BoilerLinkEventData} from '@/util/boilerlink';
 
+// Icons
+import {FaLocationDot} from 'react-icons/fa6';
+import {BsPeopleFill} from 'react-icons/bs';
+
 
 export default function BoilerLinkEvent(props: BoilerLinkEventData) {
     const [open, setOpen] = useState(false);
@@ -65,11 +69,11 @@ export default function BoilerLinkEvent(props: BoilerLinkEventData) {
                         </div>
                     )}
 
-                    <p className="text-sm text-secondary dark:text-secondary-dark">
-                        <strong>Organized by:</strong> {props.organizationName}
+                    <p className="flex gap-2 items-center text-sm text-secondary dark:text-secondary-dark">
+                        <BsPeopleFill /> {props.organizationName}
                     </p>
-                    <p className="text-sm text-secondary dark:text-secondary-dark">
-                        <strong>Location:</strong> {props.location}
+                    <p className="flex gap-2 items-center text-sm text-secondary dark:text-secondary-dark">
+                        <FaLocationDot /> {props.location}
                     </p>
 
                     <div className="text-sm space-y-2 mt-4">

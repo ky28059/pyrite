@@ -7,6 +7,10 @@ import CenteredModal from '@/components/CenteredModal';
 import type {Section} from '@/util/unitime';
 import {parseUnitimeMinutes} from '@/hooks/useNextPeriod';
 
+// Icons
+import {FaCalendar, FaLocationDot} from 'react-icons/fa6';
+import {BsPeopleFill} from 'react-icons/bs';
+
 
 export default function ScheduleClass(props: Section) {
     const [open, setOpen] = useState(false);
@@ -28,13 +32,13 @@ export default function ScheduleClass(props: Section) {
                     </div>
 
                     <div className="flex gap-1 flex-none text-xs font-semibold">
-                        <p className="hidden sm:block rounded-full bg-yellow-500 text-yellow-700 px-2 py-1 flex-none">
+                        <p className="hidden sm:block rounded-full bg-black/5 text-black/50 px-2 py-1 flex-none">
                             {props.type}
                         </p>
-                        <p className="hidden sm:block rounded-full bg-yellow-500 text-yellow-700 px-2 py-1 flex-none">
+                        <p className="hidden sm:block rounded-full bg-black/5 text-black/50 px-2 py-1 flex-none">
                             {props.start}-{props.end}
                         </p>
-                        <p className="rounded-full bg-yellow-500 text-yellow-700 px-2 py-1 flex-none">
+                        <p className="rounded-full bg-black/5 text-black/50 px-2 py-1 flex-none">
                             {props.location}
                         </p>
                     </div>
@@ -62,18 +66,18 @@ export default function ScheduleClass(props: Section) {
                     ))}
                 </div>
 
-                <div className="bg-zinc-800 dark:bg-content-secondary-dark text-white text-xs px-2 py-0.5 mb-2 h-max w-max rounded-full font-semibold">
+                <div className="bg-yellow-500/30 text-theme dark:text-theme-dark text-xs px-2 py-0.5 mb-2 h-max w-max rounded-full font-semibold">
                     {props.type}
                 </div>
 
-                <p className="text-sm text-secondary dark:text-secondary-dark">
-                    <strong>Instructor(s):</strong> {props.instructors.join(', ')}
+                <p className="flex gap-2 items-center text-sm text-secondary dark:text-secondary-dark">
+                    <BsPeopleFill /> {props.instructors.join(', ')}
                 </p>
-                <p className="text-sm text-secondary dark:text-secondary-dark">
-                    <strong>Location:</strong> {props.location}
+                <p className="flex gap-2 items-center text-sm text-secondary dark:text-secondary-dark">
+                    <FaLocationDot /> {props.location}
                 </p>
-                <p className="text-sm text-secondary dark:text-secondary-dark">
-                    <strong>Meeting times:</strong> {props.dayOfWeek} {props.start}-{props.end}
+                <p className="flex gap-2 items-center text-sm text-secondary dark:text-secondary-dark">
+                    <FaCalendar /> {props.dayOfWeek} {props.start}-{props.end}
                 </p>
             </CenteredModal>
         </>
