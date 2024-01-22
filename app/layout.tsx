@@ -9,6 +9,7 @@ import UserDataProvider from '@/components/UserDataProvider';
 import CurrentTimeProvider from '@/components/CurrentTimeProvider';
 import ClassesProvider from '@/components/ClassesProvider';
 import FaviconHandler from '@/components/FaviconHandler';
+import InstallModal from '@/components/InstallModal';
 
 // Utils
 import {loadClasses} from '@/util/unitime';
@@ -69,6 +70,7 @@ export default async function Layout(props: { children: ReactNode }) {
                                 </main>
 
                                 <FaviconHandler />
+                                <InstallModal />
                             </div>
                         </ClassesProvider>
                     </CurrentTimeProvider>
