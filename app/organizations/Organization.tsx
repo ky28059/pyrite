@@ -40,7 +40,7 @@ export default function Organization(props: BoilerLinkOrganizationData) {
             >
                 <OrganizationProfilePicture {...props} />
 
-                <div>
+                <div className="min-w-0">
                     <h5 className="font-semibold">{props.Name}</h5>
                     <p className="text-sm text-secondary dark:text-secondary-dark line-clamp-2">
                         {props.Summary}
