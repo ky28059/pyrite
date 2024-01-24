@@ -22,7 +22,7 @@ export default function ScheduleClass(props: Section) {
         <>
             <button
                 style={{gridRowStart: parseGridRows(props.start), gridRowEnd: parseGridRows(props.end), gridColumnStart: 2}}
-                className="z-10 bg-theme dark:bg-theme-dark text-left text-white rounded px-4 py-3 hover:ring-4 hover:ring-yellow-500/30 transition duration-100 focus:outline-none focus-visible:ring-[3px]"
+                className={'border-l-4 z-10 text-left rounded px-4 py-3 hover:ring-4 transition duration-100 focus:outline-none focus-visible:ring-[3px] ' + getBgStyle(props)}
                 onClick={() => setOpen(true)}
             >
                 <section className="flex gap-2 sm:gap-4">
@@ -35,13 +35,13 @@ export default function ScheduleClass(props: Section) {
                     </div>
 
                     <div className="flex gap-1 flex-none text-xs font-semibold">
-                        <p className="hidden sm:block rounded-full bg-black/5 text-black/50 px-2 py-1 flex-none">
+                        <p className="hidden sm:block rounded-full bg-black/15 px-2 py-1 flex-none">
                             {props.type}
                         </p>
-                        <p className="hidden sm:block rounded-full bg-black/5 text-black/50 px-2 py-1 flex-none">
+                        <p className="hidden sm:block rounded-full bg-black/15 px-2 py-1 flex-none">
                             {props.start}-{props.end}
                         </p>
-                        <p className="rounded-full bg-black/5 text-black/50 px-2 py-1 flex-none">
+                        <p className="rounded-full bg-black/15 px-2 py-1 flex-none">
                             {props.location}
                         </p>
                     </div>
@@ -100,4 +100,21 @@ export default function ScheduleClass(props: Section) {
 export function parseGridRows(time: string) {
     const minutes = parseUnitimeMinutes(time);
     return minutes / 5 - 84 + 1;
+}
+
+function getBgStyle(s: Section) {
+    switch (s.type) {
+        case 'Lecture':
+            return 'border-theme dark:border-theme-dark text-theme dark:text-theme-dark bg-theme/30 dark:bg-theme-dark/30 hover:ring-yellow-500/30'
+        case 'Laboratory':
+        case 'Laboratory (Hybrid)':
+            return 'border-[#7851A9] text-[#7851A9] bg-[#7851A9]/30 hover:ring-purple-500/30'
+        case 'Pso':
+            return 'border-[#6A5ACD] text-[#6A5ACD] bg-[#6A5ACD]/30 hover:ring-purple-500/30'
+        case "Recitation":
+        case "Recitation (Hybrid)":
+            return 'border-[#f56fa1] text-[#f56fa1] bg-[#f56fa1]/30 hover:ring-pink-500/30'
+        default:
+            return ''
+    }
 }
