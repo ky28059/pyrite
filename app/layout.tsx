@@ -65,7 +65,7 @@ export default async function Layout(props: { children: ReactNode }) {
                         <ClassesProvider classes={classes}>
                             <div className="flex">
                                 <Sidebar />
-                                <main className="container pt-16 pb-24 sm:pt-24">
+                                <main className="relative container pt-16 pb-24 sm:pt-24">
                                     {props.children}
                                 </main>
 

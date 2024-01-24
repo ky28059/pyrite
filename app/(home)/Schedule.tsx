@@ -8,20 +8,30 @@ import HomeDatePicker from '@/app/(home)/HomeDatePicker';
 import Calendar from '@/app/(home)/Calendar';
 import NextClassProgressBar from '@/app/(home)/NextClassProgressBar';
 import BoilerLinkEvent from '@/app/(home)/BoilerLinkEvent';
+import DayAlert from '@/app/(home)/DayAlert';
 
 // Contexts
 import UserDataContext from '@/contexts/UserDataContext';
 import ClassesContext from '@/contexts/ClassesContext';
+import CurrentTimeContext from '@/contexts/CurrentTimeContext';
 
 // Utils
 import type {BoilerLinkEventData, EventsResponse} from '@/util/boilerlink';
+import {ZONE} from '@/util/schedule';
 
 
 export default function Schedule() {
-    const [viewDate, setViewDate] = useState(DateTime.now().startOf('day'));
+    const [viewDate, setViewDate] = useState<DateTime>(DateTime.now().startOf('day'));
 
     const classes = useContext(ClassesContext);
     const {data} = useContext(UserDataContext);
+
+    // Current time check to see if viewDate is not the current date
+    const time = useContext(CurrentTimeContext);
+    const currDate = time.setZone(ZONE).startOf('day');
+
+    const jumpToPres = () => setViewDate(currDate);
+    const relDays = viewDate.diff(currDate, 'days').days;
 
     // Filtered `viewDate` classes by weekday
     const filtered = data.courseIds.map((id) => classes[id]).filter((c) => {
@@ -47,6 +57,13 @@ export default function Schedule() {
 
     return (
         <div>
+            {relDays !== 0 && (
+                <DayAlert
+                    daysRelToCur={relDays}
+                    jumpToPres={jumpToPres}
+                />
+            )}
+
             <HomeDatePicker
                 viewDate={viewDate}
                 setViewDate={setViewDate}
