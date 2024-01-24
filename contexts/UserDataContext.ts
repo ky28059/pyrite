@@ -14,7 +14,7 @@ export const defaultUserData: UserData = {
     courseIds: [],
     pinnedOrgIds: [],
     options: {
-        theme: 'light',
+        theme: 'dark',
         time: '12'
     }
 }

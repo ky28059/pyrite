@@ -57,7 +57,7 @@ export default async function Layout(props: { children: ReactNode }) {
     const classes = await loadClasses();
 
     return (
-        <html lang="en">
+        <html lang="en" className="dark">
             <body className="bg-content dark:bg-content-dark text-primary dark:text-primary-dark" style={inter.style}>
             <FirebaseProviders>
                 <UserDataProvider>

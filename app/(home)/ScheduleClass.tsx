@@ -35,13 +35,13 @@ export default function ScheduleClass(props: Section) {
                     </div>
 
                     <div className="flex gap-1 flex-none text-xs font-semibold">
-                        <p className="hidden sm:block rounded-full bg-black/15 px-2 py-1 flex-none">
+                        <p className="hidden sm:block rounded-full bg-black/5 dark:bg-black/15 px-2 py-1 flex-none">
                             {props.type}
                         </p>
-                        <p className="hidden sm:block rounded-full bg-black/15 px-2 py-1 flex-none">
+                        <p className="hidden sm:block rounded-full bg-black/5 dark:bg-black/15 px-2 py-1 flex-none">
                             {props.start}-{props.end}
                         </p>
-                        <p className="rounded-full bg-black/15 px-2 py-1 flex-none">
+                        <p className="rounded-full bg-black/5 dark:bg-black/15 px-2 py-1 flex-none">
                             {props.location}
                         </p>
                     </div>
