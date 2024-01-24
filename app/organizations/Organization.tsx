@@ -7,6 +7,7 @@ import UserDataContext from '@/contexts/UserDataContext';
 import CenteredModal from '@/components/CenteredModal';
 import CloseButton from '@/components/CloseButton';
 import OutlineButton, {DangerOutlineButton} from '@/components/OutlineButton';
+import OrganizationProfilePicture from '@/app/organizations/OrganizationProfilePicture';
 
 // Utils
 import type {BoilerLinkOrganizationData} from '@/util/boilerlink';
@@ -15,8 +16,6 @@ import {decodeBoilerLinkDescription} from '@/app/(home)/BoilerLinkEvent';
 
 export default function Organization(props: BoilerLinkOrganizationData) {
     const [open, setOpen] = useState(false);
-    const imageSrc = `https://se-images.campuslabs.com/clink/images/${props.ProfilePicture}?preset=small-sq`;
-
     const {data, setData} = useContext(UserDataContext);
 
     function addToPinned() {
@@ -39,18 +38,7 @@ export default function Organization(props: BoilerLinkOrganizationData) {
                 className="flex gap-5 text-left"
                 onClick={() => setOpen(true)}
             >
-                {props.ProfilePicture ? (
-                    <img
-                        src={imageSrc}
-                        className="rounded-full flex-none h-max"
-                        alt={props.Name}
-                    />
-                ) : (
-                    <div
-                        className="size-[75px] bg-content-secondary dark:bg-content-secondary-dark rounded-full flex items-center justify-center text-3xl flex-none text-secondary dark:text-secondary-dark font-semibold">
-                        {props.Name[0]}
-                    </div>
-                )}
+                <OrganizationProfilePicture {...props} />
 
                 <div>
                     <h5 className="font-semibold">{props.Name}</h5>
@@ -71,11 +59,7 @@ export default function Organization(props: BoilerLinkOrganizationData) {
                 />
 
                 <h1 className="flex gap-4 items-center font-bold text-2xl text-pretty mb-3">
-                    <img
-                        src={imageSrc}
-                        className="rounded-full flex-none h-max"
-                        alt={props.Name}
-                    />
+                    <OrganizationProfilePicture {...props} />
                     {props.Name}
                 </h1>
 
@@ -99,8 +83,8 @@ export default function Organization(props: BoilerLinkOrganizationData) {
                 {/*    <FaCalendar /> {props.dayOfWeek} {props.start}-{props.end}*/}
                 {/*</p>*/}
 
-                <div className="text-sm space-y-2 mt-4">
-                    {decodeBoilerLinkDescription(props.Description ?? props.Summary ?? '')}
+                <div className="text-sm space-y-2 mt-4 overflow-y-auto scrollbar:w-1 scrollbar-thumb:bg-tertiary dark:scrollbar-thumb:bg-tertiary-dark">
+                    {decodeBoilerLinkDescription(props.Description || props.Summary || '')}
                 </div>
 
                 {!data.pinnedOrgIds.includes(props.Id) ? (
