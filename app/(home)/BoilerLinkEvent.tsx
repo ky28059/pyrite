@@ -102,7 +102,7 @@ export default function BoilerLinkEvent(props: BoilerLinkEventData) {
     )
 }
 
-function decodeBoilerLinkDescription(desc: string) {
+export function decodeBoilerLinkDescription(desc: string) {
     // TODO: support <strong>, <em>, <span>, <ul>, etc.?
     const lines = he.decode(desc)
         .replaceAll(/<(?:p|li|\/?div|\/?strong|\/?em|\/?span|\/?ul).*?>/g, '')
