@@ -74,6 +74,7 @@ export default function Schedule() {
                     <NextClassProgressBar />
                     <Calendar
                         viewDate={viewDate}
+                        daysRelToCur={relDays}
                         classes={filtered}
                     />
                 </div>

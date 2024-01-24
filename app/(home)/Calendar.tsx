@@ -18,6 +18,7 @@ import type {Section} from '@/util/unitime';
 
 type CalendarProps = {
     viewDate: DateTime,
+    daysRelToCur: number,
     classes: Section[]
 };
 export default function Calendar(props: CalendarProps) {
@@ -59,7 +60,10 @@ export default function Calendar(props: CalendarProps) {
                     <hr className="h-4 border-t border-tertiary dark:border-tertiary-dark" key={i} />
                 ))}
 
-                <ScheduleIndicator />
+                {props.daysRelToCur === 0 && (
+                    // Only show schedule indicator if viewing current day
+                    <ScheduleIndicator />
+                )}
             </div>
 
             {/* Classes */}
