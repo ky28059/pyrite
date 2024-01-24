@@ -1,10 +1,12 @@
 'use client'
 
-import {useState} from 'react';
+import {useContext, useState} from 'react';
+import UserDataContext from '@/contexts/UserDataContext';
 
 // Components
 import CenteredModal from '@/components/CenteredModal';
 import CloseButton from '@/components/CloseButton';
+import OutlineButton, {DangerOutlineButton} from '@/components/OutlineButton';
 
 // Utils
 import type {BoilerLinkOrganizationData} from '@/util/boilerlink';
@@ -13,7 +15,23 @@ import {decodeBoilerLinkDescription} from '@/app/(home)/BoilerLinkEvent';
 
 export default function Organization(props: BoilerLinkOrganizationData) {
     const [open, setOpen] = useState(false);
-    const imageSrc = `https://se-images.campuslabs.com/clink/images/${props.ProfilePicture}?preset=small-sq`
+    const imageSrc = `https://se-images.campuslabs.com/clink/images/${props.ProfilePicture}?preset=small-sq`;
+
+    const {data, setData} = useContext(UserDataContext);
+
+    function addToPinned() {
+        const newData = {...data};
+        newData.pinnedOrgIds = [...newData.pinnedOrgIds, props.Id];
+        setData(newData);
+        setOpen(false);
+    }
+
+    function removeFromPinned() {
+        const newData = {...data};
+        newData.pinnedOrgIds = newData.pinnedOrgIds.filter((i) => i !== props.Id);
+        setData(newData);
+        setOpen(false);
+    }
 
     return (
         <>
@@ -71,10 +89,6 @@ export default function Organization(props: BoilerLinkOrganizationData) {
                     </div>
                 )}
 
-                {/*<div className="bg-yellow-500/30 text-theme dark:text-theme-dark text-xs px-2 py-0.5 mb-2 h-max w-max rounded-full font-semibold">*/}
-                {/*    {props.type}*/}
-                {/*</div>*/}
-
                 {/*<p className="flex gap-2 items-center text-sm text-secondary dark:text-secondary-dark">*/}
                 {/*    <BsPeopleFill /> {props.instructors.join(', ')}*/}
                 {/*</p>*/}
@@ -88,6 +102,16 @@ export default function Organization(props: BoilerLinkOrganizationData) {
                 <div className="text-sm space-y-2 mt-4">
                     {decodeBoilerLinkDescription(props.Description ?? props.Summary ?? '')}
                 </div>
+
+                {!data.pinnedOrgIds.includes(props.Id) ? (
+                    <OutlineButton className="mt-4 w-max" onClick={addToPinned}>
+                        Add to pinned
+                    </OutlineButton>
+                ) : (
+                    <DangerOutlineButton className="mt-4 w-max" onClick={removeFromPinned}>
+                        Remove from pinned
+                    </DangerOutlineButton>
+                )}
             </CenteredModal>
         </>
     )
