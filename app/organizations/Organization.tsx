@@ -11,7 +11,7 @@ import OrganizationProfilePicture from '@/app/organizations/OrganizationProfileP
 
 // Utils
 import type {BoilerLinkOrganizationData} from '@/util/boilerlink';
-import {decodeBoilerLinkDescription} from '@/app/(home)/BoilerLinkEvent';
+import {decodeBoilerLinkDescription} from '@/app/(home)/BoilerLinkEventModal';
 
 
 export default function Organization(props: BoilerLinkOrganizationData) {

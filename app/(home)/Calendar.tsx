@@ -7,6 +7,7 @@ import {DateTime} from 'luxon';
 import ScheduleClass from '@/app/(home)/ScheduleClass';
 import ScheduleMeal from '@/app/(home)/ScheduleMeal';
 import ScheduleIndicator from '@/app/(home)/ScheduleIndicator';
+import ScheduleBoilerLinkEvent from '@/app/(home)/ScheduleBoilerLinkEvent';
 
 // Contexts
 import UserDataContext from '@/contexts/UserDataContext';
@@ -14,12 +15,14 @@ import UserDataContext from '@/contexts/UserDataContext';
 // Utils
 import type {MealsResponse} from '@/util/menus';
 import type {Section} from '@/util/unitime';
+import type {BoilerLinkEventData} from '@/util/boilerlink';
 
 
 type CalendarProps = {
     viewDate: DateTime,
     daysRelToCur: number,
-    classes: Section[]
+    classes: Section[],
+    events: BoilerLinkEventData[] | null
 };
 export default function Calendar(props: CalendarProps) {
     const {data} = useContext(UserDataContext);
@@ -65,6 +68,11 @@ export default function Calendar(props: CalendarProps) {
                     <ScheduleIndicator />
                 )}
             </div>
+
+            {/* Events */}
+            {props.events?.filter(e => data.eventIds.includes(e.id)).map(e => (
+                <ScheduleBoilerLinkEvent {...e} key={e.id} />
+            ))}
 
             {/* Classes */}
             {props.classes.map(c => (

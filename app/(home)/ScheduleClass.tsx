@@ -21,9 +21,13 @@ export default function ScheduleClass(props: Section) {
     return (
         <>
             <button
-                style={{gridRowStart: parseGridRows(props.start), gridRowEnd: parseGridRows(props.end), gridColumnStart: 2}}
                 className={'border-l-4 z-10 text-left rounded px-4 py-3 hover:ring-4 transition duration-100 focus:outline-none focus-visible:ring-[3px] ' + getBgStyle(props)}
                 onClick={() => setOpen(true)}
+                style={{
+                    gridRowStart: parseGridRows(props.start),
+                    gridRowEnd: parseGridRows(props.end),
+                    gridColumnStart: 2
+                }}
             >
                 <section className="flex gap-2 sm:gap-4">
                     <div className="flex flex-col">

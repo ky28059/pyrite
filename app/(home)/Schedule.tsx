@@ -76,6 +76,7 @@ export default function Schedule() {
                         viewDate={viewDate}
                         daysRelToCur={relDays}
                         classes={filtered}
+                        events={events}
                     />
                 </div>
 
