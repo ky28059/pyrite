@@ -58,7 +58,7 @@ export default function Organization(props: BoilerLinkOrganizationData) {
                     onClick={() => setOpen(false)}
                 />
 
-                <h1 className="flex gap-4 items-center font-bold text-2xl text-pretty mb-3">
+                <h1 className="flex gap-4 items-center font-bold text-2xl text-pretty mb-3 pr-8">
                     <OrganizationProfilePicture {...props} />
                     {props.Name}
                 </h1>
@@ -83,7 +83,7 @@ export default function Organization(props: BoilerLinkOrganizationData) {
                 {/*    <FaCalendar /> {props.dayOfWeek} {props.start}-{props.end}*/}
                 {/*</p>*/}
 
-                <div className="text-sm space-y-2 mt-4 overflow-y-auto scrollbar:w-1 scrollbar-thumb:bg-tertiary dark:scrollbar-thumb:bg-tertiary-dark">
+                <div className="text-sm space-y-2 mt-4 break-all overflow-y-auto scrollbar:w-1 scrollbar-thumb:bg-tertiary dark:scrollbar-thumb:bg-tertiary-dark">
                     {decodeBoilerLinkDescription(props.Description || props.Summary || '')}
                 </div>
 
