@@ -1,21 +1,45 @@
 'use client'
 
-import {useState} from 'react';
+import {useContext, useState} from 'react';
+import {DateTime} from 'luxon';
 import he from 'he';
-import type {BoilerLinkEventData} from '@/util/boilerlink';
 
 // Components
 import CenteredModal from '@/components/CenteredModal';
 import CloseButton from '@/components/CloseButton';
+import OutlineButton, {DangerOutlineButton} from '@/components/OutlineButton';
 
 // Icons
-import {FaLocationDot} from 'react-icons/fa6';
+import {FaCalendar, FaLocationDot} from 'react-icons/fa6';
 import {BsPeopleFill} from 'react-icons/bs';
+
+// Utils
+import type {BoilerLinkEventData} from '@/util/boilerlink';
+import UserDataContext from '@/contexts/UserDataContext';
 
 
 export default function BoilerLinkEvent(props: BoilerLinkEventData) {
     const [open, setOpen] = useState(false);
+    const {data, setData} = useContext(UserDataContext);
+
     const imageSrc = `https://se-images.campuslabs.com/clink/images/${props.imagePath ?? props.organizationProfilePicture}?preset=med-w`
+
+    function addToCalendar() {
+        const newData = {...data};
+        newData.eventIds = [...newData.eventIds, props.id];
+        setData(newData);
+        setOpen(false);
+    }
+
+    function removeFromCalendar() {
+        const newData = {...data};
+        newData.eventIds = newData.eventIds.filter((i) => i !== props.id);
+        setData(newData);
+        setOpen(false);
+    }
+
+    const start = DateTime.fromISO(props.startsOn);
+    const end = DateTime.fromISO(props.endsOn);
 
     return (
         <>
@@ -57,7 +81,8 @@ export default function BoilerLinkEvent(props: BoilerLinkEventData) {
                     alt={props.name}
                 />
 
-                <div className="py-6 px-8 sm:px-10 overflow-y-auto scrollbar:w-1 scrollbar-thumb:bg-tertiary dark:scrollbar-thumb:bg-tertiary-dark">
+                <div
+                    className="py-6 px-8 sm:px-10 overflow-y-auto scrollbar:w-1 scrollbar-thumb:bg-tertiary dark:scrollbar-thumb:bg-tertiary-dark">
                     <h1 className="font-bold text-2xl mb-2">
                         {props.name}
                     </h1>
@@ -81,6 +106,10 @@ export default function BoilerLinkEvent(props: BoilerLinkEventData) {
                         <BsPeopleFill /> {props.organizationName}
                     </p>
                     <p className="flex gap-2 items-center text-sm text-secondary dark:text-secondary-dark">
+                        <FaCalendar />
+                        {start.toLocaleString(DateTime.DATETIME_MED)} – {end.toLocaleString(DateTime.DATETIME_MED)}
+                    </p>
+                    <p className="flex gap-2 items-center text-sm text-secondary dark:text-secondary-dark">
                         <FaLocationDot /> {props.location}
                     </p>
 
@@ -96,6 +125,16 @@ export default function BoilerLinkEvent(props: BoilerLinkEventData) {
                     >
                         View event on BoilerLink
                     </a>
+
+                    {!data.eventIds.includes(props.id) ? (
+                        <OutlineButton className="mt-4 w-max" onClick={addToCalendar}>
+                            Add to calendar
+                        </OutlineButton>
+                    ) : (
+                        <DangerOutlineButton className="mt-4 w-max" onClick={removeFromCalendar}>
+                            Remove from calendar
+                        </DangerOutlineButton>
+                    )}
                 </div>
             </CenteredModal>
         </>

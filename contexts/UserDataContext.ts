@@ -3,6 +3,7 @@ import {createContext} from 'react';
 
 export type UserData = {
     courseIds: string[],
+    eventIds: string[],
     pinnedOrgIds: string[],
     options: {
         theme: 'light' | 'dark',
@@ -12,6 +13,7 @@ export type UserData = {
 
 export const defaultUserData: UserData = {
     courseIds: [],
+    eventIds: [],
     pinnedOrgIds: [],
     options: {
         theme: 'dark',
