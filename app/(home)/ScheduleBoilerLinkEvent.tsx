@@ -4,7 +4,7 @@ import {useState} from 'react';
 import {DateTime, Interval} from 'luxon';
 
 // Components
-import BoilerLinkEventModal from '@/app/(home)/BoilerLinkEventModal';
+import BoilerLinkEventModal, {trimBoilerLinkDescription} from '@/app/(home)/BoilerLinkEventModal';
 
 // Utils
 import type {BoilerLinkEventData} from '@/util/boilerlink';
@@ -51,7 +51,7 @@ export default function ScheduleBoilerLinkEvent(props: BoilerLinkEventData) {
                 </section>
 
                 <p className="font-light text-sm line-clamp-2">
-                    {props.description}
+                    {trimBoilerLinkDescription(props.description)}
                 </p>
             </button>
 

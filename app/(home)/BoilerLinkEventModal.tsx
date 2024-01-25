@@ -122,6 +122,11 @@ export default function BoilerLinkEventModal(props: BoilerLinkEventModalProps) {
     )
 }
 
+export function trimBoilerLinkDescription(desc: string) {
+    return he.decode(desc)
+        .replaceAll(/<.+?>/g, '');
+}
+
 export function decodeBoilerLinkDescription(desc: string) {
     // TODO: support <strong>, <em>, <span>, <ul>, etc.?
     const lines = he.decode(desc)
