@@ -5,6 +5,7 @@ export type UserData = {
     courseIds: string[],
     eventIds: string[],
     pinnedOrgIds: string[],
+    favoriteFoodIds: string[],
     options: {
         theme: 'light' | 'dark',
         time: '12' | '24'
@@ -15,6 +16,7 @@ export const defaultUserData: UserData = {
     courseIds: [],
     eventIds: [],
     pinnedOrgIds: [],
+    favoriteFoodIds: [],
     options: {
         theme: 'dark',
         time: '12'

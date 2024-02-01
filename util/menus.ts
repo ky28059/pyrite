@@ -22,11 +22,11 @@ type Station = {
     BackgroundColor: null,
     ForegroundColor: null,
     IconUrl: null,
-    Items: Item[],
+    Items: MenuItem[],
     Name: string,
     Notes: null
 }
-type Item = {
+export type MenuItem = {
     Allergens?: Allergen[],
     ID: string,
     IsVegetarian: boolean,

@@ -2,7 +2,8 @@
 
 import {Disclosure} from '@headlessui/react';
 import {FaChevronDown, FaCircleCheck, FaCircleXmark} from 'react-icons/fa6';
-import type {Allergen, DiningCourt, Meal} from '@/util/menus';
+import DiningCourtMenuItem from '@/app/(home)/DiningCourtMenuItem';
+import type {DiningCourt, Meal} from '@/util/menus';
 
 
 type DiningCourtMealProps = {
@@ -33,20 +34,7 @@ export default function DiningCourtMeal(props: DiningCourtMealProps) {
                             {s.Name}
                         </h5>
                         {s.Items.map((i) => (
-                            <div
-                                className="px-2 py-0.5 text-secondary dark:text-secondary-dark flex flex-wrap items-center"
-                                key={i.ID + props.meal?.ID}
-                            >
-                                <span className="mr-1.5">{i.Name}</span>
-                                {i.Allergens?.filter((a) => a.Value).map((a) => (
-                                    <img
-                                        src={allergenIconUrl(a)}
-                                        key={i.ID + props.meal?.ID + a.Name}
-                                        className="size-4"
-                                        alt={a.Name}
-                                    />
-                                ))}
-                            </div>
+                            <DiningCourtMenuItem {...i} key={i.ID + props.meal?.ID} />
                         ))}
                     </section>
                 ))}
@@ -58,12 +46,4 @@ export default function DiningCourtMeal(props: DiningCourtMealProps) {
             {props.location}
         </div>
     )
-}
-
-function allergenIconUrl(a: Allergen) {
-    // Un-pluralize names (eg. soy -> soy, peanuts -> peanut)
-    const name = a.Name.endsWith('s')
-        ? a.Name.slice(0, a.Name.length - 1)
-        : a.Name;
-    return `https://api.hfs.purdue.edu/Menus/Content/dietaryTagIcons/PurdueMenusIconsNoBackground_${name.replaceAll(' ', '')}.svg`;
 }
