@@ -38,7 +38,7 @@ export default function Classes() {
                 </p>
             </section>
 
-            <section className="flex flex-col gap-4">
+            <section className="flex flex-col gap-3">
                 {filtered.slice(0, 100).map(c => <Class {...c} key={c.sections[0]} />)}
             </section>
         </div>
