@@ -48,20 +48,23 @@ export default function ScheduleMeal(props: ScheduleBackgroundBlockProps) {
                     />
                 </h1>
 
-                {!props.meals ? (
-                    // TODO: loading UI
-                    <>...</>
-                ) : (
-                    <section className="flex flex-col gap-2">
-                        {props.meals.map((l) => (
-                            <DiningCourtMeal
-                                location={l.Location}
-                                meal={l.Meals.find(m => m.Name === props.meal)}
-                                key={l.Location + l.Date}
-                            />
-                        ))}
-                    </section>
-                )}
+                <section className="flex flex-col gap-2">
+                    {!props.meals ? (
+                        <>
+                            <div className="bg-content-secondary dark:bg-content-secondary-dark rounded h-10 animate-pulse" />
+                            <div className="bg-content-secondary dark:bg-content-secondary-dark rounded h-10 animate-pulse" />
+                            <div className="bg-content-secondary dark:bg-content-secondary-dark rounded h-10 animate-pulse" />
+                            <div className="bg-content-secondary dark:bg-content-secondary-dark rounded h-10 animate-pulse" />
+                            <div className="bg-content-secondary dark:bg-content-secondary-dark rounded h-10 animate-pulse" />
+                        </>
+                    ) : props.meals.map((l) => (
+                        <DiningCourtMeal
+                            location={l.Location}
+                            meal={l.Meals.find(m => m.Name === props.meal)}
+                            key={l.Location + l.Date}
+                        />
+                    ))}
+                </section>
             </CenteredModal>
         </>
     )

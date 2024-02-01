@@ -52,7 +52,8 @@ export default function Schedule() {
         setEvents(null);
         fetch(`/api/events/${viewDate.toISO()}`)
             .then((res) => res.json())
-            .then((res: EventsResponse) => setEvents(res.value));
+            .then((res: EventsResponse) => setEvents(res.value))
+            .catch((e) => {/* TODO */ });
     }, [viewDate]);
 
     return (
