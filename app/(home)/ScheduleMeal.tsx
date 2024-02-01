@@ -1,7 +1,8 @@
 'use client'
 
-import {useState} from 'react';
+import {useContext, useMemo, useState} from 'react';
 import {DateTime} from 'luxon';
+import UserDataContext from '@/contexts/UserDataContext';
 
 // Components
 import DiningCourtMeal from '@/app/(home)/DiningCourtMeal';
@@ -22,6 +23,17 @@ type ScheduleBackgroundBlockProps = {
 }
 export default function ScheduleMeal(props: ScheduleBackgroundBlockProps) {
     const [open, setOpen] = useState(false);
+
+    // Find which favorites are being served in this meal
+    const {data} = useContext(UserDataContext);
+    const favoriteCounts = useMemo(() => {
+        return props.meals?.map((l) => ({
+            name: l.Location,
+            favorites: l.Meals.find(m => m.Name === props.meal)?.Stations
+                .flatMap(s => s.Items)
+                .filter(i => data.favoriteFoodIds.includes(i.ID))
+        })).filter(d => d.favorites && d.favorites.length > 0)
+    }, [props.meals, data.favoriteFoodIds]);
 
     return (
         <>
@@ -64,6 +76,17 @@ export default function ScheduleMeal(props: ScheduleBackgroundBlockProps) {
                             key={l.Location + l.Date}
                         />
                     ))}
+
+                    {favoriteCounts && favoriteCounts.length > 0 && (
+                        <section className="flex flex-col gap-0.5 mt-1">
+                            {favoriteCounts?.map(({name, favorites}) => (
+                                <p className="text-xs text-secondart dark:text-secondary-dark flex gap-1">
+                                    <strong>{name}</strong> is serving
+                                    {favorites?.map(i => <span className="text-theme dark:text-theme-dark">{i.Name}</span>)}
+                                </p>
+                            ))}
+                        </section>
+                    )}
                 </section>
             </CenteredModal>
         </>
