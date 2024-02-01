@@ -1,7 +1,7 @@
 'use client'
 
 import {useContext} from 'react';
-import Class from '@/app/classes/Class';
+import YourClass from '@/app/classes/YourClass';
 
 // Contexts
 import UserDataContext from '@/contexts/UserDataContext';
@@ -13,7 +13,7 @@ export default function YourClasses() {
     const {data} = useContext(UserDataContext);
 
     return (
-        <div className="hidden sm:block sticky w-96 h-max top-24">
+        <div className="hidden sm:block sticky w-96 h-max top-20">
             <h2 className="text-2xl font-bold mb-4">Your classes</h2>
 
             {data.courseIds.length === 0 ? (
@@ -21,9 +21,9 @@ export default function YourClasses() {
                     No classes to show. Add classes by selecting them on the left.
                 </p>
             ) : (
-                <div className="flex flex-col gap-3">
-                    {data.courseIds.map((id) => (
-                        <Class {...classes[id]} key={id} />
+                <div className="flex flex-col gap-2.5">
+                    {data.courseIds.sort().map((id) => (
+                        <YourClass {...classes[id]} key={id} />
                     ))}
                 </div>
             )}

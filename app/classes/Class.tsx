@@ -1,11 +1,11 @@
 'use client'
 
 import {useContext} from 'react';
+import {FiCheck, FiCircle} from 'react-icons/fi';
 
 // Utils
 import UserDataContext from '@/contexts/UserDataContext';
 import type {Section} from '@/util/unitime';
-import {FiCheck, FiCircle} from 'react-icons/fi';
 
 
 export default function Class(props: Section) {
@@ -25,7 +25,7 @@ export default function Class(props: Section) {
             onClick={toggleSelected}
         >
             {selected ? (
-                <FiCheck className="w-6 h-6 bg-tertiary dark:bg-white/10 rounded-full p-1 flex-none" />
+                <FiCheck className="w-6 h-6 bg-gray-400/25 dark:bg-white/10 rounded-full p-1 flex-none" />
             ) : (
                 <FiCircle className="w-6 h-6 text-transparent bg-tertiary dark:bg-white/10 rounded-full p-0.5 flex-none" />
             )}
