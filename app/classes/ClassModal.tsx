@@ -41,9 +41,11 @@ export default function ClassModal(props: ClassModalProps) {
                 {props.type}
             </div>
 
-            <p className="flex gap-2 items-center text-sm text-secondary dark:text-secondary-dark">
-                <BsPeopleFill /> {props.instructors.join(', ')}
-            </p>
+            {props.instructors.length > 0 && (
+                <p className="flex gap-2 items-center text-sm text-secondary dark:text-secondary-dark">
+                    <BsPeopleFill/> {props.instructors.join(', ')}
+                </p>
+            )}
             <p className="flex gap-2 items-center text-sm text-secondary dark:text-secondary-dark">
                 <FaLocationDot /> {props.location}
             </p>

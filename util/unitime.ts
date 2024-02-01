@@ -32,16 +32,16 @@ export const loadClasses = cache(async () => {
         const sections = sectionRaw.split('\n').map(s => s.trim());
 
         res[sections[0]] = {
-            names: nameRaw.split('\n').map(s => s.trim()),
+            names: nameRaw.split('\n').map(s => s.trim()).filter((s) => !!s),
             sections,
             type: type as Section['type'],
-            titles: titleRaw.split('\n'),
+            titles: titleRaw.split('\n').filter((s) => !!s),
             dayOfWeek,
             start,
             end,
             location,
-            instructors: instrRaw.split('\n'),
-            emails: emailRaw.split('\n')
+            instructors: instrRaw.split('\n').filter((s) => !!s),
+            emails: emailRaw.split('\n').filter((s) => !!s)
         }
     }
 
