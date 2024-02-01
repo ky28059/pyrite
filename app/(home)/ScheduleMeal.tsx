@@ -77,7 +77,7 @@ export default function ScheduleMeal(props: ScheduleBackgroundBlockProps) {
                         />
                     ))}
 
-                    {favoriteCounts && favoriteCounts.length > 0 && (
+                    {favoriteCounts && favoriteCounts.length > 0 ? (
                         <section className="flex flex-col gap-0.5 mt-1">
                             {favoriteCounts?.map(({name, favorites}) => (
                                 <p className="text-xs text-secondart dark:text-secondary-dark flex gap-1">
@@ -86,6 +86,10 @@ export default function ScheduleMeal(props: ScheduleBackgroundBlockProps) {
                                 </p>
                             ))}
                         </section>
+                    ) : (
+                        <p className="text-xs text-secondart dark:text-secondary-dark mt-1">
+                            No favorites are being served this meal.
+                        </p>
                     )}
                 </section>
             </CenteredModal>
