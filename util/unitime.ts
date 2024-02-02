@@ -7,7 +7,11 @@ const TERM = 'Spring2024PWL';
 export type Section = {
     names: string[], // ex. AAE 20300
     sections: string[], // ex. 10001-001
-    type: 'Lecture' | 'Laboratory' | 'Laboratory (Hybrid)' | 'Recitation' | 'Recitation (Hybrid)' | 'Pso' | 'Travel Time',
+    type: 'Lecture' | 'Lecture (Hybrid)'
+        | 'Laboratory' | 'Laboratory (Hybrid)'
+        | 'Recitation' | 'Recitation (Hybrid)'
+        | 'Pso'
+        | 'Travel Time',
     titles: string[], // ex. Aeromechanics I
     dayOfWeek: string, // ex. TTh
     start: string,
@@ -46,7 +50,7 @@ export const loadClasses = cache(async () => {
         if (type === 'Midterm Examination') {
             // If the section name is "Offering", add midterm to all lecture periods instead.
             if (sections[0] === 'Offering') {
-                const objs = Object.values(res).filter(s => names.some(n => s.names.includes(n)));
+                const objs = Object.values(res).filter(s => s.type.includes('Lecture') && names.some(n => s.names.includes(n)));
                 if (!objs.length) {
                     console.log(`[ERR] Midterm for ${names[0]} parsed before corresponding class!`);
                     continue;
