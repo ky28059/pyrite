@@ -22,7 +22,8 @@ type Midterm = {
     dayOfWeek: string,
     location: string,
     start: string,
-    end: string
+    end: string,
+    date: string
 }
 
 export const loadClasses = cache(async () => {
@@ -55,7 +56,8 @@ export const loadClasses = cache(async () => {
                     dayOfWeek,
                     start,
                     end,
-                    location
+                    location,
+                    date: first
                 }));
             } else {
                 if (!res[sections[0]]) {
@@ -67,7 +69,8 @@ export const loadClasses = cache(async () => {
                     dayOfWeek,
                     start,
                     end,
-                    location
+                    location,
+                    date: first
                 });
             }
             continue;

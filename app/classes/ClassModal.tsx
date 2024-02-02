@@ -18,6 +18,26 @@ type ClassModalProps = Section & {
 export default function ClassModal(props: ClassModalProps) {
     const {open, setOpen} = props;
 
+    // Render midterm exams, adding a midterm number while correctly accounting for multiple midterm
+    // locations on the same day.
+    function parseMidterms() {
+        const dates = new Set<string>();
+
+        return props.midterms.map((m) => {
+            dates.add(m.date);
+            return (
+                <div className="bg-content-secondary dark:bg-content-secondary-dark rounded px-3 py-1.5">
+                    <h5 className="text-sm">
+                        Midterm {dates.size}
+                    </h5>
+                    <p className="text-xs text-secondary dark:text-secondary-dark">
+                        {m.dayOfWeek} {m.date} {m.start} - {m.end} @ {m.location}
+                    </p>
+                </div>
+            )
+        })
+    }
+
     return (
         <CenteredModal
             isOpen={open}
@@ -54,17 +74,11 @@ export default function ClassModal(props: ClassModalProps) {
             </p>
 
             {props.midterms.length > 0 && (
-                <section className="flex flex-col gap-2 mt-3">
-                    {props.midterms.map((m) => (
-                        <div className="bg-content-secondary dark:bg-content-secondary-dark rounded px-3 py-1.5">
-                            <h5 className="text-sm">
-                                Midterm examination
-                            </h5>
-                            <p className="text-xs text-secondary dark:text-secondary-dark">
-                                {m.dayOfWeek} {m.start} - {m.end} @ {m.location}
-                            </p>
-                        </div>
-                    ))}
+                <section className="flex flex-col gap-2 mt-5">
+                    <h3 className="font-medium text-xs text-secondary dark:text-secondary-dark">
+                        Midterm exams
+                    </h3>
+                    {parseMidterms()}
                 </section>
             )}
         </CenteredModal>
