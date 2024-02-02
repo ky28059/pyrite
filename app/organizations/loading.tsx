@@ -33,14 +33,14 @@ function DummyOrganization(props: DummyOrganizationProps) {
 
     return (
         <div className="flex gap-5">
-            <div className="size-[75px] bg-pulse dark:bg-pulse-dark rounded-full flex-none animate-pulse"/>
+            <div className="size-[75px] bg-pulse dark:bg-pulse-dark rounded-full flex-none animate-pulse" />
 
             <div className="flex-grow">
                 <div
                     className="rounded-full h-5 bg-pulse dark:bg-pulse-dark animate-pulse mb-1.5"
                     style={{width: `${headingWidth}%`}}
                 />
-                <div className="rounded-full h-4 bg-pulse dark:bg-pulse-dark animate-pulse mb-1.5"/>
+                <div className="rounded-full h-4 bg-pulse dark:bg-pulse-dark animate-pulse mb-1.5" />
                 <div
                     className="rounded-full h-4 bg-pulse dark:bg-pulse-dark animate-pulse"
                     style={{width: `${textWidth}%`}}
