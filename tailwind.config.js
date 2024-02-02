@@ -35,6 +35,10 @@ module.exports = {
         'content-secondary': {
           DEFAULT: colors.gray['100'],
           dark: '#131313'
+        },
+        pulse: {
+          DEFAULT: colors.gray['300'],
+          dark: '#313135'
         }
       }
     },
