@@ -14,15 +14,9 @@ export default async function OrganizationsPage() {
     const res = await fetchOrganizations();
 
     return (
-        <>
-            <h1 className="text-4xl font-bold mb-3">
-                Organizations
-            </h1>
-
-            <Organizations
-                organizations={res.value}
-                count={res['@odata.count']}
-            />
-        </>
+        <Organizations
+            organizations={res.value}
+            count={res['@odata.count']}
+        />
     )
 }
