@@ -18,6 +18,7 @@ import CurrentTimeContext from '@/contexts/CurrentTimeContext';
 // Utils
 import type {BoilerLinkEventData, EventsResponse} from '@/util/boilerlink';
 import {ZONE} from '@/util/schedule';
+import EventsContext from '@/contexts/EventsContext';
 
 
 export default function Schedule() {
@@ -46,13 +47,13 @@ export default function Schedule() {
     });
 
     // BoilerLink events
-    // TODO: caching?
-    const [events, setEvents] = useState<BoilerLinkEventData[] | null>(null);
+    const {events: eventsMap, setEventsForDay} = useContext(EventsContext);
+    const events = eventsMap[viewDate.toISODate()!];
+
     useEffect(() => {
-        setEvents(null);
         fetch(`/api/events/${viewDate.toISO()}`)
             .then((res) => res.json())
-            .then((res: EventsResponse) => setEvents(res.value))
+            .then((res: EventsResponse) => setEventsForDay(viewDate.toISODate()!, res.value))
             .catch((e) => {/* TODO */ });
     }, [viewDate]);
 

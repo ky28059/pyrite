@@ -8,6 +8,7 @@ import FirebaseProviders from '@/components/FirebaseProviders';
 import UserDataProvider from '@/components/UserDataProvider';
 import CurrentTimeProvider from '@/components/CurrentTimeProvider';
 import ClassesProvider from '@/components/ClassesProvider';
+import EventsProvider from '@/components/EventsProvider';
 import FaviconHandler from '@/components/FaviconHandler';
 import InstallModal from '@/components/InstallModal';
 
@@ -63,15 +64,17 @@ export default async function Layout(props: { children: ReactNode }) {
                 <UserDataProvider>
                     <CurrentTimeProvider>
                         <ClassesProvider classes={classes}>
-                            <div className="flex">
-                                <Sidebar />
-                                <main className="relative container pt-16 pb-24 sm:pt-24">
-                                    {props.children}
-                                </main>
+                            <EventsProvider>
+                                <div className="flex">
+                                    <Sidebar/>
+                                    <main className="relative container pt-16 pb-24 sm:pt-24">
+                                        {props.children}
+                                    </main>
 
-                                <FaviconHandler />
-                                <InstallModal />
-                            </div>
+                                    <FaviconHandler/>
+                                    <InstallModal/>
+                                </div>
+                            </EventsProvider>
                         </ClassesProvider>
                     </CurrentTimeProvider>
                 </UserDataProvider>
