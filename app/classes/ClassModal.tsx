@@ -52,6 +52,21 @@ export default function ClassModal(props: ClassModalProps) {
             <p className="flex gap-2 items-center text-sm text-secondary dark:text-secondary-dark">
                 <FaCalendar /> {props.dayOfWeek} {props.start}-{props.end}
             </p>
+
+            {props.midterms.length > 0 && (
+                <section className="flex flex-col gap-2 mt-3">
+                    {props.midterms.map((m) => (
+                        <div className="bg-content-secondary dark:bg-content-secondary-dark rounded px-3 py-1.5">
+                            <h5 className="text-sm">
+                                Midterm examination
+                            </h5>
+                            <p className="text-xs text-secondary dark:text-secondary-dark">
+                                {m.dayOfWeek} {m.start} - {m.end} @ {m.location}
+                            </p>
+                        </div>
+                    ))}
+                </section>
+            )}
         </CenteredModal>
     )
 }

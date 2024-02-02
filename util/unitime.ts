@@ -15,6 +15,14 @@ export type Section = {
     location: string,
     instructors: string[],
     emails: string[],
+    midterms: Midterm[],
+}
+
+type Midterm = {
+    dayOfWeek: string,
+    location: string,
+    start: string,
+    end: string
 }
 
 export const loadClasses = cache(async () => {
@@ -29,10 +37,44 @@ export const loadClasses = cache(async () => {
     // Drop first row (header) and last row (empty string)
     for (const r of rows.slice(1, rows.length - 1)) {
         const [nameRaw, sectionRaw, type, titleRaw, note, dayOfWeek, first, last, start, end, pstart, pend, , , location, capacity, enrollment, limit, instrRaw, emailRaw, , ] = r.slice(1, r.length - 1).split(/"?,(?=[",])"?/);
-        const sections = sectionRaw.split('\n').map(s => s.trim());
+
+        const names = nameRaw.split('\n').map(s => s.trim()).filter((s) => !!s);
+        const sections = sectionRaw.split('\n').map(s => s.trim()).filter((s) => !!s);
+
+        // Parse midterm exams
+        if (type === 'Midterm Examination') {
+            // If the section name is "Offering", add midterm to all lecture periods instead.
+            if (sections[0] === 'Offering') {
+                const objs = Object.values(res).filter(s => names.some(n => s.names.includes(n)));
+                if (!objs.length) {
+                    console.log(`[ERR] Midterm for ${names[0]} parsed before corresponding class!`);
+                    continue;
+                }
+
+                objs.forEach(s => s.midterms.push({
+                    dayOfWeek,
+                    start,
+                    end,
+                    location
+                }));
+            } else {
+                if (!res[sections[0]]) {
+                    console.log(`[ERR] Midterm for ${names[0]} parsed before corresponding class!`);
+                    continue;
+                }
+
+                res[sections[0]].midterms.push({
+                    dayOfWeek,
+                    start,
+                    end,
+                    location
+                });
+            }
+            continue;
+        }
 
         res[sections[0]] = {
-            names: nameRaw.split('\n').map(s => s.trim()).filter((s) => !!s),
+            names,
             sections,
             type: type as Section['type'],
             titles: titleRaw.split('\n').filter((s) => !!s),
@@ -41,7 +83,8 @@ export const loadClasses = cache(async () => {
             end,
             location,
             instructors: instrRaw.split('\n').filter((s) => !!s),
-            emails: emailRaw.split('\n').filter((s) => !!s)
+            emails: emailRaw.split('\n').filter((s) => !!s),
+            midterms: []
         }
     }
 
