@@ -1,19 +1,11 @@
 'use client'
 
 import {useState} from 'react';
-
-// Components
-import CenteredModal from '@/components/CenteredModal';
-import CloseButton from '@/components/CloseButton';
+import ClassModal from '@/app/classes/ClassModal';
 
 // Utils
 import type {Section} from '@/util/unitime';
 import {parseUnitimeMinutes} from '@/hooks/useNextPeriod';
-
-// Icons
-import {FaCalendar, FaLocationDot} from 'react-icons/fa6';
-import {BsPeopleFill} from 'react-icons/bs';
-import ClassModal from '@/app/classes/ClassModal';
 
 
 export default function ScheduleClass(props: Section) {
@@ -83,6 +75,7 @@ export function parseGridRows(time: string) {
 function getBgStyle(s: Section) {
     switch (s.type) {
         case 'Lecture':
+        case 'Lecture (Hybrid)':
             return 'border-theme dark:border-theme-dark text-theme dark:text-theme-dark bg-theme/30 dark:bg-theme-dark/30 hover:ring-yellow-500/30'
         case 'Laboratory':
         case 'Laboratory (Hybrid)':
@@ -92,7 +85,7 @@ function getBgStyle(s: Section) {
         case "Recitation":
         case "Recitation (Hybrid)":
             return 'border-[#f56fa1] text-[#f56fa1] bg-[#f56fa1]/30 hover:ring-pink-500/30'
-        default:
+        default: // TODO: travel time?
             return ''
     }
 }
