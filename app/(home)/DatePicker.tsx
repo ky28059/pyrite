@@ -7,9 +7,14 @@ import {DateTime} from 'luxon';
 // Components
 import AnimatedPopover from '@/components/AnimatedPopover';
 
-// Utils
+// Contexts
 import CurrentTimeContext from '@/contexts/CurrentTimeContext';
-import {YEAR_END, YEAR_START, ZONE} from '@/util/schedule';
+import UserDataContext from '@/contexts/UserDataContext';
+import ClassesContext from '@/contexts/ClassesContext';
+import EventsContext from '@/contexts/EventsContext';
+
+// Utils
+import {getPeriodsForDay, YEAR_END, YEAR_START, ZONE} from '@/util/schedule';
 import {useIsMounted} from '@/hooks/useIsMounted';
 
 
@@ -47,6 +52,10 @@ type CalendarProps = {
 }
 function Calendar(props: CalendarProps) {
     const {start, end, currTime, setTime, className} = props;
+
+    const {data} = useContext(UserDataContext);
+    const classes = useContext(ClassesContext);
+    const {events} = useContext(EventsContext);
 
     const date = useContext(CurrentTimeContext);
     const today = date.setZone(ZONE).startOf('day');
@@ -97,8 +106,8 @@ function Calendar(props: CalendarProps) {
                 </h4>
                 <div className="grid grid-cols-7">
                     {days.map((day, i) => {
-                        const noSchool = [0, 6].includes(day.weekday % 7)
-                        //    || (day.toFormat('MM-dd') in alternates && alternates[day.toFormat('MM-dd')] == null); TODO
+                        const noSchool = getPeriodsForDay(day, data, classes, events).length === 0;
+
                         const active = currTime.hasSame(day, 'day');
                         return (
                             <button
