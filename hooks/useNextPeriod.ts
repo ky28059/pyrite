@@ -4,9 +4,10 @@ import {useContext} from 'react';
 import CurrentTimeContext from '@/contexts/CurrentTimeContext';
 import UserDataContext from '@/contexts/UserDataContext';
 import ClassesContext from '@/contexts/ClassesContext';
+import EventsContext from '@/contexts/EventsContext';
 
 // Utils
-import {ZONE} from '@/util/schedule';
+import {getPeriodsForDay, ZONE} from '@/util/schedule';
 
 
 /**
@@ -18,19 +19,12 @@ import {ZONE} from '@/util/schedule';
 export function useNextPeriod() {
     const classes = useContext(ClassesContext);
     const {data} = useContext(UserDataContext);
+
     const time = useContext(CurrentTimeContext);
+    const {events} = useContext(EventsContext);
 
     // The user's classes for the current date, sorted ascending by start time.
-    const sorted = data.courseIds.map((id) => classes[id]).filter((c) => {
-        switch (time.weekday) {
-            case 1: return c.dayOfWeek.includes('M');
-            case 2: return /T(?!h)/.test(c.dayOfWeek);
-            case 3: return c.dayOfWeek.includes('W');
-            case 4: return c.dayOfWeek.includes('Th');
-            case 5: return c.dayOfWeek.includes('F');
-        }
-        return false;
-    }).sort((a, b) => parseUnitimeMinutes(a.start) - parseUnitimeMinutes(b.start));
+    const sorted = getPeriodsForDay(time, data, classes, events)
 
     const localized = time.setZone(ZONE);
     const midnight = localized.startOf('day');
@@ -43,7 +37,7 @@ export function useNextPeriod() {
     // than the end time.
     let currPd;
     for (currPd = 0; currPd < sorted.length; currPd++) {
-        if (minutes < parseUnitimeMinutes(sorted[currPd].end)) break;
+        if (minutes < sorted[currPd].e) break;
     }
 
     // If no period exists that has an end time after the current time, no next period exists.
@@ -55,30 +49,15 @@ export function useNextPeriod() {
 
     // Span = minutes between previous and next period
     const span = prev
-        ? parseUnitimeMinutes(next.start) - parseUnitimeMinutes(prev.end)
+        ? next.s - prev.e
         : 30;
 
     // Length = length (in minutes) of next period
-    const length = parseUnitimeMinutes(next.end) - parseUnitimeMinutes(next.start);
+    const length = next.e - next.s;
 
     // Minutes to start and end of next period
-    const toStart = parseUnitimeMinutes(next.start) - minutes;
-    const toEnd = parseUnitimeMinutes(next.end) - minutes;
+    const toStart = next.s - minutes;
+    const toEnd = next.e - minutes;
 
     return {next, span, length, toStart, toEnd}
-}
-
-/**
- * Parses a UniTime time string into its corresponding number of minutes from 12:00 AM.
- * @param time The string to parse.
- * @returns The number of minutes from midnight this string represents.
- */
-export function parseUnitimeMinutes(time: string) {
-    if (time === 'noon') return 720;
-
-    // Parse AM/PM time string, subtracting 84 because the grid starts at 7:00 AM and adding one for indexing.
-    let [hour, minute] = time.slice(0, time.length - 1).split(':').map(s => Number(s));
-    if (time.endsWith('p') && hour != 12) hour += 12;
-
-    return hour * 60 + minute;
 }

@@ -54,8 +54,8 @@ export default function FaviconHandler() {
         }
 
         document.title = ((toStart > 0)
-            ? `${next.names[0]} starting in ${Math.ceil(toStart)} minute${Math.ceil(toStart) !== 1 ? 's' : ''}.`
-            : `${next.names[0]} ending in ${Math.ceil(toEnd)} minute${Math.ceil(toEnd) !== 1 ? 's' : ''}, started ${Math.ceil(-toStart)} minute${Math.ceil(-toStart) !== 1 ? 's' : ''} ago.`)
+            ? `${next.name} starting in ${Math.ceil(toStart)} minute${Math.ceil(toStart) !== 1 ? 's' : ''}.`
+            : `${next.name} ending in ${Math.ceil(toEnd)} minute${Math.ceil(toEnd) !== 1 ? 's' : ''}, started ${Math.ceil(-toStart)} minute${Math.ceil(-toStart) !== 1 ? 's' : ''} ago.`)
             + ' (Pyrite)'
 
         let numToShow = toStart >= 0 ? Math.ceil(toStart) : Math.ceil(toEnd);

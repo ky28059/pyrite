@@ -27,7 +27,7 @@ export default function NextClassProgressBar() {
         return (
             <div className="mb-8">
                 <p className="mb-1">
-                    <strong>{next.names[0]}</strong>{' '}
+                    <strong>{next.name}</strong>{' '}
                     ending in {endQuantity} {endUnit}, started {startQuantity} {startUnit} ago.
                 </p>
                 <ProgressBar value={(length - toEnd) / length * 100} />
@@ -44,7 +44,7 @@ export default function NextClassProgressBar() {
     return (
         <div className="mb-8">
             <p className="mb-1">
-                <strong>{next.names[0]}</strong>{' '}
+                <strong>{next.name}</strong>{' '}
                 starting in {quantity} {unit} at <strong>{next.location}</strong>.
             </p>
             <ProgressBar value={(span - toStart) / span * 100} />

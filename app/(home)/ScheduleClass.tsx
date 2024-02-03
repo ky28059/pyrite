@@ -5,7 +5,7 @@ import ClassModal from '@/app/classes/ClassModal';
 
 // Utils
 import type {Section} from '@/util/unitime';
-import {parseUnitimeMinutes} from '@/hooks/useNextPeriod';
+import {parseUnitimeMinutes} from '@/util/schedule';
 
 
 export default function ScheduleClass(props: Section) {
