@@ -47,7 +47,8 @@ export default {
         laboratory: '#7851A9',
         pso: '#6A5ACD',
         recitation: '#f56fa1',
-        event: '#73C2FB'
+        event: '#73C2FB',
+        midterm: '#FF8F00'
       }
     },
     container: {

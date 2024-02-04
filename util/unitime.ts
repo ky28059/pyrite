@@ -23,7 +23,7 @@ export type SectionType = 'Lecture' | 'Lecture (Hybrid)'
     | 'Pso'
     | 'Travel Time'
 
-type Midterm = {
+export type Midterm = {
     dayOfWeek: string,
     location: string,
     start: string,

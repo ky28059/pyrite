@@ -17,6 +17,7 @@ import EventsContext from '@/contexts/EventsContext';
 // Utils
 import type {MealsResponse} from '@/util/menus';
 import {getPeriodsForDay} from '@/util/schedule';
+import ScheduleMidterm from '@/app/(home)/ScheduleMidterm';
 
 
 type CalendarProps = {
@@ -75,8 +76,10 @@ export default function Calendar(props: CalendarProps) {
             {/* Periods */}
             {periods.map((p) => {
                 switch (p.type) {
-                    case "Event":
+                    case 'Event':
                         return <ScheduleBoilerLinkEvent {...p} key={p.event.id} />
+                    case 'Midterm':
+                        return <ScheduleMidterm {...p} key={p.section.sections[0]} />
                     default:
                         return <ScheduleClass {...p} key={p.section.sections[0]} />
                 }

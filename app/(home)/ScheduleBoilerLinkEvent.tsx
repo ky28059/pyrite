@@ -7,7 +7,7 @@ import {DateTime, Interval} from 'luxon';
 import BoilerLinkEventModal, {trimBoilerLinkDescription} from '@/app/(home)/BoilerLinkEventModal';
 
 // Utils
-import {EventPeriod} from '@/util/schedule';
+import type {EventPeriod} from '@/util/schedule';
 
 
 export default function ScheduleBoilerLinkEvent(props: EventPeriod) {

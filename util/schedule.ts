@@ -2,7 +2,7 @@ import {DateTime} from 'luxon';
 import type {UserData} from '@/contexts/UserDataContext';
 import type {Classes} from '@/contexts/ClassesContext';
 import type {Events} from '@/contexts/EventsContext';
-import type {Section, SectionType} from '@/util/unitime';
+import type {Midterm, Section, SectionType} from '@/util/unitime';
 import type {BoilerLinkEventData} from '@/util/boilerlink';
 
 
@@ -10,8 +10,6 @@ export const ZONE = 'America/Indiana/Indianapolis';
 export const YEAR_START = DateTime.fromISO('2023-08-21', {zone: ZONE});
 export const YEAR_END = DateTime.fromISO('2024-05-04', {zone: ZONE})
 
-
-export type PeriodType = SectionType | 'Event';
 
 type PeriodBase = {
     name: string,
@@ -23,12 +21,17 @@ export type SectionPeriod = PeriodBase & {
     type: SectionType,
     section: Section // TODO: naming, more efficient abstraction?
 }
+export type MidtermPeriod = PeriodBase & {
+    type: 'Midterm',
+    section: Section,
+    midterm: Midterm
+}
 export type EventPeriod = PeriodBase & {
     type: 'Event',
     event: BoilerLinkEventData
 }
 
-type Period = SectionPeriod | EventPeriod;
+export type Period = SectionPeriod | MidtermPeriod | EventPeriod;
 
 /**
  * Get the schedule periods happening on a given day, sorted by start time. Returned periods include classes,
@@ -46,7 +49,7 @@ export function getPeriodsForDay(
     classes: Classes,
     events: Events
 ) {
-    // Classes for the given day
+    // Classes and midterms for the given day
     const classPeriods = data.courseIds.map((id) => classes[id]).filter((c) => {
         switch (date.weekday) {
             case 1: return c.dayOfWeek.includes('M');
@@ -56,14 +59,27 @@ export function getPeriodsForDay(
             case 5: return c.dayOfWeek.includes('F');
         }
         return false;
-    }).map<SectionPeriod>((c) => ({
-        type: c.type,
-        name: c.names[0], // TODO?
-        location: c.location,
-        s: parseUnitimeMinutes(c.start),
-        e: parseUnitimeMinutes(c.end),
-        section: c
-    }));
+    }).map((c) => {
+        const midterm = c.midterms.find((m) => m.date === date.toFormat('MM/dd/yyyy'));
+        if (midterm) return {
+            type: 'Midterm',
+            name: c.names[0] + ' (Midterm)',
+            location: midterm.location,
+            s: parseUnitimeMinutes(midterm.start),
+            e: parseUnitimeMinutes(midterm.end),
+            midterm,
+            section: c
+        } satisfies MidtermPeriod;
+
+        return {
+            type: c.type,
+            name: c.names[0], // TODO?
+            location: c.location,
+            s: parseUnitimeMinutes(c.start),
+            e: parseUnitimeMinutes(c.end),
+            section: c
+        } satisfies SectionPeriod;
+    });
 
     // Events for the given day
     const blEventPeriods = events[date.toISODate()!]?.filter((e) => data.eventIds.includes(e.id)).map<EventPeriod>((e) => {

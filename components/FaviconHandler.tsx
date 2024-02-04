@@ -5,7 +5,7 @@ import resolveConfig from 'tailwindcss/resolveConfig';
 import tailwindConfig from '@/tailwind.config';
 
 // Utils
-import type {PeriodType} from '@/util/schedule';
+import type {Period} from '@/util/schedule';
 import {useNextPeriod} from '@/hooks/useNextPeriod';
 import {hexToRgb} from '@/util/color';
 
@@ -162,7 +162,7 @@ export default function FaviconHandler() {
     return null;
 }
 
-function periodTypeToColor(type: PeriodType) {
+function periodTypeToColor(type: Period['type']) {
     const config = resolveConfig(tailwindConfig);
 
     switch (type) {
@@ -179,6 +179,8 @@ function periodTypeToColor(type: PeriodType) {
             return config.theme.colors.recitation;
         case 'Event':
             return config.theme.colors.event;
+        case 'Midterm':
+            return config.theme.colors.midterm;
         default: // TODO: travel time?
             return '#f1b42f'
     }
