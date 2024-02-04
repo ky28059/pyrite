@@ -11,21 +11,16 @@ import BoilerLinkEvent from '@/app/(home)/BoilerLinkEvent';
 import DayAlert from '@/app/(home)/DayAlert';
 
 // Contexts
-import UserDataContext from '@/contexts/UserDataContext';
-import ClassesContext from '@/contexts/ClassesContext';
 import CurrentTimeContext from '@/contexts/CurrentTimeContext';
+import EventsContext from '@/contexts/EventsContext';
 
 // Utils
-import type {BoilerLinkEventData, EventsResponse} from '@/util/boilerlink';
+import type {EventsResponse} from '@/util/boilerlink';
 import {ZONE} from '@/util/schedule';
-import EventsContext from '@/contexts/EventsContext';
 
 
 export default function Schedule() {
     const [viewDate, setViewDate] = useState<DateTime>(DateTime.now().startOf('day'));
-
-    const classes = useContext(ClassesContext);
-    const {data} = useContext(UserDataContext);
 
     // Current time check to see if viewDate is not the current date
     const time = useContext(CurrentTimeContext);
@@ -33,18 +28,6 @@ export default function Schedule() {
 
     const jumpToPres = () => setViewDate(currDate);
     const relDays = viewDate.diff(currDate, 'days').days;
-
-    // Filtered `viewDate` classes by weekday
-    const filtered = data.courseIds.map((id) => classes[id]).filter((c) => {
-        switch (viewDate.weekday) {
-            case 1: return c.dayOfWeek.includes('M');
-            case 2: return /T(?!h)/.test(c.dayOfWeek);
-            case 3: return c.dayOfWeek.includes('W');
-            case 4: return c.dayOfWeek.includes('Th');
-            case 5: return c.dayOfWeek.includes('F');
-        }
-        return false;
-    });
 
     // BoilerLink events
     const {events: eventsMap, setEventsForDay} = useContext(EventsContext);
@@ -77,8 +60,6 @@ export default function Schedule() {
                     <Calendar
                         viewDate={viewDate}
                         daysRelToCur={relDays}
-                        classes={filtered}
-                        events={events}
                     />
                 </div>
 

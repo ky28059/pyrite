@@ -2,7 +2,8 @@ import {DateTime} from 'luxon';
 import type {UserData} from '@/contexts/UserDataContext';
 import type {Classes} from '@/contexts/ClassesContext';
 import type {Events} from '@/contexts/EventsContext';
-import type {SectionType} from '@/util/unitime';
+import type {Section, SectionType} from '@/util/unitime';
+import type {BoilerLinkEventData} from '@/util/boilerlink';
 
 
 export const ZONE = 'America/Indiana/Indianapolis';
@@ -10,14 +11,24 @@ export const YEAR_START = DateTime.fromISO('2023-08-21', {zone: ZONE});
 export const YEAR_END = DateTime.fromISO('2024-05-04', {zone: ZONE})
 
 
-export type PeriodType = SectionType | 'Event'
-type Period = {
-    type: PeriodType,
+export type PeriodType = SectionType | 'Event';
+
+type PeriodBase = {
     name: string,
     location: string,
     s: number, // Minutes after midnight EST
     e: number
 }
+export type SectionPeriod = PeriodBase & {
+    type: SectionType,
+    section: Section
+}
+export type EventPeriod = PeriodBase & {
+    type: 'Event',
+    event: BoilerLinkEventData
+}
+
+type Period = SectionPeriod | EventPeriod;
 
 /**
  * Get the schedule periods happening on a given day, sorted by start time. Returned periods include classes,
@@ -45,16 +56,17 @@ export function getPeriodsForDay(
             case 5: return c.dayOfWeek.includes('F');
         }
         return false;
-    }).map<Period>((c) => ({
+    }).map<SectionPeriod>((c) => ({
         type: c.type,
         name: c.names[0], // TODO?
         location: c.location,
         s: parseUnitimeMinutes(c.start),
-        e: parseUnitimeMinutes(c.end)
+        e: parseUnitimeMinutes(c.end),
+        section: c
     }));
 
     // Events for the given day
-    const blEventPeriods = events[date.toISODate()!]?.filter((e) => data.eventIds.includes(e.id)).map<Period>((e) => {
+    const blEventPeriods = events[date.toISODate()!]?.filter((e) => data.eventIds.includes(e.id)).map<EventPeriod>((e) => {
         const start = DateTime.fromISO(e.startsOn);
         const end = DateTime.fromISO(e.endsOn);
 
@@ -68,12 +80,13 @@ export function getPeriodsForDay(
             name: e.name,
             location: e.location,
             s: start.diff(midnight, 'minutes').minutes,
-            e: end.diff(midnight, 'minutes').minutes
+            e: end.diff(midnight, 'minutes').minutes,
+            event: e
         }
     });
 
-    const periods = blEventPeriods
-        ? classPeriods.concat(blEventPeriods)
+    const periods: Period[] = blEventPeriods
+        ? [...classPeriods, ...blEventPeriods]
         : classPeriods
 
     return periods.sort((a, b) => a.s - b.s);

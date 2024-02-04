@@ -11,21 +11,22 @@ import ScheduleBoilerLinkEvent from '@/app/(home)/ScheduleBoilerLinkEvent';
 
 // Contexts
 import UserDataContext from '@/contexts/UserDataContext';
+import ClassesContext from '@/contexts/ClassesContext';
+import EventsContext from '@/contexts/EventsContext';
 
 // Utils
 import type {MealsResponse} from '@/util/menus';
-import type {Section} from '@/util/unitime';
-import type {BoilerLinkEventData} from '@/util/boilerlink';
+import {getPeriodsForDay} from '@/util/schedule';
 
 
 type CalendarProps = {
     viewDate: DateTime,
-    daysRelToCur: number,
-    classes: Section[],
-    events: BoilerLinkEventData[] | null
+    daysRelToCur: number
 };
 export default function Calendar(props: CalendarProps) {
     const {data} = useContext(UserDataContext);
+    const classes = useContext(ClassesContext);
+    const {events} = useContext(EventsContext);
 
     const [meals, setMeals] = useState<MealsResponse[] | null>(null);
     useEffect(() => {
@@ -34,6 +35,8 @@ export default function Calendar(props: CalendarProps) {
             setMeals(res);
         });
     }, [props.viewDate]);
+
+    const periods = getPeriodsForDay(props.viewDate, data, classes, events);
 
     return (
         <div className="-mx-2 relative grid grid-rows-[repeat(144,_0.5rem)] grid-cols-[4rem_1fr_0.5rem] sm:grid-cols-[5rem_1fr_2rem]">
@@ -69,15 +72,15 @@ export default function Calendar(props: CalendarProps) {
                 )}
             </div>
 
-            {/* Events */}
-            {props.events?.filter(e => data.eventIds.includes(e.id)).map(e => (
-                <ScheduleBoilerLinkEvent {...e} key={e.id} />
-            ))}
-
-            {/* Classes */}
-            {props.classes.map(c => (
-                <ScheduleClass {...c} key={c.sections[0]} />
-            ))}
+            {/* Periods */}
+            {periods.map((p) => {
+                switch (p.type) {
+                    case "Event":
+                        return <ScheduleBoilerLinkEvent {...p.event} key={p.event.id} />
+                    default:
+                        return <ScheduleClass {...p.section} key={p.section.sections[0]} />
+                }
+            })}
         </div>
     )
 }
