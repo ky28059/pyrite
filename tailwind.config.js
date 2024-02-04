@@ -36,10 +36,17 @@ module.exports = {
           DEFAULT: colors.gray['100'],
           dark: '#131313'
         },
-        pulse: {
+        pulse: { // Loading pulse bg color
           DEFAULT: colors.gray['300'],
           dark: '#313135'
-        }
+        },
+
+        // Period colors
+        lecture: this.theme,
+        laboratory: '#7851A9',
+        pso: '#6A5ACD',
+        recitation: '#f56fa1',
+        event: '#73C2FB'
       }
     },
     container: {

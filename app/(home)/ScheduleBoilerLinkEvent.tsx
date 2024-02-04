@@ -27,7 +27,7 @@ export default function ScheduleBoilerLinkEvent(props: BoilerLinkEventData) {
     return (
         <>
             <button
-                className="border-l-4 z-10 text-left rounded px-4 py-3 hover:ring-4 transition duration-100 focus:outline-none focus-visible:ring-[3px] border-[#73C2FB] text-[#73C2FB] bg-[#73C2FB]/30 hover:ring-blue-500/30"
+                className="border-l-4 z-10 text-left rounded px-4 py-3 hover:ring-4 transition duration-100 focus:outline-none focus-visible:ring-[3px] border-event text-event bg-event/30 hover:ring-event/30"
                 onClick={() => setOpen(true)}
                 style={{
                     gridRowStart: s / 5 - 84 + 1,

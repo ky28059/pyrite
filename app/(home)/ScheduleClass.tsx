@@ -79,12 +79,12 @@ function getBgStyle(s: Section) {
             return 'border-theme dark:border-theme-dark text-theme dark:text-theme-dark bg-theme/30 dark:bg-theme-dark/30 hover:ring-yellow-500/30'
         case 'Laboratory':
         case 'Laboratory (Hybrid)':
-            return 'border-[#7851A9] text-[#7851A9] bg-[#7851A9]/30 hover:ring-purple-500/30'
+            return 'border-laboratory text-laboratory bg-laboratory/30 hover:ring-laboratory/30'
         case 'Pso':
-            return 'border-[#6A5ACD] text-[#6A5ACD] bg-[#6A5ACD]/30 hover:ring-purple-500/30'
+            return 'border-pso text-pso bg-pso/30 hover:ring-pso/30'
         case "Recitation":
         case "Recitation (Hybrid)":
-            return 'border-[#f56fa1] text-[#f56fa1] bg-[#f56fa1]/30 hover:ring-pink-500/30'
+            return 'border-recitation text-recitation bg-recitation/30 hover:ring-recitation/30'
         default: // TODO: travel time?
             return ''
     }
