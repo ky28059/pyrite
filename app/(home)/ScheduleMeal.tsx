@@ -10,8 +10,9 @@ import CenteredModal from '@/components/CenteredModal';
 import CloseButton from '@/components/CloseButton';
 
 // Utils
-import {parseGridRows} from '@/app/(home)/ScheduleClass';
 import type {MealsResponse, MealType} from '@/util/menus';
+import {minutesToGridRows} from '@/app/(home)/ScheduleClass';
+import {parseUnitimeMinutes} from '@/util/schedule';
 
 
 type ScheduleBackgroundBlockProps = {
@@ -38,7 +39,12 @@ export default function ScheduleMeal(props: ScheduleBackgroundBlockProps) {
     return (
         <>
             <button
-                style={{gridRowStart: parseGridRows(props.start), gridRowEnd: parseGridRows(props.end), gridColumnStart: 1, gridColumnEnd: 4}}
+                style={{
+                    gridRowStart: minutesToGridRows(parseUnitimeMinutes(props.start)),
+                    gridRowEnd: minutesToGridRows(parseUnitimeMinutes(props.end)),
+                    gridColumnStart: 1,
+                    gridColumnEnd: 4
+                }}
                 className="bg-content-secondary dark:bg-content-secondary-dark rounded-l flex items-center justify-center text-secondary dark:text-secondary-dark uppercase tracking-wider font-medium dark:hover:bg-[#0b0b0b] transition duration-200 focus:outline-none focus-visible:ring-[3px]"
                 onClick={() => setOpen(true)}
             >

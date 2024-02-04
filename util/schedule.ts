@@ -8,7 +8,10 @@ import type {BoilerLinkEventData} from '@/util/boilerlink';
 
 export const ZONE = 'America/Indiana/Indianapolis';
 export const YEAR_START = DateTime.fromISO('2023-08-21', {zone: ZONE});
-export const YEAR_END = DateTime.fromISO('2024-05-04', {zone: ZONE})
+export const YEAR_END = DateTime.fromISO('2024-05-04', {zone: ZONE});
+
+export const HOUR_START = 7;
+export const HOUR_END = 22;
 
 
 type PeriodBase = {

@@ -8,6 +8,7 @@ import BoilerLinkEventModal, {trimBoilerLinkDescription} from '@/app/(home)/Boil
 
 // Utils
 import type {EventPeriod} from '@/util/schedule';
+import {minutesToGridRows} from '@/app/(home)/ScheduleClass';
 
 
 export default function ScheduleBoilerLinkEvent(props: EventPeriod) {
@@ -27,8 +28,8 @@ export default function ScheduleBoilerLinkEvent(props: EventPeriod) {
                 className="border-l-4 z-10 text-left rounded px-4 py-3 hover:ring-4 transition duration-100 focus:outline-none focus-visible:ring-[3px] border-event text-event bg-event/30 hover:ring-event/30"
                 onClick={() => setOpen(true)}
                 style={{
-                    gridRowStart: s / 5 - 84 + 1,
-                    gridRowEnd: e / 5 - 84 + 1,
+                    gridRowStart: minutesToGridRows(s),
+                    gridRowEnd: minutesToGridRows(e),
                     gridColumnStart: 2
                 }}
             >

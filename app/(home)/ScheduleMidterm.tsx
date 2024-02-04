@@ -5,6 +5,7 @@ import ClassModal from '@/app/classes/ClassModal';
 
 // Utils
 import type {MidtermPeriod} from '@/util/schedule';
+import {minutesToGridRows} from '@/app/(home)/ScheduleClass';
 
 
 export default function ScheduleMidterm(props: MidtermPeriod) {
@@ -17,8 +18,8 @@ export default function ScheduleMidterm(props: MidtermPeriod) {
                 className="border-l-4 z-10 text-left rounded px-4 py-3 hover:ring-4 transition duration-100 focus:outline-none focus-visible:ring-[3px] border-midterm text-midterm bg-midterm/30 hover:ring-midterm/30"
                 onClick={() => setOpen(true)}
                 style={{
-                    gridRowStart: s / 5 - 84 + 1,
-                    gridRowEnd: e / 5 - 84 + 1,
+                    gridRowStart: minutesToGridRows(s),
+                    gridRowEnd: minutesToGridRows(e),
                     gridColumnStart: 2
                 }}
             >

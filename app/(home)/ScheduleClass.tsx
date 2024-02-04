@@ -5,7 +5,7 @@ import ClassModal from '@/app/classes/ClassModal';
 
 // Utils
 import type {Section} from '@/util/unitime';
-import {parseUnitimeMinutes, SectionPeriod} from '@/util/schedule';
+import {HOUR_START, SectionPeriod} from '@/util/schedule';
 
 
 export default function ScheduleClass(props: SectionPeriod) {
@@ -18,8 +18,8 @@ export default function ScheduleClass(props: SectionPeriod) {
                 className={'border-l-4 z-10 text-left rounded px-4 py-3 hover:ring-4 transition duration-100 focus:outline-none focus-visible:ring-[3px] ' + getBgStyle(section)}
                 onClick={() => setOpen(true)}
                 style={{
-                    gridRowStart: s / 5 - 84 + 1,
-                    gridRowEnd: e / 5 - 84 + 1,
+                    gridRowStart: minutesToGridRows(s),
+                    gridRowEnd: minutesToGridRows(e),
                     gridColumnStart: 2
                 }}
             >
@@ -64,13 +64,12 @@ export default function ScheduleClass(props: SectionPeriod) {
 }
 
 /**
- * Parses a UniTime time string into its corresponding number of grid row ticks (multiples of 5 minutes).
- * @param time The string to parse.
+ * Parses a quantity of minutes into its corresponding number of grid row ticks (multiples of 5 minutes).
+ * @param m The minutes (after midnight) to convert.
  * @returns The number of grid rows this time represents.
  */
-export function parseGridRows(time: string) {
-    const minutes = parseUnitimeMinutes(time);
-    return minutes / 5 - 84 + 1;
+export function minutesToGridRows(m: number) {
+    return m / 5 - (HOUR_START * 12) + 1
 }
 
 function getBgStyle(s: Section) {
