@@ -7,22 +7,19 @@ import {DateTime, Interval} from 'luxon';
 import BoilerLinkEventModal, {trimBoilerLinkDescription} from '@/app/(home)/BoilerLinkEventModal';
 
 // Utils
-import type {BoilerLinkEventData} from '@/util/boilerlink';
+import {EventPeriod} from '@/util/schedule';
 
 
-export default function ScheduleBoilerLinkEvent(props: BoilerLinkEventData) {
+export default function ScheduleBoilerLinkEvent(props: EventPeriod) {
+    const {s, e, event} = props;
     const [open, setOpen] = useState(false);
 
-    const start = DateTime.fromISO(props.startsOn);
-    const end = DateTime.fromISO(props.endsOn);
+    const start = DateTime.fromISO(event.startsOn);
+    const end = DateTime.fromISO(event.endsOn);
     const interval = Interval.fromDateTimes(start, end);
 
     const isSameDay = start.hasSame(end, 'day');
     if (!isSameDay) return null; // TODO
-
-    const midnight = start.startOf('day');
-    const s = start.diff(midnight, 'minutes').minutes;
-    const e = end.diff(midnight, 'minutes').minutes;
 
     return (
         <>
@@ -37,7 +34,7 @@ export default function ScheduleBoilerLinkEvent(props: BoilerLinkEventData) {
             >
                 <section className="flex gap-2 sm:gap-4">
                     <h3 className="font-semibold font-lg line-clamp-1">
-                        {props.name}
+                        {event.name}
                     </h3>
 
                     <div className="flex gap-1 flex-none text-xs font-semibold">
@@ -45,18 +42,18 @@ export default function ScheduleBoilerLinkEvent(props: BoilerLinkEventData) {
                             {interval.toLocaleString(DateTime.DATETIME_MED)}
                         </p>
                         <p className="rounded-full bg-black/5 dark:bg-black/15 px-2 py-1 flex-none">
-                            {props.location}
+                            {event.location}
                         </p>
                     </div>
                 </section>
 
                 <p className="font-light text-sm line-clamp-2">
-                    {trimBoilerLinkDescription(props.description)}
+                    {trimBoilerLinkDescription(event.description)}
                 </p>
             </button>
 
             <BoilerLinkEventModal
-                {...props}
+                {...event}
                 open={open}
                 setOpen={setOpen}
             />

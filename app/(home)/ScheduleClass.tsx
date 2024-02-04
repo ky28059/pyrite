@@ -5,56 +5,57 @@ import ClassModal from '@/app/classes/ClassModal';
 
 // Utils
 import type {Section} from '@/util/unitime';
-import {parseUnitimeMinutes} from '@/util/schedule';
+import {parseUnitimeMinutes, SectionPeriod} from '@/util/schedule';
 
 
-export default function ScheduleClass(props: Section) {
+export default function ScheduleClass(props: SectionPeriod) {
+    const {s, e, section} = props;
     const [open, setOpen] = useState(false);
 
     return (
         <>
             <button
-                className={'border-l-4 z-10 text-left rounded px-4 py-3 hover:ring-4 transition duration-100 focus:outline-none focus-visible:ring-[3px] ' + getBgStyle(props)}
+                className={'border-l-4 z-10 text-left rounded px-4 py-3 hover:ring-4 transition duration-100 focus:outline-none focus-visible:ring-[3px] ' + getBgStyle(section)}
                 onClick={() => setOpen(true)}
                 style={{
-                    gridRowStart: parseGridRows(props.start),
-                    gridRowEnd: parseGridRows(props.end),
+                    gridRowStart: s / 5 - 84 + 1,
+                    gridRowEnd: e / 5 - 84 + 1,
                     gridColumnStart: 2
                 }}
             >
                 <section className="flex gap-2 sm:gap-4">
                     <div className="flex flex-col">
-                        {props.sections.map((id, i) => (
+                        {section.sections.map((id, i) => (
                             <h3 className="font-semibold font-lg line-clamp-1" key={id}>
-                                {props.names[i]}: {props.titles[i]} ({id})
+                                {section.names[i]}: {section.titles[i]} ({id})
                             </h3>
                         ))}
                     </div>
 
                     <div className="flex gap-1 flex-none text-xs font-semibold">
                         <p className="hidden sm:block rounded-full bg-black/5 dark:bg-black/15 px-2 py-1 flex-none">
-                            {props.type}
+                            {section.type}
                         </p>
                         <p className="hidden sm:block rounded-full bg-black/5 dark:bg-black/15 px-2 py-1 flex-none">
-                            {props.start}-{props.end}
+                            {section.start}-{section.end}
                         </p>
                         <p className="rounded-full bg-black/5 dark:bg-black/15 px-2 py-1 flex-none">
-                            {props.location}
+                            {section.location}
                         </p>
                     </div>
                 </section>
 
-                {props.instructors?.map((name, i) => (
+                {section.instructors?.map((name, i) => (
                     <p className="font-light text-sm" key={name}>
-                        {name}{props.emails[i] && (
-                            <> ({props.emails[i]})</>
+                        {name}{section.emails[i] && (
+                            <> ({section.emails[i]})</>
                         )}
                     </p>
                 ))}
             </button>
 
             <ClassModal
-                {...props}
+                {...section}
                 open={open}
                 setOpen={setOpen}
             />

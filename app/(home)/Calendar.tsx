@@ -76,9 +76,9 @@ export default function Calendar(props: CalendarProps) {
             {periods.map((p) => {
                 switch (p.type) {
                     case "Event":
-                        return <ScheduleBoilerLinkEvent {...p.event} key={p.event.id} />
+                        return <ScheduleBoilerLinkEvent {...p} key={p.event.id} />
                     default:
-                        return <ScheduleClass {...p.section} key={p.section.sections[0]} />
+                        return <ScheduleClass {...p} key={p.section.sections[0]} />
                 }
             })}
         </div>

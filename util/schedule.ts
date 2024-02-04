@@ -21,7 +21,7 @@ type PeriodBase = {
 }
 export type SectionPeriod = PeriodBase & {
     type: SectionType,
-    section: Section
+    section: Section // TODO: naming, more efficient abstraction?
 }
 export type EventPeriod = PeriodBase & {
     type: 'Event',
