@@ -7,11 +7,7 @@ const TERM = 'Spring2024PWL';
 export type Section = {
     names: string[], // ex. AAE 20300
     sections: string[], // ex. 10001-001
-    type: 'Lecture' | 'Lecture (Hybrid)'
-        | 'Laboratory' | 'Laboratory (Hybrid)'
-        | 'Recitation' | 'Recitation (Hybrid)'
-        | 'Pso'
-        | 'Travel Time',
+    type: SectionType,
     titles: string[], // ex. Aeromechanics I
     dayOfWeek: string, // ex. TTh
     start: string,
@@ -21,6 +17,11 @@ export type Section = {
     emails: string[],
     midterms: Midterm[],
 }
+export type SectionType = 'Lecture' | 'Lecture (Hybrid)'
+    | 'Laboratory' | 'Laboratory (Hybrid)'
+    | 'Recitation' | 'Recitation (Hybrid)'
+    | 'Pso'
+    | 'Travel Time'
 
 type Midterm = {
     dayOfWeek: string,

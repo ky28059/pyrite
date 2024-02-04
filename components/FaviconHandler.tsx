@@ -3,6 +3,7 @@
 import {useContext, useEffect, useRef} from 'react';
 
 // Utils
+import type {PeriodType} from '@/util/schedule';
 import {useNextPeriod} from '@/hooks/useNextPeriod';
 import {hexToRgb} from '@/util/color';
 
@@ -62,7 +63,7 @@ export default function FaviconHandler() {
         const isSeconds = numToShow === 1;
         if (isSeconds) numToShow = toStart >= 0 ? Math.ceil(toStart * 60) : Math.ceil(toEnd * 60);
 
-        const color = '#f1b42f'; // TODO
+        const color = periodTypeToColor(next.type);
         const fc = canvas.current.getContext('2d')!;
 
         // configure it to look nice
@@ -157,4 +158,24 @@ export default function FaviconHandler() {
     }, [date])
 
     return null;
+}
+
+function periodTypeToColor(type: PeriodType) {
+    switch (type) {
+        case 'Lecture':
+        case 'Lecture (Hybrid)':
+            return '#f1b42f'
+        case 'Laboratory':
+        case 'Laboratory (Hybrid)':
+            return '#7851A9'
+        case 'Pso':
+            return '#6A5ACD'
+        case 'Recitation':
+        case 'Recitation (Hybrid)':
+            return '#f56fa1'
+        case 'Event':
+            return '#73C2FB'
+        default: // TODO: travel time?
+            return '#f1b42f'
+    }
 }

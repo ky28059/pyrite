@@ -1,7 +1,8 @@
-import {DateTime, Interval} from 'luxon';
+import {DateTime} from 'luxon';
 import type {UserData} from '@/contexts/UserDataContext';
 import type {Classes} from '@/contexts/ClassesContext';
 import type {Events} from '@/contexts/EventsContext';
+import type {SectionType} from '@/util/unitime';
 
 
 export const ZONE = 'America/Indiana/Indianapolis';
@@ -9,7 +10,9 @@ export const YEAR_START = DateTime.fromISO('2023-08-21', {zone: ZONE});
 export const YEAR_END = DateTime.fromISO('2024-05-04', {zone: ZONE})
 
 
+export type PeriodType = SectionType | 'Event'
 type Period = {
+    type: PeriodType,
     name: string,
     location: string,
     s: number, // Minutes after midnight EST
@@ -43,6 +46,7 @@ export function getPeriodsForDay(
         }
         return false;
     }).map<Period>((c) => ({
+        type: c.type,
         name: c.names[0], // TODO?
         location: c.location,
         s: parseUnitimeMinutes(c.start),
@@ -60,6 +64,7 @@ export function getPeriodsForDay(
         const midnight = start.startOf('day');
 
         return {
+            type: 'Event',
             name: e.name,
             location: e.location,
             s: start.diff(midnight, 'minutes').minutes,
