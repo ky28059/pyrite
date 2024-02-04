@@ -21,7 +21,7 @@ export default function Class(props: Section) {
 
     return (
         <button
-            className={'px-5 py-4 rounded flex gap-4 items-center bg-content-secondary dark:bg-content-secondary-dark border text-left transition duration-150 ' + (selected ? 'bg-theme/20 dark:bg-theme-dark/20 border-theme' : 'border-tertiary dark:border-tertiary-dark hover:!border-theme')}
+            className={'px-5 py-4 rounded flex gap-4 items-center bg-content-secondary dark:bg-content-secondary-dark border text-left transition duration-150 ' + (selected ? 'bg-theme/20 dark:bg-theme-dark/20 border-theme' : 'border-transparent hover:border-theme')}
             onClick={toggleSelected}
         >
             {selected ? (

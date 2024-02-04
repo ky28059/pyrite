@@ -1,6 +1,8 @@
 'use client'
 
 import {useContext, useEffect, useRef} from 'react';
+import resolveConfig from 'tailwindcss/resolveConfig';
+import tailwindConfig from '@/tailwind.config';
 
 // Utils
 import type {PeriodType} from '@/util/schedule';
@@ -161,20 +163,22 @@ export default function FaviconHandler() {
 }
 
 function periodTypeToColor(type: PeriodType) {
+    const config = resolveConfig(tailwindConfig);
+
     switch (type) {
         case 'Lecture':
         case 'Lecture (Hybrid)':
             return '#f1b42f'
         case 'Laboratory':
         case 'Laboratory (Hybrid)':
-            return '#7851A9'
+            return config.theme.colors.laboratory;
         case 'Pso':
-            return '#6A5ACD'
+            return config.theme.colors.pso;
         case 'Recitation':
         case 'Recitation (Hybrid)':
-            return '#f56fa1'
+            return config.theme.colors.recitation;
         case 'Event':
-            return '#73C2FB'
+            return config.theme.colors.event;
         default: // TODO: travel time?
             return '#f1b42f'
     }

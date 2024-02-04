@@ -1,8 +1,9 @@
-const colors = require('tailwindcss/colors');
-const plugin = require('tailwindcss/plugin');
+import type {Config} from 'tailwindcss';
+import colors from 'tailwindcss/colors';
+import plugin from 'tailwindcss/plugin';
 
-/** @type {import('tailwindcss').Config} */
-module.exports = {
+
+export default {
   content: [
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
@@ -42,7 +43,7 @@ module.exports = {
         },
 
         // Period colors
-        lecture: this.theme,
+        lecture: '#f1b42f', // TODO
         laboratory: '#7851A9',
         pso: '#6A5ACD',
         recitation: '#f56fa1',
@@ -67,4 +68,4 @@ module.exports = {
       addVariant('scrollbar-thumb', ['&::-webkit-scrollbar-thumb']);
     })
   ]
-}
+} satisfies Config;
