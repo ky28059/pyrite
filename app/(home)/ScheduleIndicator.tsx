@@ -27,7 +27,7 @@ export default function ScheduleIndicator() {
     const minutes = time.diff(midnight, 'minutes').minutes;
 
     // Start: HOUR_START, span: (HOUR_END - HOUR_START)
-    const progress = (minutes - HOUR_START * 60) / (HOUR_END - HOUR_START) * 60 * 100;
+    const progress = (minutes - HOUR_START * 60) / ((HOUR_END - HOUR_START) * 60) * 100;
 
     return (
         <div
