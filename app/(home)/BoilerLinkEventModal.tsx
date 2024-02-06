@@ -3,6 +3,7 @@
 import {useContext} from 'react';
 import {DateTime, Interval} from 'luxon';
 import he from 'he';
+import DOMPurify from 'isomorphic-dompurify';
 
 // Components
 import CenteredModal from '@/components/CenteredModal';
@@ -98,9 +99,10 @@ export default function BoilerLinkEventModal(props: BoilerLinkEventModalProps) {
                     <FaLocationDot /> {props.location}
                 </p>
 
-                <div className="text-sm space-y-2 mt-4 min-h-0 overflow-y-auto scrollbar:w-1 scrollbar-thumb:bg-tertiary dark:scrollbar-thumb:bg-tertiary-dark">
-                    {decodeBoilerLinkDescription(props.description)}
-                </div>
+                <div
+                    className="text-sm space-y-2 mt-4 min-h-0 overflow-y-auto scrollbar:w-1 scrollbar-thumb:bg-tertiary dark:scrollbar-thumb:bg-tertiary-dark [&_a]:text-theme dark:[&_a]:text-theme-dark [&_a:hover]:underline"
+                    dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(props.description)}}
+                />
 
                 <a
                     className="block mt-4 text-sm text-secondary dark-text-secondary-dark italic hover:underline w-max"
@@ -128,13 +130,4 @@ export default function BoilerLinkEventModal(props: BoilerLinkEventModalProps) {
 export function trimBoilerLinkDescription(desc: string) {
     return he.decode(desc)
         .replaceAll(/<.+?>/g, '');
-}
-
-export function decodeBoilerLinkDescription(desc: string) {
-    // TODO: support <strong>, <em>, <span>, <ul>, etc.?
-    const lines = he.decode(desc)
-        .replaceAll(/<(?:p|li|\/?div|\/?strong|\/?em|\/?span|\/?ul).*?>/g, '')
-        .split(/<\/(?:p|li)>/);
-
-    return lines.slice(0, lines.length - 1).map((t) => <p>{t}</p>);
 }

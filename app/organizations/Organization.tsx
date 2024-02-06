@@ -2,6 +2,7 @@
 
 import {useContext, useState} from 'react';
 import UserDataContext from '@/contexts/UserDataContext';
+import DOMPurify from 'isomorphic-dompurify';
 
 // Components
 import CenteredModal from '@/components/CenteredModal';
@@ -11,7 +12,6 @@ import OrganizationProfilePicture from '@/app/organizations/OrganizationProfileP
 
 // Utils
 import type {BoilerLinkOrganizationData} from '@/util/boilerlink';
-import {decodeBoilerLinkDescription} from '@/app/(home)/BoilerLinkEventModal';
 
 
 export default function Organization(props: BoilerLinkOrganizationData) {
@@ -83,9 +83,10 @@ export default function Organization(props: BoilerLinkOrganizationData) {
                 {/*    <FaCalendar /> {props.dayOfWeek} {props.start}-{props.end}*/}
                 {/*</p>*/}
 
-                <div className="text-sm space-y-2 mt-4 break-all overflow-y-auto scrollbar:w-1 scrollbar-thumb:bg-tertiary dark:scrollbar-thumb:bg-tertiary-dark">
-                    {decodeBoilerLinkDescription(props.Description || props.Summary || '')}
-                </div>
+                <div
+                    className="text-sm space-y-2 mt-4 break-all overflow-y-auto scrollbar:w-1 scrollbar-thumb:bg-tertiary dark:scrollbar-thumb:bg-tertiary-dark"
+                    dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(props.Description || props.Summary || '')}}
+                />
 
                 {!data.pinnedOrgIds.includes(props.Id) ? (
                     <OutlineButton className="mt-4 w-max" onClick={addToPinned}>
