@@ -6,6 +6,8 @@ export type EventsResponse = {
     value: BoilerLinkEventData[]
 }
 
+export type EventTheme = 'Athletics' | 'Social' | 'CommunityService' | 'ThoughtfulLearning' | 'Arts'
+
 export type BoilerLinkEventData = {
     id: string,
     institutionId: number,
@@ -22,7 +24,7 @@ export type BoilerLinkEventData = {
     location: string,
     startsOn: string, // ISO
     endsOn: string, // ISO
-    theme: string,
+    theme: EventTheme,
     imagePath?: string,
     categoryIds: string[],
     categoryNames: string[],

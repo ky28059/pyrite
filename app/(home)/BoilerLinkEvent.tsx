@@ -2,19 +2,20 @@
 
 import {useState} from 'react';
 import {DateTime, Interval} from 'luxon';
-import he from 'he';
 
 // Components
 import BoilerLinkEventModal from '@/app/(home)/BoilerLinkEventModal';
 
 // Utils
-import type {BoilerLinkEventData} from '@/util/boilerlink';
+import type {BoilerLinkEventData, EventTheme} from '@/util/boilerlink';
 
 
 export default function BoilerLinkEvent(props: BoilerLinkEventData) {
     const [open, setOpen] = useState(false);
 
-    const imageSrc = `https://se-images.campuslabs.com/clink/images/${props.imagePath ?? props.organizationProfilePicture}?preset=med-w`
+    const imageSrc = props.imagePath
+        ? `https://se-images.campuslabs.com/clink/images/${props.imagePath}?preset=med-w`
+        : themeToDefaultImageUrl(props.theme);
 
     const start = DateTime.fromISO(props.startsOn);
     const end = DateTime.fromISO(props.endsOn);
@@ -51,4 +52,19 @@ export default function BoilerLinkEvent(props: BoilerLinkEventData) {
             />
         </>
     )
+}
+
+export function themeToDefaultImageUrl(theme: EventTheme) {
+    switch (theme) {
+        case 'CommunityService':
+            return 'https://static.campuslabsengage.com/discovery/images/events/service.jpg';
+        case 'Athletics':
+            return 'https://static.campuslabsengage.com/discovery/images/events/athletics.jpg';
+        case 'Social':
+            return 'https://static.campuslabsengage.com/discovery/images/events/social.jpg';
+        case 'Arts':
+            return 'https://static.campuslabsengage.com/discovery/images/events/artsandmusic.jpg';
+        default:
+            return 'https://static.campuslabsengage.com/discovery/images/events/learning.jpg';
+    }
 }

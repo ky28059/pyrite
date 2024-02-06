@@ -16,6 +16,7 @@ import {FaCalendar, FaLocationDot} from 'react-icons/fa6';
 // Utils
 import type {BoilerLinkEventData} from '@/util/boilerlink';
 import UserDataContext from '@/contexts/UserDataContext';
+import {themeToDefaultImageUrl} from '@/app/(home)/BoilerLinkEvent';
 
 
 type BoilerLinkEventModalProps = BoilerLinkEventData & {
@@ -26,7 +27,9 @@ export default function BoilerLinkEventModal(props: BoilerLinkEventModalProps) {
     const {open, setOpen} = props;
     const {data, setData} = useContext(UserDataContext);
 
-    const imageSrc = `https://se-images.campuslabs.com/clink/images/${props.imagePath ?? props.organizationProfilePicture}?preset=med-w`
+    const imageSrc = props.imagePath
+        ? `https://se-images.campuslabs.com/clink/images/${props.imagePath}?preset=med-w`
+        : themeToDefaultImageUrl(props.theme);
 
     const start = DateTime.fromISO(props.startsOn);
     const end = DateTime.fromISO(props.endsOn);
@@ -100,7 +103,7 @@ export default function BoilerLinkEventModal(props: BoilerLinkEventModalProps) {
                 </div>
 
                 <a
-                    className="block mt-4 text-sm text-secondary dark-text-secondary-dark italic hover:underline"
+                    className="block mt-4 text-sm text-secondary dark-text-secondary-dark italic hover:underline w-max"
                     href={`https://boilerlink.purdue.edu/event/${props.id}`}
                     target="_blank"
                     rel="noopener noreferrer"
