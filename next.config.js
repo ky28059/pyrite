@@ -5,5 +5,13 @@ const withSerwist = require("@serwist/next").default({
 });
 
 module.exports = withSerwist({
-    reactStrictMode: true
+    reactStrictMode: true,
+    images: {
+        remotePatterns: [{
+            protocol: 'https',
+            hostname: 'se-images.campuslabs.com',
+            port: '',
+            pathname: '/clink/images/**'
+        }]
+    }
 });
