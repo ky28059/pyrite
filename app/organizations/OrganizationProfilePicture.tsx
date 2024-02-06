@@ -1,12 +1,15 @@
+import Image from 'next/image';
 import {BoilerLinkOrganizationData} from '@/util/boilerlink';
 
 
 export default function OrganizationProfilePicture(props: BoilerLinkOrganizationData) {
     return props.ProfilePicture ? (
-        <img
+        <Image
             src={`https://se-images.campuslabs.com/clink/images/${props.ProfilePicture}?preset=small-sq`}
             className="rounded-full flex-none h-max"
             alt={props.Name}
+            width={75}
+            height={75}
         />
     ) : (
         <div
