@@ -14,7 +14,10 @@ import OrganizationProfilePicture from '@/app/organizations/OrganizationProfileP
 import type {BoilerLinkOrganizationData} from '@/util/boilerlink';
 
 
-export default function Organization(props: BoilerLinkOrganizationData) {
+type OrganizationProps = BoilerLinkOrganizationData & {
+    blurUrl: string
+}
+export default function Organization(props: OrganizationProps) {
     const [open, setOpen] = useState(false);
     const {data, setData} = useContext(UserDataContext);
 

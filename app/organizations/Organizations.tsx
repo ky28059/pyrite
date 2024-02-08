@@ -8,6 +8,7 @@ import type {BoilerLinkOrganizationData} from '@/util/boilerlink';
 
 type OrganizationsProps = {
     organizations: BoilerLinkOrganizationData[],
+    blurUrls: {[key: string]: string},
     count: number
 }
 export default function Organizations(props: OrganizationsProps) {
@@ -45,13 +46,21 @@ export default function Organizations(props: OrganizationsProps) {
 
             <div className="flex flex-col gap-4">
                 {pinned.length !== 0 && pinned.map((o) => (
-                    <Organization {...o} key={o.Id} />
+                    <Organization
+                        {...o}
+                        blurUrl={props.blurUrls[o.Id]}
+                        key={o.Id}
+                    />
                 ))}
                 {pinned.length !== 0 && (
                     <hr className="border-tertiary dark:border-tertiary-dark my-4" />
                 )}
                 {filtered.map((o) => (
-                    <Organization {...o} key={o.Id} />
+                    <Organization
+                        {...o}
+                        blurUrl={props.blurUrls[o.Id]}
+                        key={o.Id}
+                    />
                 ))}
             </div>
         </div>
