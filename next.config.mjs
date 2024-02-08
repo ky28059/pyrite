@@ -1,10 +1,13 @@
-const withSerwist = require("@serwist/next").default({
+import withSerwistInit from '@serwist/next';
+import withPlaiceholder from '@plaiceholder/next';
+
+const withSerwist = withSerwistInit({
     swSrc: "app/sw.ts",
     swDest: "public/sw.js",
     disable: process.env.NODE_ENV !== 'production'
 });
 
-module.exports = withSerwist({
+export default withPlaiceholder(withSerwist({
     reactStrictMode: true,
     images: {
         remotePatterns: [{
@@ -14,4 +17,4 @@ module.exports = withSerwist({
             pathname: '/clink/images/**'
         }]
     }
-});
+}));
