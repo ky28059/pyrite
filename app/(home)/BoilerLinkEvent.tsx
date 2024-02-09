@@ -39,7 +39,7 @@ export default function BoilerLinkEvent(props: BoilerLinkEventData) {
                     <p className="text-xs text-secondary dark:text-secondary-dark">
                         {interval.toLocaleString(DateTime.DATETIME_MED)}
                     </p>
-                    <p className="text-xs text-secondary dark:text-secondary-dark">
+                    <p className="text-xs text-secondary dark:text-secondary-dark line-clamp-1">
                         @ {props.location}
                     </p>
                 </div>
@@ -64,6 +64,10 @@ export function themeToDefaultImageUrl(theme: EventTheme) {
             return 'https://static.campuslabsengage.com/discovery/images/events/social.jpg';
         case 'Arts':
             return 'https://static.campuslabsengage.com/discovery/images/events/artsandmusic.jpg';
+        case 'Fundraising':
+            return 'https://static.campuslabsengage.com/discovery/images/events/fundraising.jpg';
+        case 'Cultural':
+            return 'https://static.campuslabsengage.com/discovery/images/events/cultural.jpg';
         default:
             return 'https://static.campuslabsengage.com/discovery/images/events/learning.jpg';
     }
