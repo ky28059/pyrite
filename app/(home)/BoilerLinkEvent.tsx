@@ -68,6 +68,10 @@ export function themeToDefaultImageUrl(theme: EventTheme) {
             return 'https://static.campuslabsengage.com/discovery/images/events/fundraising.jpg';
         case 'Cultural':
             return 'https://static.campuslabsengage.com/discovery/images/events/cultural.jpg';
+        case 'GroupBusiness':
+            return 'https://static.campuslabsengage.com/discovery/images/events/groupbusiness.jpg';
+        case 'Spirituality':
+            return 'https://static.campuslabsengage.com/discovery/images/events/spirituality.jpg';
         default:
             return 'https://static.campuslabsengage.com/discovery/images/events/learning.jpg';
     }
