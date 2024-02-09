@@ -1,5 +1,6 @@
 import {NextResponse} from 'next/server';
 import {DateTime} from 'luxon';
+import {ZONE} from '@/util/schedule';
 import type {EventsResponse} from '@/util/boilerlink';
 
 
@@ -9,10 +10,10 @@ import type {EventsResponse} from '@/util/boilerlink';
  */
 export async function GET(request: Request, {params}: {params: {date: string}}) {
     // Query only for events that start *on* the requested day.
-    const rangeStart = DateTime.fromISO(params.date);
+    // Set zone when parsing because BoilerLink is incapable of handling timezones other than Indianapolis.
+    const rangeStart = DateTime.fromISO(params.date, {zone: ZONE});
     const rangeEnd = rangeStart.plus({days: 1});
 
-    console.log(params.date, rangeStart.toISO(), rangeEnd.toISO());
     console.log(`https://boilerlink.purdue.edu/api/discovery/event/search?startsAfter=${rangeStart.toISO()}&startsBefore=${rangeEnd.toISO()}&orderByField=startsOn&orderByDirection=ascending&status=Approved&take=100&query=`);
 
     const res: EventsResponse = await (await fetch(`https://boilerlink.purdue.edu/api/discovery/event/search?startsAfter=${rangeStart.toISO()}&startsBefore=${rangeEnd.toISO()}&orderByField=startsOn&orderByDirection=ascending&status=Approved&take=100&query=`)).json()
