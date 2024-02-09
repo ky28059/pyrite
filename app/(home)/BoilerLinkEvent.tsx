@@ -24,7 +24,7 @@ export default function BoilerLinkEvent(props: BoilerLinkEventData) {
     return (
         <>
             <button
-                className="flex rounded overflow-hidden border border-tertiary dark:border-tertiary-dark text-sm hover:border-primary dark:hover:border-primary-dark transition duration-200 text-left items-stretch"
+                className="flex-none flex rounded overflow-hidden border border-tertiary dark:border-tertiary-dark text-sm hover:border-primary dark:hover:border-primary-dark transition duration-200 text-left items-stretch"
                 onClick={() => setOpen(true)}
             >
                 <img

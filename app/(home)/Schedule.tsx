@@ -63,23 +63,31 @@ export default function Schedule() {
                     />
                 </div>
 
-                <div className="flex flex-col gap-2 flex-none xl:w-80">
-                    <h3 className="font-semibold text-lg mb-1">
-                        BoilerLink Events{' '}
+                <div className="flex flex-col gap-2 flex-none xl:w-80 xl:max-h-[1448px] xl:-mr-2">
+                    <h3 className="flex gap-1.5 items-center font-semibold text-lg mb-1">
+                        BoilerLink Events
                         <span className="font-normal text-base">({viewDate.toLocaleString()})</span>
+
+                        {events && events.length > 0 && (
+                            <span className="text-xs font-semibold rounded-full px-1.5 py-0.5 bg-theme/30 dark:bg-theme-dark/30 text-theme dark:text-theme-dark">
+                                {events.length}
+                            </span>
+                        )}
                     </h3>
 
-                    {!events ? (
-                        <p className="text-sm text-secondary dark:text-secondary-dark">
-                            Loading events...
-                        </p>
-                    ) : events.length === 0 ? (
-                        <p className="text-sm text-secondary dark:text-secondary-dark">
-                            No events to show.
-                        </p>
-                    ) : events.map((e) => (
-                        <BoilerLinkEvent {...e} key={e.id} />
-                    ))}
+                    <div className="flex flex-col gap-2 overflow-y-auto scrollbar:w-1 scrollbar-thumb:bg-tertiary dark:scrollbar-thumb:bg-tertiary-dark xl:pr-2">
+                        {!events ? (
+                            <p className="text-sm text-secondary dark:text-secondary-dark">
+                                Loading events...
+                            </p>
+                        ) : events.length === 0 ? (
+                            <p className="text-sm text-secondary dark:text-secondary-dark">
+                                No events to show.
+                            </p>
+                        ) : events.map((e) => (
+                            <BoilerLinkEvent {...e} key={e.id} />
+                        ))}
+                    </div>
                 </div>
             </div>
         </div>
