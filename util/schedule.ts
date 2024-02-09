@@ -2,7 +2,7 @@ import {DateTime} from 'luxon';
 import type {UserData} from '@/contexts/UserDataContext';
 import type {Classes} from '@/contexts/ClassesContext';
 import type {Events} from '@/contexts/EventsContext';
-import type {Midterm, Section, SectionType} from '@/util/unitime';
+import type {Test, Section, SectionType} from '@/util/unitime';
 import type {BoilerLinkEventData} from '@/util/boilerlink';
 
 
@@ -27,7 +27,7 @@ export type SectionPeriod = PeriodBase & {
 export type MidtermPeriod = PeriodBase & {
     type: 'Midterm',
     section: Section,
-    midterm: Midterm
+    midterm: Test
 }
 export type EventPeriod = PeriodBase & {
     type: 'Event',

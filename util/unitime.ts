@@ -20,7 +20,8 @@ export type Section = {
     location: string,
     instructors: string[],
     emails: string[],
-    midterms: Midterm[],
+    midterms: Test[],
+    finals: Test[],
 }
 export type SectionType = 'Lecture' | 'Lecture (Hybrid)'
     | 'Laboratory' | 'Laboratory (Hybrid)'
@@ -28,7 +29,7 @@ export type SectionType = 'Lecture' | 'Lecture (Hybrid)'
     | 'Pso'
     | 'Travel Time'
 
-export type Midterm = {
+export type Test = {
     dayOfWeek: string,
     location: string,
     start: string,
@@ -86,6 +87,41 @@ export const loadClasses = cache(async () => {
             continue;
         }
 
+        // Parse final exams
+        if (type === 'Final Examination') {
+            // If the section name is "Offering" or "Course", add final to all lecture periods instead.
+            // TODO: real meaning of this?
+            if (sections[0] === 'Offering' || sections[0] === 'Course') {
+                const objs = Object.values(res).filter(s => s.type.includes('Lecture') && names.some(n => s.names.includes(n)));
+                if (!objs.length) {
+                    console.log(`[ERR] Final for ${names[0]} parsed before corresponding class!`);
+                    continue;
+                }
+
+                objs.forEach(s => s.finals.push({
+                    dayOfWeek,
+                    start,
+                    end,
+                    location,
+                    date: first
+                }));
+            } else {
+                if (!res[sections[0]]) {
+                    console.log(`[ERR] Final for ${names[0]} parsed before corresponding class!`);
+                    continue;
+                }
+
+                res[sections[0]].finals.push({
+                    dayOfWeek,
+                    start,
+                    end,
+                    location,
+                    date: first
+                });
+            }
+            continue;
+        }
+
         res[sections[0]] = {
             names,
             sections,
@@ -97,7 +133,8 @@ export const loadClasses = cache(async () => {
             location,
             instructors: instrRaw.split('\n').filter((s) => !!s),
             emails: emailRaw.slice(0, emailRaw.length - 1).split('\n').filter((s) => !!s),
-            midterms: []
+            midterms: [],
+            finals: []
         }
     }
 

@@ -9,6 +9,7 @@ import {FaCalendar, FaLocationDot} from 'react-icons/fa6';
 
 // Utils
 import type {Section} from '@/util/unitime';
+import ScheduleMidterm from '@/app/(home)/ScheduleMidterm';
 
 
 type ClassModalProps = Section & {
@@ -79,6 +80,24 @@ export default function ClassModal(props: ClassModalProps) {
                         Midterm exams
                     </h3>
                     {parseMidterms()}
+                </section>
+            )}
+
+            {props.finals.length > 0 && (
+                <section className="flex flex-col gap-2 mt-5">
+                    <h3 className="font-medium text-xs text-secondary dark:text-secondary-dark">
+                        Final exam
+                    </h3>
+                    {props.finals.map((m) => (
+                        <div className="bg-content-secondary dark:bg-content-secondary-dark rounded px-3 py-1.5">
+                            <h5 className="text-sm">
+                                Final
+                            </h5>
+                            <p className="text-xs text-secondary dark:text-secondary-dark">
+                                {m.dayOfWeek} {m.date} {m.start} - {m.end} @ {m.location}
+                            </p>
+                        </div>
+                    ))}
                 </section>
             )}
         </CenteredModal>
