@@ -2,7 +2,12 @@ import {readFileSync, writeFileSync} from 'fs';
 import {cache} from 'react';
 
 
+// https://docs.google.com/document/d/1YIvPtHRbqF7pJXqlrqll41ncAjM8GlCQMHowi52K-Bw/edit
+// https://timetable.mypurdue.purdue.edu/Timetabling/export?output=events.csv&type=room&term=${TERM}&flags=${FLAGS}
+// https://timetable.mypurdue.purdue.edu/Timetabling/export?output=events.csv&type=room&term=Spring2024PWL&flags=26499
+
 const TERM = 'Spring2024PWL';
+const FLAGS = 0b110011110000011;
 
 export type Section = {
     names: string[], // ex. AAE 20300
@@ -42,7 +47,7 @@ export const loadClasses = cache(async () => {
 
     // Drop first row (header) and last row (empty string)
     for (const r of rows.slice(1, rows.length - 1)) {
-        const [nameRaw, sectionRaw, type, titleRaw, note, dayOfWeek, first, last, start, end, pstart, pend, , , location, capacity, enrollment, limit, instrRaw, emailRaw, , ] = r.slice(1, r.length - 1).split(/"?,(?=[",])"?/);
+        const [nameRaw, sectionRaw, type, titleRaw, dayOfWeek, first, last, start, end, pstart, pend, location, instrRaw, emailRaw] = r.slice(1, r.length).split(/"?,(?=[",]|$)"?/);
 
         const names = nameRaw.split('\n').map(s => s.trim()).filter((s) => !!s);
         const sections = sectionRaw.split('\n').map(s => s.trim()).filter((s) => !!s);
@@ -91,7 +96,7 @@ export const loadClasses = cache(async () => {
             end,
             location,
             instructors: instrRaw.split('\n').filter((s) => !!s),
-            emails: emailRaw.split('\n').filter((s) => !!s),
+            emails: emailRaw.slice(0, emailRaw.length - 1).split('\n').filter((s) => !!s),
             midterms: []
         }
     }
