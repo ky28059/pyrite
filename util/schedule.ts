@@ -10,6 +10,9 @@ export const ZONE = 'America/Indiana/Indianapolis';
 export const YEAR_START = DateTime.fromISO('2023-08-21', {zone: ZONE});
 export const YEAR_END = DateTime.fromISO('2024-05-04', {zone: ZONE});
 
+export const FINALS_START = DateTime.fromISO('2024-04-29', {zone: ZONE});
+export const FINALS_END = DateTime.fromISO('2024-05-04', {zone: ZONE});
+
 export const HOUR_START = 7;
 export const HOUR_END = 22;
 
@@ -76,8 +79,10 @@ export function getPeriodsForDay(
             section: c
         } satisfies TestPeriod;
 
-        // Otherwise, if no test is occurring, filter out classes that don't regularly occur on this day of week.
-        if (!occursOnDay(c, date)) return null;
+        // Otherwise, if no test is occurring, filter out classes that don't regularly occur on this day of week
+        // (or filter out all regular classes if it's finals week).
+        if (!occursOnDay(c, date) || (date >= FINALS_START && date <= FINALS_END))
+            return null;
 
         return {
             type: c.type,
