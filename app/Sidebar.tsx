@@ -43,8 +43,10 @@ export default function Sidebar() {
 
             <div className="mt-auto">
                 {!mounted || status === 'loading' ? (
-                    // TODO: loading UI
-                    <div>...</div>
+                    <div className="w-full px-2 py-1 sm:-ml-1 sm:mr-2 flex gap-2 items-center">
+                        <div className="size-10 rounded-full bg-pulse dark:bg-pulse-dark animate-pulse" />
+                        <span className="hidden sm:block h-6 flex-grow mr-3 rounded bg-pulse dark:bg-pulse-dark animate-pulse" />
+                    </div>
                 ) : !user ? (
                     <SignInButton />
                 ) : (
