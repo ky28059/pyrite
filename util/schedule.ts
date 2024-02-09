@@ -24,17 +24,17 @@ export type SectionPeriod = PeriodBase & {
     type: SectionType,
     section: Section // TODO: naming, more efficient abstraction?
 }
-export type MidtermPeriod = PeriodBase & {
-    type: 'Midterm',
+export type TestPeriod = PeriodBase & {
+    type: 'Midterm' | 'Final',
     section: Section,
-    midterm: Test
+    test: Test
 }
 export type EventPeriod = PeriodBase & {
     type: 'Event',
     event: BoilerLinkEventData
 }
 
-export type Period = SectionPeriod | MidtermPeriod | EventPeriod;
+export type Period = SectionPeriod | TestPeriod | EventPeriod;
 
 /**
  * Get the schedule periods happening on a given day, sorted by start time. Returned periods include classes,
@@ -52,17 +52,8 @@ export function getPeriodsForDay(
     classes: Classes,
     events: Events
 ) {
-    // Classes and midterms for the given day
-    const classPeriods = data.courseIds.map((id) => classes[id]).filter((c) => {
-        switch (date.weekday) {
-            case 1: return c.dayOfWeek.includes('M');
-            case 2: return /T(?!h)/.test(c.dayOfWeek);
-            case 3: return c.dayOfWeek.includes('W');
-            case 4: return c.dayOfWeek.includes('Th');
-            case 5: return c.dayOfWeek.includes('F');
-        }
-        return false;
-    }).map((c) => {
+    // Classes, midterms, and finals for the given day
+    const classPeriods = data.courseIds.map((id) => classes[id]).map((c) => {
         const midterm = c.midterms.find((m) => m.date === date.toFormat('MM/dd/yyyy'));
         if (midterm) return {
             type: 'Midterm',
@@ -70,9 +61,23 @@ export function getPeriodsForDay(
             location: midterm.location,
             s: parseUnitimeMinutes(midterm.start),
             e: parseUnitimeMinutes(midterm.end),
-            midterm,
+            test: midterm,
             section: c
-        } satisfies MidtermPeriod;
+        } satisfies TestPeriod;
+
+        const final = c.finals.find((m) => m.date === date.toFormat('MM/dd/yyyy'));
+        if (final) return {
+            type: 'Final',
+            name: c.names[0] + ' (Final)',
+            location: final.location,
+            s: parseUnitimeMinutes(final.start),
+            e: parseUnitimeMinutes(final.end),
+            test: final,
+            section: c
+        } satisfies TestPeriod;
+
+        // Otherwise, if no test is occurring, filter out classes that don't regularly occur on this day of week.
+        if (!occursOnDay(c, date)) return null;
 
         return {
             type: c.type,
@@ -82,7 +87,7 @@ export function getPeriodsForDay(
             e: parseUnitimeMinutes(c.end),
             section: c
         } satisfies SectionPeriod;
-    });
+    }).filter((p): p is SectionPeriod | TestPeriod => !!p);
 
     // Events for the given day
     const blEventPeriods = events[date.toISODate()!]?.filter((e) => data.eventIds.includes(e.id)).map<EventPeriod>((e) => {
@@ -124,4 +129,15 @@ export function parseUnitimeMinutes(time: string) {
     if (time.endsWith('p') && hour != 12) hour += 12;
 
     return hour * 60 + minute;
+}
+
+function occursOnDay(c: Section, date: DateTime) {
+    switch (date.weekday) {
+        case 1: return c.dayOfWeek.includes('M');
+        case 2: return /T(?!h)/.test(c.dayOfWeek);
+        case 3: return c.dayOfWeek.includes('W');
+        case 4: return c.dayOfWeek.includes('Th');
+        case 5: return c.dayOfWeek.includes('F');
+    }
+    return false;
 }

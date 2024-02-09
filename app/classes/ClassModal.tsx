@@ -9,7 +9,7 @@ import {FaCalendar, FaLocationDot} from 'react-icons/fa6';
 
 // Utils
 import type {Section} from '@/util/unitime';
-import ScheduleMidterm from '@/app/(home)/ScheduleMidterm';
+import ScheduleTest from '@/app/(home)/ScheduleTest';
 
 
 type ClassModalProps = Section & {

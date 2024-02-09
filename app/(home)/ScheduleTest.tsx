@@ -4,12 +4,12 @@ import {useState} from 'react';
 import ClassModal from '@/app/classes/ClassModal';
 
 // Utils
-import type {MidtermPeriod} from '@/util/schedule';
+import type {TestPeriod} from '@/util/schedule';
 import {minutesToGridRows} from '@/app/(home)/ScheduleClass';
 
 
-export default function ScheduleMidterm(props: MidtermPeriod) {
-    const {s, e, section, midterm} = props;
+export default function ScheduleTest(props: TestPeriod) {
+    const {s, e, section, test, type} = props;
     const [open, setOpen] = useState(false);
 
     return (
@@ -34,13 +34,13 @@ export default function ScheduleMidterm(props: MidtermPeriod) {
 
                     <div className="flex gap-1 flex-none text-xs font-semibold">
                         <p className="hidden sm:block rounded-full bg-black/5 dark:bg-black/15 px-2 py-1 flex-none">
-                            Midterm
+                            {type}
                         </p>
                         <p className="hidden sm:block rounded-full bg-black/5 dark:bg-black/15 px-2 py-1 flex-none">
-                            {midterm.start}-{midterm.end}
+                            {test.start}-{test.end}
                         </p>
                         <p className="rounded-full bg-black/5 dark:bg-black/15 px-2 py-1 flex-none">
-                            {midterm.location}
+                            {test.location}
                         </p>
                     </div>
                 </section>

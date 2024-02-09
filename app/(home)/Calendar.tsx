@@ -8,7 +8,7 @@ import ScheduleClass from '@/app/(home)/ScheduleClass';
 import ScheduleMeal from '@/app/(home)/ScheduleMeal';
 import ScheduleIndicator from '@/app/(home)/ScheduleIndicator';
 import ScheduleBoilerLinkEvent from '@/app/(home)/ScheduleBoilerLinkEvent';
-import ScheduleMidterm from '@/app/(home)/ScheduleMidterm';
+import ScheduleTest from '@/app/(home)/ScheduleTest';
 
 // Contexts
 import UserDataContext from '@/contexts/UserDataContext';
@@ -82,7 +82,8 @@ export default function Calendar(props: CalendarProps) {
                     case 'Event':
                         return <ScheduleBoilerLinkEvent {...p} key={p.event.id} />
                     case 'Midterm':
-                        return <ScheduleMidterm {...p} key={p.section.sections[0]} />
+                    case 'Final':
+                        return <ScheduleTest {...p} key={p.section.sections[0]}/>
                     default:
                         return <ScheduleClass {...p} key={p.section.sections[0]} />
                 }
