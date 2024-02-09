@@ -1,4 +1,5 @@
 import {NextResponse} from 'next/server';
+import {DateTime} from 'luxon';
 import type {EventsResponse} from '@/util/boilerlink';
 
 
@@ -8,6 +9,11 @@ import type {EventsResponse} from '@/util/boilerlink';
  */
 export async function GET(request: Request, {params}: {params: {date: string}}) {
     console.log(params.date);
-    const res: EventsResponse = await (await fetch(`https://boilerlink.purdue.edu/api/discovery/event/search?endsAfter=${params.date}&orderByField=endsOn&orderByDirection=ascending&status=Approved&take=15&query=`)).json()
+
+    // Query only for events that start *on* the requested day.
+    const rangeStart = DateTime.fromISO(params.date);
+    const rangeEnd = rangeStart.plus({days: 1});
+
+    const res: EventsResponse = await (await fetch(`https://boilerlink.purdue.edu/api/discovery/event/search?startsAfter=${rangeStart.toISO()}&startsBefore=${rangeEnd.toISO()}&orderByField=startsOn&orderByDirection=ascending&status=Approved&take=100&query=`)).json()
     return NextResponse.json(res);
 }
