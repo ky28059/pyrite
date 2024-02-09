@@ -1,4 +1,4 @@
-import {DateTime} from 'luxon';
+import {DateTime, Interval} from 'luxon';
 import type {UserData} from '@/contexts/UserDataContext';
 import type {Classes} from '@/contexts/ClassesContext';
 import type {Events} from '@/contexts/EventsContext';
@@ -7,11 +7,18 @@ import type {BoilerLinkEventData} from '@/util/boilerlink';
 
 
 export const ZONE = 'America/Indiana/Indianapolis';
+
+// TODO: generate these?
 export const YEAR_START = DateTime.fromISO('2023-08-21', {zone: ZONE});
 export const YEAR_END = DateTime.fromISO('2024-05-04', {zone: ZONE});
 
-export const FINALS_START = DateTime.fromISO('2024-04-29', {zone: ZONE});
-export const FINALS_END = DateTime.fromISO('2024-05-04', {zone: ZONE});
+export const FALL_FINALS = Interval.fromISO('2023-12-11/2023-12-16', {zone: ZONE})
+export const SPRING_FINALS = Interval.fromISO('2024-04-29/2024-05-04', {zone: ZONE})
+
+export const FALL_BREAK = Interval.fromISO('2023-10-09/2023-10-11', {zone: ZONE})
+export const THANKSGIVING_BREAK = Interval.fromISO('2023-11-22/2023-11-25', {zone: ZONE});
+export const WINTER_BREAK = Interval.fromISO('2023-12-16/2024-01-08', {zone: ZONE});
+export const SPRING_BREAK = Interval.fromISO('2024-03-11/2024-03-16', {zone: ZONE});
 
 export const HOUR_START = 7;
 export const HOUR_END = 22;
@@ -80,9 +87,16 @@ export function getPeriodsForDay(
         } satisfies TestPeriod;
 
         // Otherwise, if no test is occurring, filter out classes that don't regularly occur on this day of week
-        // (or filter out all regular classes if it's finals week).
-        if (!occursOnDay(c, date) || (date >= FINALS_START && date <= FINALS_END))
-            return null;
+        // (or filter out all regular classes if it's a break or finals week).
+        if (
+            !occursOnDay(c, date)
+            || FALL_FINALS.contains(date)
+            || SPRING_FINALS.contains(date)
+            || FALL_BREAK.contains(date)
+            || THANKSGIVING_BREAK.contains(date)
+            || WINTER_BREAK.contains(date)
+            || SPRING_BREAK.contains(date)
+        ) return null;
 
         return {
             type: c.type,
