@@ -1,7 +1,7 @@
 'use client'
 
-import {useContext, useEffect, useState} from 'react';
-import {DateTime} from 'luxon';
+import { useContext, useEffect, useState } from 'react';
+import { DateTime } from 'luxon';
 
 // Components
 import ScheduleClass from '@/app/(home)/ScheduleClass';
@@ -16,8 +16,8 @@ import ClassesContext from '@/contexts/ClassesContext';
 import EventsContext from '@/contexts/EventsContext';
 
 // Utils
-import type {MealsResponse} from '@/util/menus';
-import {getPeriodsForDay, HOUR_END, HOUR_START} from '@/util/schedule';
+import type { MealsResponse } from '@/util/menus';
+import { getPeriodsForDay, HOUR_END, HOUR_START } from '@/util/schedule';
 
 
 type CalendarProps = {
@@ -25,9 +25,9 @@ type CalendarProps = {
     daysRelToCur: number
 };
 export default function Calendar(props: CalendarProps) {
-    const {data} = useContext(UserDataContext);
+    const { data } = useContext(UserDataContext);
     const classes = useContext(ClassesContext);
-    const {events} = useContext(EventsContext);
+    const { events } = useContext(EventsContext);
 
     const [meals, setMeals] = useState<MealsResponse[] | null>(null);
     useEffect(() => {
@@ -42,7 +42,7 @@ export default function Calendar(props: CalendarProps) {
     return (
         <div
             className="-mx-2 relative grid grid-cols-[4rem_1fr_0.5rem] sm:grid-cols-[5rem_1fr_2rem]"
-            style={{gridTemplateRows: `repeat(${(HOUR_END - HOUR_START) * 12 + 1}, 0.5rem)`}}
+            style={{ gridTemplateRows: `repeat(${(HOUR_END - HOUR_START) * 12 + 1}, 0.5rem)` }}
         >
             <ScheduleMeal start="7:00a" end="10:00a" meal="Breakfast" meals={meals} viewDate={props.viewDate} />
             <ScheduleMeal start="11:00a" end="2:00p" meal="Lunch" meals={meals} viewDate={props.viewDate} />
@@ -51,7 +51,7 @@ export default function Calendar(props: CalendarProps) {
             {/* Hour labels */}
             {Array(HOUR_END - HOUR_START + 1).fill(0).map((_, i) => (
                 <p
-                    style={{gridRowStart: i * 12 + 1, gridColumnStart: 1}}
+                    style={{ gridRowStart: i * 12 + 1, gridColumnStart: 1 }}
                     className="text-xs text-secondary dark:text-secondary-dark -mt-2 text-right pr-6 select-none pointer-events-none"
                     key={i}
                 >
@@ -83,7 +83,7 @@ export default function Calendar(props: CalendarProps) {
                         return <ScheduleBoilerLinkEvent {...p} key={p.event.id} />
                     case 'Midterm':
                     case 'Final':
-                        return <ScheduleTest {...p} key={p.section.sections[0]}/>
+                        return <ScheduleTest {...p} key={p.section.sections[0]} />
                     default:
                         return <ScheduleClass {...p} key={p.section.sections[0]} />
                 }

@@ -13,12 +13,12 @@ export default function Loading() {
                 </p>
             </section>
 
-            <DummyOrganization/>
-            <DummyOrganization headingWidth={55} textWidth={40}/>
-            <DummyOrganization headingWidth={45}/>
-            <DummyOrganization textWidth={75}/>
-            <DummyOrganization headingWidth={70}/>
-            <DummyOrganization textWidth={25}/>
+            <DummyOrganization />
+            <DummyOrganization headingWidth={55} textWidth={40} />
+            <DummyOrganization headingWidth={45} />
+            <DummyOrganization textWidth={75} />
+            <DummyOrganization headingWidth={70} />
+            <DummyOrganization textWidth={25} />
         </div>
     )
 }
@@ -29,7 +29,7 @@ type DummyOrganizationProps = {
 }
 
 function DummyOrganization(props: DummyOrganizationProps) {
-    const {headingWidth = 40, textWidth = 60} = props;
+    const { headingWidth = 40, textWidth = 60 } = props;
 
     return (
         <div className="flex gap-5">
@@ -38,12 +38,12 @@ function DummyOrganization(props: DummyOrganizationProps) {
             <div className="flex-grow">
                 <div
                     className="rounded-full h-5 bg-pulse dark:bg-pulse-dark animate-pulse mb-1.5"
-                    style={{width: `${headingWidth}%`}}
+                    style={{ width: `${headingWidth}%` }}
                 />
                 <div className="rounded-full h-4 bg-pulse dark:bg-pulse-dark animate-pulse mb-1.5" />
                 <div
                     className="rounded-full h-4 bg-pulse dark:bg-pulse-dark animate-pulse"
-                    style={{width: `${textWidth}%`}}
+                    style={{ width: `${textWidth}%` }}
                 />
             </div>
         </div>

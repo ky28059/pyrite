@@ -9,7 +9,7 @@ export type MealsResponse = {
     Notes: string
 }
 export type Meal = {
-    Hours: {StartTime: string, EndTime: string} | null,
+    Hours: { StartTime: string, EndTime: string } | null,
     ID: string,
     Name: MealType,
     Notes: null,
@@ -41,7 +41,7 @@ export type Allergen = {
 export async function getMenu(date: string, location: DiningCourt) {
     // Revalidate menu fetches every 24 hours
     const res = await (await fetch(`https://api.hfs.purdue.edu/menus/v2/locations/${location}/${date}`, {
-        next: {revalidate: 60 * 60 * 24}
+        next: { revalidate: 60 * 60 * 24 }
     })).json();
 
     return res as MealsResponse;

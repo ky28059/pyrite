@@ -1,13 +1,13 @@
 'use client'
 
-import {useState} from 'react';
-import {DateTime, Interval} from 'luxon';
+import { useState } from 'react';
+import { DateTime, Interval } from 'luxon';
 
 // Components
 import BoilerLinkEventModal from '@/app/(home)/BoilerLinkEventModal';
 
 // Utils
-import type {BoilerLinkEventData, EventTheme} from '@/util/boilerlink';
+import type { BoilerLinkEventData, EventTheme } from '@/util/boilerlink';
 
 
 export default function BoilerLinkEvent(props: BoilerLinkEventData) {

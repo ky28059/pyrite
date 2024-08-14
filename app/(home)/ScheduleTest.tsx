@@ -1,15 +1,15 @@
 'use client'
 
-import {useState} from 'react';
+import { useState } from 'react';
 import ClassModal from '@/app/classes/ClassModal';
 
 // Utils
-import type {TestPeriod} from '@/util/schedule';
-import {minutesToGridRows} from '@/app/(home)/ScheduleClass';
+import type { TestPeriod } from '@/util/schedule';
+import { minutesToGridRows } from '@/app/(home)/ScheduleClass';
 
 
 export default function ScheduleTest(props: TestPeriod) {
-    const {s, e, section, test, type} = props;
+    const { s, e, section, test, type } = props;
     const [open, setOpen] = useState(false);
 
     return (

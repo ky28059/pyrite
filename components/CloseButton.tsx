@@ -1,4 +1,4 @@
-import {MouseEventHandler} from 'react';
+import { MouseEventHandler } from 'react';
 
 
 type CloseButtonProps = {
@@ -6,7 +6,7 @@ type CloseButtonProps = {
     onClick?: MouseEventHandler<HTMLButtonElement>
 }
 export default function CloseButton(props: CloseButtonProps) {
-    const {className, onClick} = props;
+    const { className, onClick } = props;
 
     return (
         <button

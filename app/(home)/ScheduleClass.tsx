@@ -1,15 +1,15 @@
 'use client'
 
-import {useState} from 'react';
+import { useState } from 'react';
 import ClassModal from '@/app/classes/ClassModal';
 
 // Utils
-import type {Section} from '@/util/unitime';
-import {HOUR_START, SectionPeriod} from '@/util/schedule';
+import type { Section } from '@/util/unitime';
+import { HOUR_START, SectionPeriod } from '@/util/schedule';
 
 
 export default function ScheduleClass(props: SectionPeriod) {
-    const {s, e, section} = props;
+    const { s, e, section } = props;
     const [open, setOpen] = useState(false);
 
     return (

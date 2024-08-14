@@ -1,8 +1,8 @@
 'use client'
 
-import {useState} from 'react';
+import { useState } from 'react';
 import ClassModal from '@/app/classes/ClassModal';
-import type {Section} from '@/util/unitime';
+import type { Section } from '@/util/unitime';
 
 
 export default function YourClass(props: Section) {

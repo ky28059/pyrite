@@ -1,10 +1,10 @@
 'use client'
 
-import {useNextPeriod} from '@/hooks/useNextPeriod';
+import { useNextPeriod } from '@/hooks/useNextPeriod';
 
 
 export default function NextClassProgressBar() {
-    const {next, span, length, toStart, toEnd} = useNextPeriod();
+    const { next, span, length, toStart, toEnd } = useNextPeriod();
     if (!next) return null;
 
     // If the time to the next period is greater than `span`, we're the first period of the day and before
@@ -52,12 +52,12 @@ export default function NextClassProgressBar() {
     );
 }
 
-function ProgressBar(props: {value: number}) {
+function ProgressBar(props: { value: number }) {
     return (
         <div className="flex overflow-hidden bg-tertiary dark:bg-tertiary-dark h-2 rounded">
             <div
                 className="bg-primary dark:bg-primary-dark transition-[width] duration-700"
-                style={{width: `${props.value}%`}}
+                style={{ width: `${props.value}%` }}
             />
         </div>
     )

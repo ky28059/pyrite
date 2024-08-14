@@ -1,14 +1,14 @@
 'use client'
 
-import {useContext} from 'react';
-import {useRouter, useSearchParams} from 'next/navigation';
-import {useAuth, useFirestore} from 'reactfire';
+import { useContext } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { useAuth, useFirestore } from 'reactfire';
 
 // Utils
-import {signInWithPopup, OAuthProvider} from 'firebase/auth';
-import {doc, getDoc, setDoc} from 'firebase/firestore';
+import { signInWithPopup, OAuthProvider } from 'firebase/auth';
+import { doc, getDoc, setDoc } from 'firebase/firestore';
 import UserDataContext from '@/contexts/UserDataContext';
-import {MdLogin} from 'react-icons/md';
+import { MdLogin } from 'react-icons/md';
 
 
 export default function SignInButton() {
@@ -16,9 +16,9 @@ export default function SignInButton() {
     const firestore = useFirestore();
 
     const params = useSearchParams();
-    const {push} = useRouter();
+    const { push } = useRouter();
 
-    const {data} = useContext(UserDataContext);
+    const { data } = useContext(UserDataContext);
 
     async function signInWithMicrosoft() {
         // Initialize Microsoft OAuth provider, setting the tenant ID to restrict login to `purdue.edu` only.

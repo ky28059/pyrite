@@ -1,23 +1,23 @@
 'use client'
 
-import {useContext} from 'react';
-import {DateTime, Interval} from 'luxon';
+import { useContext } from 'react';
+import { DateTime, Interval } from 'luxon';
 import he from 'he';
 import DOMPurify from 'isomorphic-dompurify';
 
 // Components
 import CenteredModal from '@/components/CenteredModal';
 import CloseButton from '@/components/CloseButton';
-import OutlineButton, {DangerOutlineButton} from '@/components/OutlineButton';
+import OutlineButton, { DangerOutlineButton } from '@/components/OutlineButton';
 
 // Icons
-import {BsPeopleFill} from 'react-icons/bs';
-import {FaCalendar, FaLocationDot} from 'react-icons/fa6';
+import { BsPeopleFill } from 'react-icons/bs';
+import { FaCalendar, FaLocationDot } from 'react-icons/fa6';
 
 // Utils
-import type {BoilerLinkEventData} from '@/util/boilerlink';
+import type { BoilerLinkEventData } from '@/util/boilerlink';
 import UserDataContext from '@/contexts/UserDataContext';
-import {themeToDefaultImageUrl} from '@/app/(home)/BoilerLinkEvent';
+import { themeToDefaultImageUrl } from '@/app/(home)/BoilerLinkEvent';
 
 
 type BoilerLinkEventModalProps = BoilerLinkEventData & {
@@ -25,8 +25,8 @@ type BoilerLinkEventModalProps = BoilerLinkEventData & {
     setOpen: (b: boolean) => void
 }
 export default function BoilerLinkEventModal(props: BoilerLinkEventModalProps) {
-    const {open, setOpen} = props;
-    const {data, setData} = useContext(UserDataContext);
+    const { open, setOpen } = props;
+    const { data, setData } = useContext(UserDataContext);
 
     const imageSrc = props.imagePath
         ? `https://se-images.campuslabs.com/clink/images/${props.imagePath}?preset=med-w`
@@ -38,14 +38,14 @@ export default function BoilerLinkEventModal(props: BoilerLinkEventModalProps) {
     const interval = Interval.fromDateTimes(start, end);
 
     function addToCalendar() {
-        const newData = {...data};
+        const newData = { ...data };
         newData.eventIds = [...newData.eventIds, props.id];
         setData(newData);
         setOpen(false);
     }
 
     function removeFromCalendar() {
-        const newData = {...data};
+        const newData = { ...data };
         newData.eventIds = newData.eventIds.filter((i) => i !== props.id);
         setData(newData);
         setOpen(false);
@@ -101,7 +101,7 @@ export default function BoilerLinkEventModal(props: BoilerLinkEventModalProps) {
 
                 <div
                     className="text-sm space-y-2 mt-4 min-h-0 overflow-y-auto scrollbar:w-1 scrollbar-thumb:bg-tertiary dark:scrollbar-thumb:bg-tertiary-dark [&_a]:text-theme dark:[&_a]:text-theme-dark [&_a:hover]:underline"
-                    dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(props.description)}}
+                    dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(props.description) }}
                 />
 
                 <a

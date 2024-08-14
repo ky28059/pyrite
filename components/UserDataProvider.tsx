@@ -1,18 +1,18 @@
 'use client'
 
-import {ReactNode, useLayoutEffect, useState} from 'react';
-import UserDataContext, {defaultUserData, UserData} from '@/contexts/UserDataContext';
-import {useFirestore, useUser} from 'reactfire';
-import {doc, setDoc} from 'firebase/firestore';
+import { ReactNode, useLayoutEffect, useState } from 'react';
+import UserDataContext, { defaultUserData, UserData } from '@/contexts/UserDataContext';
+import { useFirestore, useUser } from 'reactfire';
+import { doc, setDoc } from 'firebase/firestore';
 
 
 // Local-caching & cloud-backed algorithm borrowed from
 // https://github.com/SVWEFSBRWHWBCOTSEID/game-website/blob/main/components/PreferencesProvider.tsx
-export default function UserDataProvider(props: {children: ReactNode}) {
+export default function UserDataProvider(props: { children: ReactNode }) {
     const [data, setData] = useState(defaultUserData);
 
     const firestore = useFirestore();
-    const {data: user} = useUser();
+    const { data: user } = useUser();
 
     // Load saved preferences from `localStorage` on mount
     useLayoutEffect(() => {
@@ -49,7 +49,7 @@ export default function UserDataProvider(props: {children: ReactNode}) {
     }
 
     return (
-        <UserDataContext.Provider value={{data, setData: updateUserData, setLocalData}}>
+        <UserDataContext.Provider value={{ data, setData: updateUserData, setLocalData }}>
             {props.children}
         </UserDataContext.Provider>
     )
@@ -59,7 +59,7 @@ export default function UserDataProvider(props: {children: ReactNode}) {
 // Concretely, this function overrides the keys of `a` with values under the same keys in `b`.
 // See https://github.com/GunnWATT/watt/blob/main/client/src/hooks/useLocalStorageData.ts#L35-L52
 export function deepmerge<T extends {}, V extends T>(a: T, b: V) {
-    const newObj = {...a};
+    const newObj = { ...a };
 
     for (const key in a) if (key in b) {
         // Recursively merge non-array, non-null object keys

@@ -1,6 +1,6 @@
 'use client'
 
-import {useContext} from 'react';
+import { useContext } from 'react';
 import YourClass from '@/app/classes/YourClass';
 
 // Contexts
@@ -11,7 +11,7 @@ import Link from 'next/link';
 
 export default function YourClasses() {
     const classes = useContext(ClassesContext);
-    const {data} = useContext(UserDataContext);
+    const { data } = useContext(UserDataContext);
 
     return (
         <div className="hidden sm:flex sm:flex-col sticky w-96 h-max top-20 -mt-12 max-h-[calc(100vh_-_9rem)]">
@@ -30,7 +30,7 @@ export default function YourClasses() {
                 <>
                     <div className="flex flex-col gap-2.5 min-h-0 overflow-y-auto pr-1 scrollbar:w-1 scrollbar-thumb:bg-tertiary dark:scrollbar-thumb:bg-tertiary-dark">
                         {data.courseIds.sort().map((id) => (
-                            <YourClass {...classes[id]} key={id}/>
+                            <YourClass {...classes[id]} key={id} />
                         ))}
                     </div>
                     <p className="text-secondary dark:text-secondary-dark text-sm mt-2.5">

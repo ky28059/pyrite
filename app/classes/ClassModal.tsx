@@ -4,12 +4,11 @@ import CenteredModal from '@/components/CenteredModal';
 import CloseButton from '@/components/CloseButton';
 
 // Icons
-import {BsPeopleFill} from 'react-icons/bs';
-import {FaCalendar, FaLocationDot} from 'react-icons/fa6';
+import { BsPeopleFill } from 'react-icons/bs';
+import { FaCalendar, FaLocationDot } from 'react-icons/fa6';
 
 // Utils
-import type {Section} from '@/util/unitime';
-import ScheduleTest from '@/app/(home)/ScheduleTest';
+import type { Section } from '@/util/unitime';
 
 
 type ClassModalProps = Section & {
@@ -17,7 +16,7 @@ type ClassModalProps = Section & {
     setOpen: (o: boolean) => void
 }
 export default function ClassModal(props: ClassModalProps) {
-    const {open, setOpen} = props;
+    const { open, setOpen } = props;
 
     return (
         <CenteredModal
@@ -44,7 +43,7 @@ export default function ClassModal(props: ClassModalProps) {
 
             {props.instructors.length > 0 && (
                 <p className="flex gap-2 items-center text-sm text-secondary dark:text-secondary-dark">
-                    <BsPeopleFill/> {props.instructors.join(', ')}
+                    <BsPeopleFill /> {props.instructors.join(', ')}
                 </p>
             )}
             <p className="flex gap-2 items-center text-sm text-secondary dark:text-secondary-dark">

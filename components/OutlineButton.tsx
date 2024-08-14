@@ -1,4 +1,4 @@
-import {MouseEventHandler, ReactNode} from 'react';
+import { MouseEventHandler, ReactNode } from 'react';
 
 
 // A general purpose outline button for use primarily in modals.
@@ -10,7 +10,7 @@ type OutlineButtonProps = {
     disabled?: boolean
 };
 export default function OutlineButton(props: OutlineButtonProps) {
-    const {children, className, ...buttonProps} = props;
+    const { children, className, ...buttonProps } = props;
 
     return (
         <button
@@ -23,7 +23,7 @@ export default function OutlineButton(props: OutlineButtonProps) {
 }
 
 export function DangerOutlineButton(props: OutlineButtonProps) {
-    const {children, className, ...buttonProps} = props;
+    const { children, className, ...buttonProps } = props;
 
     return (
         <button

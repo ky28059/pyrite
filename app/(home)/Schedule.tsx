@@ -1,7 +1,7 @@
 'use client'
 
-import {useContext, useEffect, useState} from 'react';
-import {DateTime} from 'luxon';
+import { useContext, useEffect, useState } from 'react';
+import { DateTime } from 'luxon';
 
 // Components
 import HomeDatePicker from '@/app/(home)/HomeDatePicker';
@@ -15,8 +15,8 @@ import CurrentTimeContext from '@/contexts/CurrentTimeContext';
 import EventsContext from '@/contexts/EventsContext';
 
 // Utils
-import type {EventsResponse} from '@/util/boilerlink';
-import {ZONE} from '@/util/schedule';
+import type { EventsResponse } from '@/util/boilerlink';
+import { ZONE } from '@/util/schedule';
 
 
 export default function Schedule() {
@@ -30,14 +30,14 @@ export default function Schedule() {
     const relDays = viewDate.diff(currDate, 'days').days;
 
     // BoilerLink events
-    const {events: eventsMap, setEventsForDay} = useContext(EventsContext);
+    const { events: eventsMap, setEventsForDay } = useContext(EventsContext);
     const events = eventsMap[viewDate.toISODate()!];
 
     useEffect(() => {
         fetch(`/api/events/${viewDate.toISO()}`)
             .then((res) => res.json())
             .then((res: EventsResponse) => setEventsForDay(viewDate.toISODate()!, res.value))
-            .catch((e) => {/* TODO */ });
+            .catch((e) => { /* TODO */ });
     }, [viewDate]);
 
     return (

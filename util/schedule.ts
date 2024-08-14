@@ -1,24 +1,24 @@
-import {DateTime, Interval} from 'luxon';
-import type {UserData} from '@/contexts/UserDataContext';
-import type {Classes} from '@/contexts/ClassesContext';
-import type {Events} from '@/contexts/EventsContext';
-import type {Test, Section, SectionType} from '@/util/unitime';
-import type {BoilerLinkEventData} from '@/util/boilerlink';
+import { DateTime, Interval } from 'luxon';
+import type { UserData } from '@/contexts/UserDataContext';
+import type { Classes } from '@/contexts/ClassesContext';
+import type { Events } from '@/contexts/EventsContext';
+import type { Test, Section, SectionType } from '@/util/unitime';
+import type { BoilerLinkEventData } from '@/util/boilerlink';
 
 
 export const ZONE = 'America/Indiana/Indianapolis';
 
 // TODO: generate these?
-export const YEAR_START = DateTime.fromISO('2023-08-21', {zone: ZONE});
-export const YEAR_END = DateTime.fromISO('2024-05-04', {zone: ZONE});
+export const YEAR_START = DateTime.fromISO('2023-08-21', { zone: ZONE });
+export const YEAR_END = DateTime.fromISO('2024-05-04', { zone: ZONE });
 
-export const FALL_FINALS = Interval.fromISO('2023-12-11/2023-12-16', {zone: ZONE})
-export const SPRING_FINALS = Interval.fromISO('2024-04-29/2024-05-04', {zone: ZONE})
+export const FALL_FINALS = Interval.fromISO('2023-12-11/2023-12-16', { zone: ZONE })
+export const SPRING_FINALS = Interval.fromISO('2024-04-29/2024-05-04', { zone: ZONE })
 
-export const FALL_BREAK = Interval.fromISO('2023-10-09/2023-10-11', {zone: ZONE})
-export const THANKSGIVING_BREAK = Interval.fromISO('2023-11-22/2023-11-25', {zone: ZONE});
-export const WINTER_BREAK = Interval.fromISO('2023-12-16/2024-01-08', {zone: ZONE});
-export const SPRING_BREAK = Interval.fromISO('2024-03-11/2024-03-16', {zone: ZONE});
+export const FALL_BREAK = Interval.fromISO('2023-10-09/2023-10-11', { zone: ZONE })
+export const THANKSGIVING_BREAK = Interval.fromISO('2023-11-22/2023-11-25', { zone: ZONE });
+export const WINTER_BREAK = Interval.fromISO('2023-12-16/2024-01-08', { zone: ZONE });
+export const SPRING_BREAK = Interval.fromISO('2024-03-11/2024-03-16', { zone: ZONE });
 
 export const HOUR_START = 7;
 export const HOUR_END = 22;
@@ -64,7 +64,7 @@ export function getPeriodsForDay(
 ) {
     // Classes, midterms, and finals for the given day
     const classPeriods = data.courseIds.map((id) => classes[id]).map((c) => {
-        const midterm = c.midterms.find((m) => m.date === date.toFormat('MM/dd/yyyy'));
+        const midterm = c.midterms.flatMap(m => m).find((m) => m.date === date.toFormat('MM/dd/yyyy'));
         if (midterm) return {
             type: 'Midterm',
             name: c.names[0] + ' (Midterm)',

@@ -1,8 +1,8 @@
 'use client'
 
-import {useAuth, useUser} from 'reactfire';
-import {Auth, signOut} from 'firebase/auth';
-import {useIsMounted} from '@/hooks/useIsMounted';
+import { useAuth, useUser } from 'reactfire';
+import { Auth, signOut } from 'firebase/auth';
+import { useIsMounted } from '@/hooks/useIsMounted';
 
 // Components
 import SidebarItem from '@/app/SidebarItem';
@@ -10,13 +10,13 @@ import SignInButton from '@/components/SignInButton';
 import FirebaseUserDataUpdater from '@/components/FirebaseUserDataUpdater';
 
 // Icons
-import {FaBookmark, FaCalendar, FaCircleInfo, FaGear} from 'react-icons/fa6';
-import {BsPeopleFill} from 'react-icons/bs';
+import { FaBookmark, FaCalendar, FaCircleInfo, FaGear } from 'react-icons/fa6';
+import { BsPeopleFill } from 'react-icons/bs';
 
 
 export default function Sidebar() {
     const auth = useAuth();
-    const {data: user, status} = useUser();
+    const { data: user, status } = useUser();
 
     const mounted = useIsMounted();
 

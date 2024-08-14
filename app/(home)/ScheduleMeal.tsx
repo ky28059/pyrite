@@ -1,7 +1,7 @@
 'use client'
 
-import {useContext, useMemo, useState} from 'react';
-import {DateTime} from 'luxon';
+import { useContext, useMemo, useState } from 'react';
+import { DateTime } from 'luxon';
 import UserDataContext from '@/contexts/UserDataContext';
 
 // Components
@@ -10,9 +10,9 @@ import CenteredModal from '@/components/CenteredModal';
 import CloseButton from '@/components/CloseButton';
 
 // Utils
-import type {MealsResponse, MealType} from '@/util/menus';
-import {minutesToGridRows} from '@/app/(home)/ScheduleClass';
-import {parseUnitimeMinutes} from '@/util/schedule';
+import type { MealsResponse, MealType } from '@/util/menus';
+import { minutesToGridRows } from '@/app/(home)/ScheduleClass';
+import { parseUnitimeMinutes } from '@/util/schedule';
 
 
 type ScheduleBackgroundBlockProps = {
@@ -26,7 +26,7 @@ export default function ScheduleMeal(props: ScheduleBackgroundBlockProps) {
     const [open, setOpen] = useState(false);
 
     // Find which favorites are being served in this meal
-    const {data} = useContext(UserDataContext);
+    const { data } = useContext(UserDataContext);
     const favoriteCounts = useMemo(() => {
         return props.meals?.map((l) => ({
             name: l.Location,
@@ -85,10 +85,14 @@ export default function ScheduleMeal(props: ScheduleBackgroundBlockProps) {
 
                     {favoriteCounts && favoriteCounts.length > 0 ? (
                         <section className="flex flex-col gap-0.5 mt-1">
-                            {favoriteCounts?.map(({name, favorites}) => (
+                            {favoriteCounts?.map(({ name, favorites }) => (
                                 <p className="text-xs text-secondart dark:text-secondary-dark flex gap-1">
                                     <strong>{name}</strong> is serving
-                                    {favorites?.map(i => <span className="text-theme dark:text-theme-dark">{i.Name}</span>)}
+                                    {favorites?.map(i => (
+                                        <span className="text-theme dark:text-theme-dark">
+                                            {i.Name}
+                                        </span>
+                                    ))}
                                 </p>
                             ))}
                         </section>

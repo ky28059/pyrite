@@ -1,6 +1,6 @@
 'use client'
 
-import {useContext, useMemo, useState} from 'react';
+import { useContext, useMemo, useState } from 'react';
 import Class from '@/app/classes/Class';
 import ClassesContext from '@/contexts/ClassesContext';
 

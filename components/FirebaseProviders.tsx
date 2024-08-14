@@ -1,10 +1,17 @@
 'use client'
 
-import type {ReactNode} from 'react';
-import {useFirebaseApp, AuthProvider, FirestoreProvider, AnalyticsProvider, FirebaseAppProvider, StorageProvider} from 'reactfire';
-import {getFirestore} from 'firebase/firestore';
-import {getAuth, OAuthProvider} from 'firebase/auth';
-import {getStorage } from 'firebase/storage';
+import type { ReactNode } from 'react';
+import {
+    useFirebaseApp,
+    AuthProvider,
+    FirestoreProvider,
+    AnalyticsProvider,
+    FirebaseAppProvider,
+    StorageProvider
+} from 'reactfire';
+import { getFirestore } from 'firebase/firestore';
+import { getAuth, OAuthProvider } from 'firebase/auth';
+import { getStorage } from 'firebase/storage';
 // import { getAnalytics } from 'firebase/analytics';
 
 
@@ -18,7 +25,7 @@ const firebaseConfig = {
     measurementId: "G-1YQPZGG4PF"
 };
 
-export default function FirebaseProviders(props: {children: ReactNode}) {
+export default function FirebaseProviders(props: { children: ReactNode }) {
     return (
         <FirebaseAppProvider firebaseConfig={firebaseConfig}>
             <InnerFirebaseProviders>
@@ -28,7 +35,7 @@ export default function FirebaseProviders(props: {children: ReactNode}) {
     );
 }
 
-function InnerFirebaseProviders(props: {children: ReactNode}) {
+function InnerFirebaseProviders(props: { children: ReactNode }) {
     const firebase = useFirebaseApp();
 
     // Initialize auth and functions

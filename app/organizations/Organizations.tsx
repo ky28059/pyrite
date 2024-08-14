@@ -1,9 +1,9 @@
 'use client'
 
-import {useContext, useMemo, useState} from 'react';
+import { useContext, useMemo, useState } from 'react';
 import Organization from '@/app/organizations/Organization';
 import UserDataContext from '@/contexts/UserDataContext';
-import type {BoilerLinkOrganizationData} from '@/util/boilerlink';
+import type { BoilerLinkOrganizationData } from '@/util/boilerlink';
 
 
 type OrganizationsProps = {
@@ -12,7 +12,7 @@ type OrganizationsProps = {
 }
 export default function Organizations(props: OrganizationsProps) {
     const [query, setQuery] = useState('');
-    const {data} = useContext(UserDataContext);
+    const { data } = useContext(UserDataContext);
 
     const pinned = useMemo(() => {
         return props.organizations.filter((o) => data.pinnedOrgIds.includes(o.Id))

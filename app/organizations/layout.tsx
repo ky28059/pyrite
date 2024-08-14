@@ -1,7 +1,7 @@
-import type {ReactNode} from 'react';
+import type { ReactNode } from 'react';
 
 
-export default function Layout(props: {children: ReactNode}) {
+export default function Layout(props: { children: ReactNode }) {
     return (
         <>
             <h1 className="text-4xl font-bold mb-3">

@@ -1,11 +1,11 @@
 'use client'
 
-import {useState, ReactNode, useEffect} from 'react';
-import {DateTime} from 'luxon';
+import { useState, ReactNode, useEffect } from 'react';
+import { DateTime } from 'luxon';
 import CurrentTimeContext from '@/contexts/CurrentTimeContext';
 
 
-export default function CurrentTimeProvider(props: {children: ReactNode}) {
+export default function CurrentTimeProvider(props: { children: ReactNode }) {
     const [time, setTime] = useState(DateTime.now());
 
     // Update current time every 100ms

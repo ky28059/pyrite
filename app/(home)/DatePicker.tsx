@@ -1,8 +1,8 @@
 'use client'
 
-import {useContext, useEffect, useRef} from 'react';
-import {Popover} from '@headlessui/react';
-import {DateTime} from 'luxon';
+import { useContext, useEffect, useRef } from 'react';
+import { Popover } from '@headlessui/react';
+import { DateTime } from 'luxon';
 
 // Components
 import AnimatedPopover from '@/components/AnimatedPopover';
@@ -14,8 +14,8 @@ import ClassesContext from '@/contexts/ClassesContext';
 import EventsContext from '@/contexts/EventsContext';
 
 // Utils
-import {getPeriodsForDay, YEAR_END, YEAR_START, ZONE} from '@/util/schedule';
-import {useIsMounted} from '@/hooks/useIsMounted';
+import { getPeriodsForDay, YEAR_END, YEAR_START, ZONE } from '@/util/schedule';
+import { useIsMounted } from '@/hooks/useIsMounted';
 
 
 type DatePickerProps = {
@@ -51,15 +51,15 @@ type CalendarProps = {
     className?: string
 }
 function Calendar(props: CalendarProps) {
-    const {start, end, currTime, setTime, className} = props;
+    const { start, end, currTime, setTime, className } = props;
 
-    const {data} = useContext(UserDataContext);
+    const { data } = useContext(UserDataContext);
     const classes = useContext(ClassesContext);
-    const {events} = useContext(EventsContext);
+    const { events } = useContext(EventsContext);
 
     const date = useContext(CurrentTimeContext);
     const today = date.setZone(ZONE).startOf('day');
-    const tmrw = today.plus({days: 1});
+    const tmrw = today.plus({ days: 1 });
 
     // Wrapper and month refs for auto-centering on current selected month
     const wrapper = useRef<HTMLDivElement>(null);
@@ -75,7 +75,7 @@ function Calendar(props: CalendarProps) {
     }, [wrapper, currMonth])
 
     // Function to set the day without modifying the hour or minutes
-    const setDate = (day: DateTime) => setTime(currTime.set({year: day.year, ordinal: day.ordinal}));
+    const setDate = (day: DateTime) => setTime(currTime.set({ year: day.year, ordinal: day.ordinal }));
 
     const weekdays = ['U', 'M', 'T', 'W', 'θ', 'F', 'S'];
 
@@ -91,12 +91,12 @@ function Calendar(props: CalendarProps) {
         const month = m % 12
 
         // TODO: can this be better accomplished with another constructor?
-        const startOfMonth = DateTime.fromFormat(`${year}-${month + 1}`, "yyyy-M", {zone: ZONE});
+        const startOfMonth = DateTime.fromFormat(`${year}-${month + 1}`, "yyyy-M", { zone: ZONE });
 
         const days = Array(startOfMonth.daysInMonth).fill(0)
             .map((_, i) => i + 1)
             // TODO: see todo above
-            .map(day => DateTime.fromFormat(`${year}-${month + 1}-${day}`, "yyyy-M-d", {zone: ZONE}))
+            .map(day => DateTime.fromFormat(`${year}-${month + 1}-${day}`, "yyyy-M-d", { zone: ZONE }))
             .filter(day => !(day < START || day > END));
 
         return (
@@ -114,7 +114,7 @@ function Calendar(props: CalendarProps) {
                                 className={'flex items-center justify-center cursor-pointer py-0.5' + (noSchool && !active ? ' text-secondary dark:text-secondary-dark' : '') + (active ? ' bg-theme dark:bg-theme-dark text-white rounded-full' : '')}
                                 onClick={() => setDate(day)}
                                 key={day.toISO()}
-                                style={i === 0 ? {gridColumnStart: (day.weekday % 7) + 1} : undefined}
+                                style={i === 0 ? { gridColumnStart: (day.weekday % 7) + 1 } : undefined}
                             >
                                 {day.day}
                             </button>
@@ -133,7 +133,10 @@ function Calendar(props: CalendarProps) {
                 ))}
             </section>
 
-            <section ref={wrapper} className="flex flex-col gap-4 px-4 py-3 overflow-auto scroll-smooth scrollbar:w-1 scrollbar-thumb:bg-tertiary dark:scrollbar-thumb:bg-tertiary-dark">
+            <section
+                className="flex flex-col gap-4 px-4 py-3 overflow-auto scroll-smooth scrollbar:w-1 scrollbar-thumb:bg-tertiary dark:scrollbar-thumb:bg-tertiary-dark"
+                ref={wrapper}
+            >
                 {monthElements}
             </section>
 

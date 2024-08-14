@@ -1,32 +1,32 @@
 'use client'
 
-import {useContext, useState} from 'react';
+import { useContext, useState } from 'react';
 import UserDataContext from '@/contexts/UserDataContext';
 import DOMPurify from 'isomorphic-dompurify';
 
 // Components
 import CenteredModal from '@/components/CenteredModal';
 import CloseButton from '@/components/CloseButton';
-import OutlineButton, {DangerOutlineButton} from '@/components/OutlineButton';
+import OutlineButton, { DangerOutlineButton } from '@/components/OutlineButton';
 import OrganizationProfilePicture from '@/app/organizations/OrganizationProfilePicture';
 
 // Utils
-import type {BoilerLinkOrganizationData} from '@/util/boilerlink';
+import type { BoilerLinkOrganizationData } from '@/util/boilerlink';
 
 
 export default function Organization(props: BoilerLinkOrganizationData) {
     const [open, setOpen] = useState(false);
-    const {data, setData} = useContext(UserDataContext);
+    const { data, setData } = useContext(UserDataContext);
 
     function addToPinned() {
-        const newData = {...data};
+        const newData = { ...data };
         newData.pinnedOrgIds = [...newData.pinnedOrgIds, props.Id];
         setData(newData);
         setOpen(false);
     }
 
     function removeFromPinned() {
-        const newData = {...data};
+        const newData = { ...data };
         newData.pinnedOrgIds = newData.pinnedOrgIds.filter((i) => i !== props.Id);
         setData(newData);
         setOpen(false);
@@ -85,7 +85,7 @@ export default function Organization(props: BoilerLinkOrganizationData) {
 
                 <div
                     className="text-sm space-y-2 mt-4 break-all overflow-y-auto scrollbar:w-1 scrollbar-thumb:bg-tertiary dark:scrollbar-thumb:bg-tertiary-dark"
-                    dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(props.Description || props.Summary || '')}}
+                    dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(props.Description || props.Summary || '') }}
                 />
 
                 {!data.pinnedOrgIds.includes(props.Id) ? (

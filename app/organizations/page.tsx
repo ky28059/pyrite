@@ -1,5 +1,5 @@
-import {Metadata} from 'next';
-import {fetchOrganizations} from '@/util/boilerlink';
+import { Metadata } from 'next';
+import { fetchOrganizations } from '@/util/boilerlink';
 import Organizations from '@/app/organizations/Organizations';
 
 

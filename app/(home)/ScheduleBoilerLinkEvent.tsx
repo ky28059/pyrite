@@ -1,18 +1,18 @@
 'use client'
 
-import {useState} from 'react';
-import {DateTime, Interval} from 'luxon';
+import { useState } from 'react';
+import { DateTime, Interval } from 'luxon';
 
 // Components
-import BoilerLinkEventModal, {trimBoilerLinkDescription} from '@/app/(home)/BoilerLinkEventModal';
+import BoilerLinkEventModal, { trimBoilerLinkDescription } from '@/app/(home)/BoilerLinkEventModal';
 
 // Utils
-import type {EventPeriod} from '@/util/schedule';
-import {minutesToGridRows} from '@/app/(home)/ScheduleClass';
+import type { EventPeriod } from '@/util/schedule';
+import { minutesToGridRows } from '@/app/(home)/ScheduleClass';
 
 
 export default function ScheduleBoilerLinkEvent(props: EventPeriod) {
-    const {s, e, event} = props;
+    const { s, e, event } = props;
     const [open, setOpen] = useState(false);
 
     const start = DateTime.fromISO(event.startsOn);

@@ -1,17 +1,21 @@
 'use client'
 
-import {useContext} from 'react';
-import {FaRegStar, FaStar} from 'react-icons/fa6';
-import type {Allergen, MenuItem} from '@/util/menus';
+import { useContext } from 'react';
+import { FaRegStar, FaStar } from 'react-icons/fa6';
+
+// Contexts
 import UserDataContext from '@/contexts/UserDataContext';
+
+// Utils
+import type { Allergen, MenuItem } from '@/util/menus';
 
 
 export default function DiningCourtMenuItem(props: MenuItem) {
-    const {data, setData} = useContext(UserDataContext);
+    const { data, setData } = useContext(UserDataContext);
     const active = data.favoriteFoodIds.includes(props.ID);
 
     function toggleFavorite() {
-        const newData = {...data};
+        const newData = { ...data };
         newData.favoriteFoodIds = active
             ? newData.favoriteFoodIds.filter((i) => i !== props.ID)
             : [...newData.favoriteFoodIds, props.ID];

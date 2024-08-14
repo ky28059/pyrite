@@ -1,4 +1,4 @@
-import {useContext} from 'react';
+import { useContext } from 'react';
 
 // Contexts
 import CurrentTimeContext from '@/contexts/CurrentTimeContext';
@@ -7,7 +7,7 @@ import ClassesContext from '@/contexts/ClassesContext';
 import EventsContext from '@/contexts/EventsContext';
 
 // Utils
-import {getPeriodsForDay, ZONE} from '@/util/schedule';
+import { getPeriodsForDay, ZONE } from '@/util/schedule';
 
 
 /**
@@ -18,10 +18,10 @@ import {getPeriodsForDay, ZONE} from '@/util/schedule';
  */
 export function useNextPeriod() {
     const classes = useContext(ClassesContext);
-    const {data} = useContext(UserDataContext);
+    const { data } = useContext(UserDataContext);
 
     const time = useContext(CurrentTimeContext);
-    const {events} = useContext(EventsContext);
+    const { events } = useContext(EventsContext);
 
     // The user's classes for the current date, sorted ascending by start time.
     const sorted = getPeriodsForDay(time, data, classes, events)
@@ -31,7 +31,7 @@ export function useNextPeriod() {
     const minutes = localized.diff(midnight, 'minutes').minutes;
 
     if (!sorted.length)
-        return {next: null, span: 0, length: 0, toStart: 0, toEnd: 0};
+        return { next: null, span: 0, length: 0, toStart: 0, toEnd: 0 };
 
     // Loop through all periods, finding the index of the first period for which the current time is less
     // than the end time.
@@ -42,7 +42,7 @@ export function useNextPeriod() {
 
     // If no period exists that has an end time after the current time, no next period exists.
     if (currPd >= sorted.length)
-        return {next: null, span: 0, length: 0, toStart: 0, toEnd: 0};
+        return { next: null, span: 0, length: 0, toStart: 0, toEnd: 0 };
 
     const next = sorted[currPd];
     const prev = sorted[currPd - 1];
@@ -59,5 +59,5 @@ export function useNextPeriod() {
     const toStart = next.s - minutes;
     const toEnd = next.e - minutes;
 
-    return {next, span, length, toStart, toEnd}
+    return { next, span, length, toStart, toEnd }
 }

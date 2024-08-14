@@ -1,9 +1,13 @@
 'use client'
 
-import {Disclosure} from '@headlessui/react';
-import {FaChevronDown, FaCircleCheck, FaCircleXmark} from 'react-icons/fa6';
+import { Disclosure } from '@headlessui/react';
+import { FaChevronDown, FaCircleCheck, FaCircleXmark } from 'react-icons/fa6';
+
+// Components
 import DiningCourtMenuItem from '@/app/(home)/DiningCourtMenuItem';
-import type {DiningCourt, Meal} from '@/util/menus';
+
+// Utils
+import type { DiningCourt, Meal } from '@/util/menus';
 
 
 type DiningCourtMealProps = {
@@ -14,12 +18,12 @@ export default function DiningCourtMeal(props: DiningCourtMealProps) {
     return props.meal?.Status === 'Open' ? (
         <Disclosure>
             <Disclosure.Button className="flex gap-3 items-center rounded border border-tertiary dark:border-tertiary-dark hover:border-secondary dark:hover:border-secondary-dark px-4 py-2 transition duration-150">
-                {({open}) => (
+                {({ open }) => (
                     <>
                         <FaCircleCheck className="text-lime-500" />
                         {props.location}
 
-                        <FaChevronDown className={`bg-content-secondary dark:bg-content-secondary-dark rounded-full p-1 transition duration-100` + (open ? ' rotate-180' : '')}/>
+                        <FaChevronDown className={`bg-content-secondary dark:bg-content-secondary-dark rounded-full p-1 transition duration-100` + (open ? ' rotate-180' : '')} />
                     </>
                 )}
             </Disclosure.Button>

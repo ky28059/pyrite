@@ -1,10 +1,10 @@
-import {Fragment, ReactNode} from 'react';
-import {Popover, Transition} from '@headlessui/react';
+import { Fragment, ReactNode } from 'react';
+import { Popover, Transition } from '@headlessui/react';
 
 
 // A reusable component to wrap a "dropdown" animation around a `Popover.Panel`.
 // https://github.com/GunnWATT/watt/blob/b84912add397b1187dc931e96b2dfac29f547ffc/client/src/components/layout/AnimatedPopover.tsx
-export default function AnimatedPopover(props: {children: ReactNode, className?: string}) {
+export default function AnimatedPopover(props: { children: ReactNode, className?: string }) {
     return (
         <Transition
             as={Fragment}

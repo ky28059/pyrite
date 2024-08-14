@@ -1,6 +1,6 @@
-import type {ReactNode} from 'react';
-import type {Metadata, Viewport} from 'next';
-import {Inter} from 'next/font/google';
+import type { ReactNode } from 'react';
+import type { Metadata, Viewport } from 'next';
+import { Inter } from 'next/font/google';
 
 // Components
 import Sidebar from '@/app/Sidebar';
@@ -13,7 +13,7 @@ import FaviconHandler from '@/components/FaviconHandler';
 import InstallModal from '@/components/InstallModal';
 
 // Utils
-import {loadClasses} from '@/util/unitime';
+import { loadClasses } from '@/util/unitime';
 
 import './globals.css';
 
@@ -60,25 +60,25 @@ export default async function Layout(props: { children: ReactNode }) {
     return (
         <html lang="en" className="dark">
             <body className="bg-content dark:bg-content-dark text-primary dark:text-primary-dark" style={inter.style}>
-            <FirebaseProviders>
-                <UserDataProvider>
-                    <CurrentTimeProvider>
-                        <ClassesProvider classes={classes}>
-                            <EventsProvider>
-                                <div className="flex">
-                                    <Sidebar/>
-                                    <main className="relative container pt-16 pb-24 sm:pt-24">
-                                        {props.children}
-                                    </main>
+                <FirebaseProviders>
+                    <UserDataProvider>
+                        <CurrentTimeProvider>
+                            <ClassesProvider classes={classes}>
+                                <EventsProvider>
+                                    <div className="flex">
+                                        <Sidebar />
+                                        <main className="relative container pt-16 pb-24 sm:pt-24">
+                                            {props.children}
+                                        </main>
 
-                                    <FaviconHandler/>
-                                    <InstallModal/>
-                                </div>
-                            </EventsProvider>
-                        </ClassesProvider>
-                    </CurrentTimeProvider>
-                </UserDataProvider>
-            </FirebaseProviders>
+                                        <FaviconHandler />
+                                        <InstallModal />
+                                    </div>
+                                </EventsProvider>
+                            </ClassesProvider>
+                        </CurrentTimeProvider>
+                    </UserDataProvider>
+                </FirebaseProviders>
             </body>
         </html>
     )

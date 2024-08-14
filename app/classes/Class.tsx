@@ -1,22 +1,22 @@
 'use client'
 
-import {useContext} from 'react';
-import {FiCheck, FiCircle} from 'react-icons/fi';
+import { useContext } from 'react';
+import { FiCheck, FiCircle } from 'react-icons/fi';
 
 // Utils
 import UserDataContext from '@/contexts/UserDataContext';
-import type {Section} from '@/util/unitime';
+import type { Section } from '@/util/unitime';
 
 
 export default function Class(props: Section) {
-    const {data, setData} = useContext(UserDataContext);
+    const { data, setData } = useContext(UserDataContext);
     const selected = data.courseIds.includes(props.sections[0]);
 
     function toggleSelected() {
         const newIds = selected
             ? data.courseIds.filter(s => s !== props.sections[0])
             : [...data.courseIds, props.sections[0]]
-        setData({...data, courseIds: newIds});
+        setData({ ...data, courseIds: newIds });
     }
 
     return (

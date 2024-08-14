@@ -1,8 +1,8 @@
 'use client'
 
-import {Fragment, useState, useEffect, useLayoutEffect} from 'react';
-import {Dialog, Transition} from '@headlessui/react';
-import {FiPlusSquare, FiShare} from 'react-icons/fi';
+import { Fragment, useState, useEffect, useLayoutEffect } from 'react';
+import { Dialog, Transition } from '@headlessui/react';
+import { FiPlusSquare, FiShare } from 'react-icons/fi';
 
 
 // Ported from https://github.com/GunnWATT/watt/blob/main/client/src/components/layout/InstallModal.tsx
@@ -75,9 +75,13 @@ export default function InstallModal() {
                                 </div>
                                 <li>In the dialogue, tap <strong>"Add"</strong>.</li>
                             </ol>
+
                             <p className="text-secondary dark:text-secondary-dark text-sm">
                                 Not interested?{' '}
-                                <button onClick={() => setIsOpen(false)} className="font-semibold focus:outline-none focus:underline">
+                                <button
+                                    onClick={() => setIsOpen(false)}
+                                    className="font-semibold focus:outline-none focus:underline"
+                                >
                                     Dismiss.
                                 </button>
                             </p>

@@ -1,22 +1,22 @@
 'use client'
 
-import {ReactNode, useContext} from 'react';
-import {RadioGroup} from '@headlessui/react';
-import UserDataContext, {UserData} from '@/contexts/UserDataContext';
-import {BsMoonFill, BsSunFill} from 'react-icons/bs';
+import { ReactNode, useContext } from 'react';
+import { RadioGroup } from '@headlessui/react';
+import UserDataContext, { UserData } from '@/contexts/UserDataContext';
+import { BsMoonFill, BsSunFill } from 'react-icons/bs';
 
 
 export default function PreferencesContent() {
-    const {data, setData} = useContext(UserDataContext);
+    const { data, setData } = useContext(UserDataContext);
 
     function changeTheme(theme: UserData['options']['theme']) {
-        const newData = {...data};
+        const newData = { ...data };
         newData.options.theme = theme;
         setData(newData);
     }
 
     function changeTime(time: UserData['options']['time']) {
-        const newData = {...data};
+        const newData = { ...data };
         newData.options.time = time;
         setData(newData);
     }
@@ -56,7 +56,7 @@ export default function PreferencesContent() {
     )
 }
 
-function RadioOption(props: {value: string, children: ReactNode}) {
+function RadioOption(props: { value: string, children: ReactNode }) {
     return (
         <RadioGroup.Option
             className="flex gap-2 justify-center items-center text-sm font-medium flex-grow border border-tertiary dark:border-tertiary-dark ui-checked:ring-theme  dark:ui-checked:ring-theme-dark ui-not-checked:hover:border-primary dark:ui-not-checked:hover:border-primary-dark transition duration-150 ui-checked:ring-2 rounded px-4 py-2 cursor-pointer"

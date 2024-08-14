@@ -1,7 +1,7 @@
 'use client'
 
-import {useContext} from 'react';
-import {useIsMounted} from '@/hooks/useIsMounted';
+import { useContext } from 'react';
+import { useIsMounted } from '@/hooks/useIsMounted';
 
 // Contexts
 import CurrentTimeContext from '@/contexts/CurrentTimeContext';
@@ -12,7 +12,7 @@ export default function HomeClock() {
     const time = useContext(CurrentTimeContext);
     const mounted = useIsMounted();
 
-    const {data} = useContext(UserDataContext);
+    const { data } = useContext(UserDataContext);
     const format = data.options.time === '12' ? 'h:mm:ss a' : 'H:mm:ss'
 
     return (

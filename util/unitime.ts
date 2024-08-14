@@ -1,5 +1,5 @@
-import {readFileSync, writeFileSync} from 'fs';
-import {cache} from 'react';
+import { readFileSync, writeFileSync } from 'fs';
+import { cache } from 'react';
 
 
 // https://docs.google.com/document/d/1YIvPtHRbqF7pJXqlrqll41ncAjM8GlCQMHowi52K-Bw/edit
@@ -38,7 +38,7 @@ export type Test = {
 }
 
 export const loadClasses = cache(async () => {
-    const res: {[id: string]: Section} = {};
+    const res: { [id: string]: Section } = {};
 
     // Fields in this CSV can contain both newlines and commas. To properly parse,
     // 1. each row ends in `,\n` (so split the text file by that)

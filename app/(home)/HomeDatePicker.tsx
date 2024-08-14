@@ -1,9 +1,13 @@
 'use client'
 
-import {DateTime} from 'luxon';
-import {useHotkeys} from 'react-hotkeys-hook';
-import {FaChevronLeft, FaChevronRight} from 'react-icons/fa';
+import { DateTime } from 'luxon';
+import { useHotkeys } from 'react-hotkeys-hook';
+
+// Components
 import DatePicker from '@/app/(home)/DatePicker';
+
+// Icons
+import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
 
 type HomeDatePickerProps = {
@@ -11,14 +15,14 @@ type HomeDatePickerProps = {
     setViewDate: (d: DateTime) => void
 }
 export default function HomeDatePicker(props: HomeDatePickerProps) {
-    const {viewDate, setViewDate} = props;
+    const { viewDate, setViewDate } = props;
 
     function decDay() {
-        setViewDate(viewDate.minus({day: 1}));
+        setViewDate(viewDate.minus({ day: 1 }));
     }
 
     function incDay() {
-        setViewDate(viewDate.plus({day: 1}));
+        setViewDate(viewDate.plus({ day: 1 }));
     }
 
     useHotkeys('left', decDay, [viewDate]);

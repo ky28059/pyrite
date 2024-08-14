@@ -1,4 +1,4 @@
-import {BoilerLinkOrganizationData} from '@/util/boilerlink';
+import type { BoilerLinkOrganizationData } from '@/util/boilerlink';
 
 
 export default function OrganizationProfilePicture(props: BoilerLinkOrganizationData) {

@@ -1,7 +1,7 @@
 'use client'
 
-import {useState} from 'react';
-import {Transition} from '@headlessui/react';
+import { useState } from 'react';
+import { Transition } from '@headlessui/react';
 import CloseButton from '@/components/CloseButton';
 
 
@@ -10,7 +10,7 @@ type DayAlertProps = {
     jumpToPres: () => void
 };
 export default function DayAlert(props: DayAlertProps) {
-    const {daysRelToCur: days, jumpToPres} = props;
+    const { daysRelToCur: days, jumpToPres } = props;
 
     const [visible, setVisible] = useState(true);
 
