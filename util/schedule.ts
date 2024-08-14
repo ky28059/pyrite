@@ -62,8 +62,6 @@ export function getPeriodsForDay(
     classes: Classes,
     events: Events
 ) {
-    if (date < YEAR_START || date > YEAR_END) return [];
-
     // Classes, midterms, and finals for the given day
     const classPeriods = data.courseIds.map((id) => classes[id]).map((c) => {
         const midterm = c.midterms.flatMap(m => m).find((m) => m.date === date.toFormat('MM/dd/yyyy'));
@@ -98,6 +96,8 @@ export function getPeriodsForDay(
             || THANKSGIVING_BREAK.contains(date)
             || WINTER_BREAK.contains(date)
             || SPRING_BREAK.contains(date)
+            || date < YEAR_START
+            || date > YEAR_END
         ) return null;
 
         return {
