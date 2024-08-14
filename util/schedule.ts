@@ -9,16 +9,16 @@ import type { BoilerLinkEventData } from '@/util/boilerlink';
 export const ZONE = 'America/Indiana/Indianapolis';
 
 // TODO: generate these?
-export const YEAR_START = DateTime.fromISO('2023-08-21', { zone: ZONE });
-export const YEAR_END = DateTime.fromISO('2024-05-04', { zone: ZONE });
+export const YEAR_START = DateTime.fromISO('2024-08-19', { zone: ZONE });
+export const YEAR_END = DateTime.fromISO('2025-05-10', { zone: ZONE });
 
-export const FALL_FINALS = Interval.fromISO('2023-12-11/2023-12-16', { zone: ZONE })
-export const SPRING_FINALS = Interval.fromISO('2024-04-29/2024-05-04', { zone: ZONE })
+export const FALL_FINALS = Interval.fromISO('2024-12-09/2024-12-14', { zone: ZONE })
+export const SPRING_FINALS = Interval.fromISO('2025-05-05/2025-05-10', { zone: ZONE })
 
-export const FALL_BREAK = Interval.fromISO('2023-10-09/2023-10-11', { zone: ZONE })
-export const THANKSGIVING_BREAK = Interval.fromISO('2023-11-22/2023-11-25', { zone: ZONE });
-export const WINTER_BREAK = Interval.fromISO('2023-12-16/2024-01-08', { zone: ZONE });
-export const SPRING_BREAK = Interval.fromISO('2024-03-11/2024-03-16', { zone: ZONE });
+export const FALL_BREAK = Interval.fromISO('2024-10-07/2024-10-08', { zone: ZONE })
+export const THANKSGIVING_BREAK = Interval.fromISO('2024-11-27/2024-11-30', { zone: ZONE });
+export const WINTER_BREAK = Interval.fromISO('2024-12-14/2025-01-13', { zone: ZONE });
+export const SPRING_BREAK = Interval.fromISO('2025-03-17/2025-03-22', { zone: ZONE });
 
 export const HOUR_START = 7;
 export const HOUR_END = 22;
