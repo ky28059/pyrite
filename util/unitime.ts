@@ -20,7 +20,7 @@ export type Section = {
     location: string,
     instructors: string[],
     emails: string[],
-    midterms: Test[],
+    midterms: Test[][],
     finals: Test[],
 }
 export type SectionType = 'Lecture' | 'Lecture (Hybrid)'
@@ -55,6 +55,14 @@ export const loadClasses = cache(async () => {
 
         // Parse midterm exams
         if (type === 'Midterm Examination') {
+            const midterm: Test = {
+                dayOfWeek,
+                start,
+                end,
+                location,
+                date: first
+            };
+
             // If the section name is "Offering", add midterm to all lecture periods instead.
             if (sections[0] === 'Offering') {
                 const objs = Object.values(res).filter(s => s.type.includes('Lecture') && names.some(n => s.names.includes(n)));
@@ -63,32 +71,42 @@ export const loadClasses = cache(async () => {
                     continue;
                 }
 
-                objs.forEach(s => s.midterms.push({
-                    dayOfWeek,
-                    start,
-                    end,
-                    location,
-                    date: first
-                }));
+                objs.forEach(s => {
+                    const group = s.midterms.find(g => g[0].date === first);
+                    if (group) {
+                        group.push(midterm)
+                    } else {
+                        s.midterms.push([midterm]);
+                        s.midterms.sort((g1, g2) => g1[0].date.localeCompare(g2[0].date))
+                    }
+                });
             } else {
                 if (!res[sections[0]]) {
                     console.log(`[ERR] Midterm for ${names[0]} parsed before corresponding class!`);
                     continue;
                 }
 
-                res[sections[0]].midterms.push({
-                    dayOfWeek,
-                    start,
-                    end,
-                    location,
-                    date: first
-                });
+                const group = res[sections[0]].midterms.find(g => g[0].date === first);
+                if (group) {
+                    group.push(midterm)
+                } else {
+                    res[sections[0]].midterms.push([midterm]);
+                    res[sections[0]].midterms.sort((g1, g2) => g1[0].date.localeCompare(g2[0].date))
+                }
             }
             continue;
         }
 
         // Parse final exams
         if (type === 'Final Examination') {
+            const final: Test = {
+                dayOfWeek,
+                start,
+                end,
+                location,
+                date: first
+            };
+
             // If the section name is "Offering" or "Course", add final to all lecture periods instead.
             // TODO: real meaning of this?
             if (sections[0] === 'Offering' || sections[0] === 'Course') {
@@ -98,26 +116,14 @@ export const loadClasses = cache(async () => {
                     continue;
                 }
 
-                objs.forEach(s => s.finals.push({
-                    dayOfWeek,
-                    start,
-                    end,
-                    location,
-                    date: first
-                }));
+                objs.forEach(s => s.finals.push(final));
             } else {
                 if (!res[sections[0]]) {
                     console.log(`[ERR] Final for ${names[0]} parsed before corresponding class!`);
                     continue;
                 }
 
-                res[sections[0]].finals.push({
-                    dayOfWeek,
-                    start,
-                    end,
-                    location,
-                    date: first
-                });
+                res[sections[0]].finals.push(final);
             }
             continue;
         }
