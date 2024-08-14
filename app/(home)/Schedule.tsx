@@ -20,7 +20,7 @@ import { ZONE } from '@/util/schedule';
 
 
 export default function Schedule() {
-    const [viewDate, setViewDate] = useState<DateTime>(DateTime.now().startOf('day'));
+    const [viewDate, setViewDate] = useState(DateTime.now().setZone(ZONE).startOf('day'));
 
     // Current time check to see if viewDate is not the current date
     const time = useContext(CurrentTimeContext);
