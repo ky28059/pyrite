@@ -1,26 +1,28 @@
 'use client'
 
-import {useContext, useEffect, useRef} from 'react';
+import { useContext, useEffect, useRef } from 'react';
 import resolveConfig from 'tailwindcss/resolveConfig';
 import tailwindConfig from '@/tailwind.config';
 
 // Utils
-import type {Period} from '@/util/schedule';
-import {useNextPeriod} from '@/hooks/useNextPeriod';
-import {hexToRgb} from '@/util/color';
+import type { Period } from '@/util/schedule';
+import { useNextPeriod } from '@/hooks/useNextPeriod';
+import { hexToRgb } from '@/util/color';
 
 // Contexts
 import UserDataContext from '@/contexts/UserDataContext';
 import CurrentTimeContext from '@/contexts/CurrentTimeContext';
 
 
+const config = resolveConfig(tailwindConfig);
+
 // Ported mostly from https://github.com/GunnWATT/watt/blob/main/client/src/components/schedule/FaviconHandler.tsx
 export default function FaviconHandler() {
-    const {data} = useContext(UserDataContext);
+    const { data } = useContext(UserDataContext);
 
     // TODO: use timeouts
     const date = useContext(CurrentTimeContext);
-    const {next, toStart, toEnd, span} = useNextPeriod();
+    const { next, toStart, toEnd, span } = useNextPeriod();
 
     // Reference to the favicon element
     const favicon = useRef<HTMLLinkElement>();
@@ -152,7 +154,7 @@ export default function FaviconHandler() {
 
             fc.fillStyle = isLight(color) ? 'black' : 'white';
             fc.font = `bold ${numToShow > 100 ? FAVICON_SIZE * 0.6 : FAVICON_SIZE * 0.8}px "Roboto", sans-serif`
-            fc.fillText(''+numToShow, FAVICON_SIZE / 2, FAVICON_SIZE * 0.575)
+            fc.fillText('' + numToShow, FAVICON_SIZE / 2, FAVICON_SIZE * 0.575)
         }
 
         favicon.current.href = canvas.current.toDataURL();
@@ -163,23 +165,26 @@ export default function FaviconHandler() {
 }
 
 function periodTypeToColor(type: Period['type']) {
-    const config = resolveConfig(tailwindConfig);
-
     switch (type) {
         case 'Lecture':
         case 'Lecture (Hybrid)':
             return '#f1b42f'
         case 'Laboratory':
         case 'Laboratory (Hybrid)':
+            // @ts-ignore TODO
             return config.theme.colors.laboratory;
         case 'Pso':
+            // @ts-ignore TODO
             return config.theme.colors.pso;
         case 'Recitation':
         case 'Recitation (Hybrid)':
+            // @ts-ignore TODO
             return config.theme.colors.recitation;
         case 'Event':
+            // @ts-ignore TODO
             return config.theme.colors.event;
         case 'Midterm':
+            // @ts-ignore TODO
             return config.theme.colors.midterm;
         default: // TODO: travel time?
             return '#f1b42f'
