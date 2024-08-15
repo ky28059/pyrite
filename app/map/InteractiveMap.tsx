@@ -1,6 +1,6 @@
 "use client"
 
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { GoogleMap, useLoadScript } from '@react-google-maps/api';
 
 // Contexts
@@ -10,15 +10,22 @@ import ClassesContext from '@/contexts/ClassesContext';
 // Utils
 import type { Building } from '@/util/buildings';
 import InteractiveMarker from '@/app/map/InteractiveMarker';
-import { mapStyle } from '@/app/map/mapStyle';
+import { mapStyle, mapStyleDark } from '@/app/map/mapStyle';
 
 
 type InteractiveMapProps = {
-    buildings: Building[]
+    buildings: Building[],
+    theme?: string,
 }
 export default function InteractiveMap(props: InteractiveMapProps) {
     const { data } = useContext(UserDataContext);
     const classes = useContext(ClassesContext);
+
+    // Use initial theme from cookies to avoid FOUC, but update theme on preferences change as well.
+    const [theme, setTheme] = useState(props.theme);
+    useEffect(() => {
+        setTheme(data.options.theme);
+    }, [data.options.theme]);
 
     const [openBuilding, setOpenBuilding] = useState('');
 
@@ -48,7 +55,7 @@ export default function InteractiveMap(props: InteractiveMapProps) {
                 mapTypeControl: false,
                 clickableIcons: false,
                 zoomControl: false,
-                styles: mapStyle
+                styles: theme === 'dark' ? mapStyleDark : mapStyle
             }}
             onClick={() => setOpenBuilding('')}
         >
