@@ -1,20 +1,16 @@
 'use client'
 
 import { useContext } from 'react';
-import Link from 'next/link';
-import type { Section } from '@/util/unitime';
-
-// Components
 import YourClass from '@/app/classes/YourClass';
 
 // Contexts
 import UserDataContext from '@/contexts/UserDataContext';
+import ClassesContext from '@/contexts/ClassesContext';
+import Link from 'next/link';
 
 
-type YourClassesProps = {
-    classes: { [p: string]: Section }
-}
-export default function YourClasses(props: YourClassesProps) {
+export default function YourClasses() {
+    const classes = useContext(ClassesContext);
     const { data } = useContext(UserDataContext);
 
     return (
@@ -34,7 +30,7 @@ export default function YourClasses(props: YourClassesProps) {
                 <>
                     <div className="flex flex-col gap-2.5 min-h-0 overflow-y-auto pr-1 scrollbar:w-1 scrollbar-thumb:bg-tertiary">
                         {data.courseIds.sort().map((id) => (
-                            <YourClass {...props.classes[id]} key={id} />
+                            <YourClass {...classes[id]} key={id} />
                         ))}
                     </div>
                     <p className="text-secondary text-sm mt-2.5">

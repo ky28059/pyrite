@@ -4,29 +4,25 @@ import { useContext, useEffect, useRef } from 'react';
 import resolveConfig from 'tailwindcss/resolveConfig';
 import tailwindConfig from '@/tailwind.config';
 
+// Utils
+import type { Period } from '@/util/schedule';
+import { useNextPeriod } from '@/hooks/useNextPeriod';
+import { hexToRgb } from '@/util/color';
+
 // Contexts
 import UserDataContext from '@/contexts/UserDataContext';
 import CurrentTimeContext from '@/contexts/CurrentTimeContext';
-
-// Utils
-import type { Period } from '@/util/schedule';
-import type { Section } from '@/util/unitime';
-import { useNextPeriod } from '@/hooks/useNextPeriod';
-import { hexToRgb } from '@/util/color';
 
 
 const config = resolveConfig(tailwindConfig);
 
 // Ported mostly from https://github.com/GunnWATT/watt/blob/main/client/src/components/schedule/FaviconHandler.tsx
-type FaviconHandlerProps = {
-    classes: { [p: string]: Section }
-}
-export default function FaviconHandler(props: FaviconHandlerProps) {
+export default function FaviconHandler() {
     const { data } = useContext(UserDataContext);
 
     // TODO: use timeouts
     const date = useContext(CurrentTimeContext);
-    const { next, toStart, toEnd, span } = useNextPeriod(props.classes);
+    const { next, toStart, toEnd, span } = useNextPeriod();
 
     // Reference to the favicon element
     const favicon = useRef<HTMLLinkElement>();

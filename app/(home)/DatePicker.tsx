@@ -10,20 +10,17 @@ import AnimatedPopover from '@/components/AnimatedPopover';
 // Contexts
 import CurrentTimeContext from '@/contexts/CurrentTimeContext';
 import UserDataContext from '@/contexts/UserDataContext';
+import ClassesContext from '@/contexts/ClassesContext';
 import EventsContext from '@/contexts/EventsContext';
 
 // Utils
-import type { Section } from '@/util/unitime';
 import { getPeriodsForDay, YEAR_END, YEAR_START, ZONE } from '@/util/schedule';
 import { useIsMounted } from '@/hooks/useIsMounted';
 
 
 type DatePickerProps = {
-    viewDate: DateTime,
-    setViewDate: (d: DateTime) => void,
-    start?: DateTime,
-    end?: DateTime,
-    classes: { [p: string]: Section }
+    viewDate: DateTime, setViewDate: (d: DateTime) => void,
+    start?: DateTime, end?: DateTime
 }
 export default function DatePicker(props: DatePickerProps) {
     const mounted = useIsMounted();
@@ -41,7 +38,6 @@ export default function DatePicker(props: DatePickerProps) {
                     setTime={props.setViewDate}
                     start={props.start}
                     end={props.end}
-                    classes={props.classes}
                 />
             </AnimatedPopover>
         </Popover>
@@ -52,13 +48,13 @@ export default function DatePicker(props: DatePickerProps) {
 type CalendarProps = {
     start?: DateTime, end?: DateTime,
     currTime: DateTime, setTime: (day: DateTime) => any,
-    classes: { [p: string]: Section },
     className?: string
 }
 function Calendar(props: CalendarProps) {
     const { start, end, currTime, setTime, className } = props;
 
     const { data } = useContext(UserDataContext);
+    const classes = useContext(ClassesContext);
     const { events } = useContext(EventsContext);
 
     const date = useContext(CurrentTimeContext);
@@ -110,7 +106,7 @@ function Calendar(props: CalendarProps) {
                 </h4>
                 <div className="grid grid-cols-7">
                     {days.map((day, i) => {
-                        const noSchool = getPeriodsForDay(day, data, props.classes, events).length === 0;
+                        const noSchool = getPeriodsForDay(day, data, classes, events).length === 0;
 
                         const active = currTime.hasSame(day, 'day');
                         return (

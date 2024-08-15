@@ -17,14 +17,10 @@ import EventsContext from '@/contexts/EventsContext';
 
 // Utils
 import type { EventsResponse } from '@/util/boilerlink';
-import type { Section } from '@/util/unitime';
 import { ZONE } from '@/util/schedule';
 
 
-type HomeContentProps = {
-    classes: { [p: string]: Section }
-}
-export default function HomeContent(props: HomeContentProps) {
+export default function HomeContent() {
     const [viewDate, setViewDate] = useState(DateTime.now().setZone(ZONE).startOf('day'));
 
     // Current time check to see if viewDate is not the current date
@@ -61,15 +57,13 @@ export default function HomeContent(props: HomeContentProps) {
                         <HomeDatePicker
                             viewDate={viewDate}
                             setViewDate={setViewDate}
-                            classes={props.classes}
                         />
                     </div>
 
-                    <NextClassProgressBar classes={props.classes} />
+                    <NextClassProgressBar />
                     <Calendar
                         viewDate={viewDate}
                         daysRelToCur={relDays}
-                        classes={props.classes}
                     />
                 </div>
 

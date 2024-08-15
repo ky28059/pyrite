@@ -4,9 +4,6 @@ import type { Metadata } from 'next';
 import Classes from '@/app/classes/Classes';
 import YourClasses from '@/app/classes/YourClasses';
 
-// Utils
-import { classes } from '@/util/unitime';
-
 
 export const metadata: Metadata = {
     title: 'Classes',
@@ -23,8 +20,8 @@ export default function ClassesPage() {
             </h1>
 
             <div className="flex gap-16">
-                <Classes classes={classes} />
-                <YourClasses classes={classes} />
+                <Classes />
+                <YourClasses />
             </div>
         </main>
     )
