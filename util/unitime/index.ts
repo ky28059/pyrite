@@ -23,7 +23,7 @@ export type Section = {
     midterms: Test[][],
     finals: Test[],
 }
-export type SectionType = 'Lecture' | 'Lecture (Hybrid)'
+export type SectionType = 'Lecture' | 'Lecture (Hybrid)' | 'Lecture (Synchronous Online)Lecture (Synchronous Online)'
     | 'Laboratory' | 'Laboratory (Hybrid)'
     | 'Recitation' | 'Recitation (Hybrid)'
     | 'Pso'
