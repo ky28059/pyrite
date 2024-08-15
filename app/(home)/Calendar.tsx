@@ -14,10 +14,11 @@ import ScheduleTest from '@/app/(home)/ScheduleTest';
 import UserDataContext from '@/contexts/UserDataContext';
 import ClassesContext from '@/contexts/ClassesContext';
 import EventsContext from '@/contexts/EventsContext';
+import CurrentTimeContext from '@/contexts/CurrentTimeContext';
 
 // Utils
 import type { MealsResponse } from '@/util/menus';
-import { getPeriodsForDay, HOUR_END, HOUR_START } from '@/util/schedule';
+import { getPeriodsForDay, HOUR_END, HOUR_START, ZONE } from '@/util/schedule';
 
 
 type CalendarProps = {
@@ -28,6 +29,9 @@ export default function Calendar(props: CalendarProps) {
     const { data } = useContext(UserDataContext);
     const classes = useContext(ClassesContext);
     const { events } = useContext(EventsContext);
+
+    const time = useContext(CurrentTimeContext);
+    const timeEst = time.setZone(ZONE);
 
     const [meals, setMeals] = useState<MealsResponse[] | null>(null);
     useEffect(() => {
@@ -51,7 +55,11 @@ export default function Calendar(props: CalendarProps) {
             {/* Hour labels */}
             {Array(HOUR_END - HOUR_START + 1).fill(0).map((_, i) => (
                 <p
-                    style={{ gridRowStart: i * 12 + 1, gridColumnStart: 1 }}
+                    style={{
+                        gridRowStart: i * 12 + 1,
+                        gridColumnStart: 1,
+                        opacity: tickMarkHidden(timeEst, i + HOUR_START) ? 0 : 1
+                    }}
                     className="text-xs text-secondary dark:text-secondary-dark -mt-2 text-right pr-6 select-none pointer-events-none"
                     key={i}
                 >
@@ -90,4 +98,18 @@ export default function Calendar(props: CalendarProps) {
             })}
         </div>
     )
+}
+
+/**
+ * Gets whether the tick mark for the given hour should be hidden due to the indicator being too close to it.
+ * @param time The current time (in `ZONE` tz).
+ * @param hour The hour represented by the given tick (0-23).
+ * @returns Whether the tick should be hidden.
+ */
+function tickMarkHidden(time: DateTime, hour: number) {
+    const diff = time.hour - hour;
+    if (diff !== 0 && diff !== -1) return false;
+
+    return (diff === 0 && time.minute < 10)
+        || (diff === -1 && time.minute > 50)
 }
