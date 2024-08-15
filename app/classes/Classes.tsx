@@ -30,10 +30,10 @@ export default function Classes() {
                     type="text"
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
-                    className="border border-tertiary dark:border-tertiary-dark rounded px-3 py-1.5 focus:outline-none focus-visible:ring-[3px] w-full mb-1 dark:bg-content-secondary-dark placeholder:text-secondary dark:placeholder:text-secondary-dark"
+                    className="border border-tertiary rounded px-3 py-1.5 focus:outline-none focus-visible:ring-[3px] w-full mb-1 dark:bg-content-secondary placeholder:text-secondary"
                     placeholder="Search classes by name (SCLA 101), title (Multivariate Calculus), or section ID"
                 />
-                <p className="text-xs font-light text-secondary dark:text-secondary-dark">
+                <p className="text-xs font-light text-secondary">
                     Viewing {Math.min(100, filtered.length)} of {filtered.length} courses.
                 </p>
             </section>

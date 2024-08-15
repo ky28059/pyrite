@@ -21,7 +21,7 @@ export default function Class(props: Section) {
 
     return (
         <button
-            className={'px-5 py-4 rounded flex gap-4 items-center bg-content-secondary dark:bg-content-secondary-dark border text-left transition duration-150 ' + (selected ? 'bg-theme/20 dark:bg-theme-dark/20 border-theme' : 'border-transparent hover:border-theme')}
+            className={'px-5 py-4 rounded flex gap-4 items-center bg-content-secondary border text-left transition duration-150 ' + (selected ? 'bg-theme/20 border-theme' : 'border-transparent hover:border-theme')}
             onClick={toggleSelected}
         >
             {selected ? (
@@ -40,7 +40,7 @@ export default function Class(props: Section) {
                         ))}
                     </div>
 
-                    <div className="bg-theme/30 dark:bg-theme-dark/30 text-theme dark:text-theme-dark text-xs px-2 py-0.5 mt-0.5 h-max rounded-full font-semibold">
+                    <div className="bg-theme/30 text-theme text-xs px-2 py-0.5 mt-0.5 h-max rounded-full font-semibold">
                         {props.type}
                     </div>
                 </div>

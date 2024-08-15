@@ -35,10 +35,10 @@ export default function Organizations(props: OrganizationsProps) {
                     type="text"
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
-                    className="border border-tertiary dark:border-tertiary-dark rounded px-3 py-1.5 focus:outline-none focus-visible:ring-[3px] w-full mb-1 dark:bg-content-secondary-dark placeholder:text-secondary dark:placeholder:text-secondary-dark"
+                    className="border border-tertiary rounded px-3 py-1.5 focus:outline-none focus-visible:ring-[3px] w-full mb-1 dark:bg-content-secondary placeholder:text-secondary"
                     placeholder="Search organizations"
                 />
-                <p className="text-xs font-light text-secondary dark:text-secondary-dark">
+                <p className="text-xs font-light text-secondary">
                     Viewing {filtered.length + pinned.length} of {props.count} organizations.
                 </p>
             </section>
@@ -48,7 +48,7 @@ export default function Organizations(props: OrganizationsProps) {
                     <Organization {...o} key={o.Id} />
                 ))}
                 {pinned.length !== 0 && (
-                    <hr className="border-tertiary dark:border-tertiary-dark my-4" />
+                    <hr className="border-tertiary my-4" />
                 )}
                 {filtered.map((o) => (
                     <Organization {...o} key={o.Id} />

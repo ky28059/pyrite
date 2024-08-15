@@ -59,7 +59,7 @@ export default async function Layout(props: { children: ReactNode }) {
 
     return (
         <html lang="en" className="dark">
-            <body className="bg-content dark:bg-content-dark text-primary dark:text-primary-dark" style={inter.style}>
+            <body className="bg-content text-primary" style={inter.style}>
                 <FirebaseProviders>
                     <UserDataProvider>
                         <CurrentTimeProvider>

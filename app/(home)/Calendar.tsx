@@ -60,7 +60,7 @@ export default function Calendar(props: CalendarProps) {
                         gridColumnStart: 1,
                         opacity: tickMarkHidden(timeEst, i + HOUR_START) ? 0 : 1
                     }}
-                    className="text-xs text-secondary dark:text-secondary-dark -mt-2 text-right pr-6 select-none pointer-events-none"
+                    className="text-xs text-secondary -mt-2 text-right pr-6 select-none pointer-events-none"
                     key={i}
                 >
                     {data.options.time === '12' ? (
@@ -76,7 +76,7 @@ export default function Calendar(props: CalendarProps) {
             <div className="absolute inset-0 flex flex-col ml-14 sm:ml-[6rem] pointer-events-none">
                 {Array((HOUR_END - HOUR_START) * 6 + 1).fill(0).map((_, i) => (
                     <hr
-                        className={'h-4 flex-none border-t border-tertiary dark:border-tertiary-dark' + (i % 6 !== 0 ? ' opacity-65' : '')}
+                        className={'h-4 flex-none border-t border-tertiary' + (i % 6 !== 0 ? ' opacity-65' : '')}
                         key={i}
                     />
                 ))}

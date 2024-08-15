@@ -13,30 +13,12 @@ const config: Config = {
     theme: {
         extend: {
             colors: {
-                theme: {
-                    DEFAULT: '#F8C537',
-                    dark: '#f1b42f'
-                },
-                primary: { // Primary text color
-                    DEFAULT: '#212121',
-                    dark: '#ffffff'
-                },
-                secondary: { // Secondary text color
-                    DEFAULT: '#757575',
-                    dark: '#898989',
-                },
-                tertiary: { // Tertiary text color
-                    DEFAULT: 'rgb(229 231 235)',
-                    dark: '#404040'
-                },
-                content: {
-                    DEFAULT: '#ffffff',
-                    dark: '#1b1b1b'
-                },
-                'content-secondary': {
-                    DEFAULT: colors.gray['100'],
-                    dark: '#131313'
-                },
+                theme: 'rgb(var(--theme) / <alpha-value>)',
+                primary: 'rgb(var(--primary) / <alpha-value>)',
+                secondary: 'rgb(var(--secondary) / <alpha-value>)',
+                tertiary: 'rgb(var(--tertiary) / <alpha-value>)',
+                content: 'rgb(var(--content) / <alpha-value>)',
+                'content-secondary': 'rgb(var(--content-secondary) / <alpha-value>)',
                 pulse: { // Loading pulse bg color
                     DEFAULT: colors.gray['300'],
                     dark: '#313135'

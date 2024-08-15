@@ -51,7 +51,7 @@ export default function InstallModal() {
                     leaveFrom="opacity-100 translate-y-0"
                     leaveTo="opacity-0 translate-y-12"
                 >
-                    <div className="relative flex flex-col bg-content dark:bg-content-dark rounded-t-2xl max-w-md max-h-[80%] mx-3 pt-6 px-6 shadow-xl">
+                    <div className="relative flex flex-col bg-content rounded-t-2xl max-w-md max-h-[80%] mx-3 pt-6 px-6 shadow-xl">
                         <img
                             src="/icons/maskable-512x512.png"
                             alt="Home screen icon"
@@ -60,15 +60,16 @@ export default function InstallModal() {
                         <h3 className="text-lg font-semibold mt-9">
                             It looks like you're using Pyrite in the iOS Safari app.
                         </h3>
-                        <hr className="my-3 border-tertiary dark:border-tertiary-dark" />
+                        <hr className="my-3 border-tertiary" />
+
                         <section className="overflow-scroll scroll-smooth scrollbar-none pb-6">
                             <p className="mb-3">Pyrite is best experienced when installed as a PWA.</p>
                             <p className="mb-3">To add Pyrite to your home screen,</p>
                             <ol className="list-decimal list-inside space-y-1 mb-3">
-                                <li>Tap the share button <FiShare className="inline h-6 w-6 p-1 bg-content-secondary dark:bg-content-secondary-dark rounded-md" />.</li>
+                                <li>Tap the share button <FiShare className="inline h-6 w-6 p-1 bg-content-secondary rounded-md" />.</li>
                                 <li>Select <strong>"Add to Home Screen"</strong> in the bottom row.</li>
-                                <div className="p-2 bg-content-secondary dark:bg-content-secondary-dark rounded-lg">
-                                    <span className="flex items-center justify-between text-sm font-light p-3 bg-content dark:bg-content-dark rounded-lg">
+                                <div className="p-2 bg-content-secondary rounded-lg">
+                                    <span className="flex items-center justify-between text-sm font-light p-3 bg-content rounded-lg">
                                         Add to Home Screen
                                         <FiPlusSquare className="h-[1.1rem] w-[1.1rem]" />
                                     </span>
@@ -76,7 +77,7 @@ export default function InstallModal() {
                                 <li>In the dialogue, tap <strong>"Add"</strong>.</li>
                             </ol>
 
-                            <p className="text-secondary dark:text-secondary-dark text-sm">
+                            <p className="text-secondary text-sm">
                                 Not interested?{' '}
                                 <button
                                     onClick={() => setIsOpen(false)}

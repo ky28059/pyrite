@@ -1,3 +1,27 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    :root {
+        --theme: 248 197 55; /* #F8C537 */
+
+        --primary: 33 33 33; /* #212121 */
+        --secondary: 117 117 117; /* #757575 */
+        --tertiary: 229 231 235;
+
+        --content: 255 255 255; /* #ffffff */
+        --content-secondary: 243 244 246; /* #f3f4f6 */
+    }
+
+    :root.dark {
+        --theme: 241 180 47; /* #f1b42f */
+
+        --primary: 255 255 255; /* #ffffff */
+        --secondary: 137 137 137; /* #898989 */
+        --tertiary: 64 64 64; /* #404040 */
+
+        --content: 27 27 27; /* #1b1b1b */
+        --content-secondary: 19 19 19; /* #131313 */
+    }
+}

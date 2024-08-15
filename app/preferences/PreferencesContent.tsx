@@ -59,7 +59,7 @@ export default function PreferencesContent() {
 function RadioOption(props: { value: string, children: ReactNode }) {
     return (
         <RadioGroup.Option
-            className="flex gap-2 justify-center items-center text-sm font-medium flex-grow border border-tertiary dark:border-tertiary-dark ui-checked:ring-theme  dark:ui-checked:ring-theme-dark ui-not-checked:hover:border-primary dark:ui-not-checked:hover:border-primary-dark transition duration-150 ui-checked:ring-2 rounded px-4 py-2 cursor-pointer"
+            className="flex gap-2 justify-center items-center text-sm font-medium flex-grow border border-tertiary ui-checked:ring-theme ui-not-checked:hover:border-primary transition duration-150 ui-checked:ring-2 rounded px-4 py-2 cursor-pointer"
             value={props.value}
         >
             {props.children}

@@ -10,7 +10,7 @@ export default function OrganizationProfilePicture(props: BoilerLinkOrganization
         />
     ) : (
         <div
-            className="size-[75px] bg-content-secondary dark:bg-content-secondary-dark rounded-full flex items-center justify-center text-3xl flex-none text-secondary dark:text-secondary-dark font-semibold">
+            className="size-[75px] bg-content-secondary rounded-full flex items-center justify-center text-3xl flex-none text-secondary font-semibold">
             {props.Name[0]}
         </div>
     )

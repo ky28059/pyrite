@@ -14,7 +14,7 @@ export default function OutlineButton(props: OutlineButtonProps) {
 
     return (
         <button
-            className={'text-secondary dark:text-secondary-dark border border-secondary dark:border-secondary-dark hover:!text-white hover:bg-[#9c9ca2] dark:hover:bg-[#717173] hover:shadow-lg hover:shadow-gray-500/40 dark:hover:shadow-zinc-800/40 hover:!border-transparent rounded px-3 py-2 transition-shadow duration-100 focus:outline-none focus-visible:ring-[3px] focus-visible:ring-black/20 dark:focus-visible:ring-white/20' + (className ? ` ${className}` : '')}
+            className={'text-secondary border border-secondary hover:text-white hover:bg-[#9c9ca2] dark:hover:bg-[#717173] hover:shadow-lg hover:shadow-gray-500/40 dark:hover:shadow-zinc-800/40 hover:!border-transparent rounded px-3 py-2 transition-shadow duration-100 focus:outline-none focus-visible:ring-[3px] focus-visible:ring-black/20 dark:focus-visible:ring-white/20' + (className ? ` ${className}` : '')}
             {...buttonProps}
         >
             {children}

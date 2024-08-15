@@ -76,7 +76,7 @@ function getBgStyle(s: Section) {
     switch (s.type) {
         case 'Lecture':
         case 'Lecture (Hybrid)':
-            return 'border-theme dark:border-theme-dark text-theme dark:text-theme-dark bg-theme/30 dark:bg-theme-dark/30 hover:ring-yellow-500/30'
+            return 'border-theme text-theme bg-theme/30 hover:ring-yellow-500/30'
         case 'Laboratory':
         case 'Laboratory (Hybrid)':
             return 'border-laboratory text-laboratory bg-laboratory/30 hover:ring-laboratory/30'

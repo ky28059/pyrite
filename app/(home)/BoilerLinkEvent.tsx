@@ -24,7 +24,7 @@ export default function BoilerLinkEvent(props: BoilerLinkEventData) {
     return (
         <>
             <button
-                className="flex-none flex rounded overflow-hidden border border-tertiary dark:border-tertiary-dark text-sm hover:border-primary dark:hover:border-primary-dark transition duration-200 text-left items-stretch"
+                className="flex-none flex rounded overflow-hidden border border-tertiary text-sm hover:border-primary transition duration-200 text-left items-stretch"
                 onClick={() => setOpen(true)}
             >
                 <img
@@ -36,10 +36,10 @@ export default function BoilerLinkEvent(props: BoilerLinkEventData) {
                 <div className="px-4 py-2 flex-grow">
                     <h5 className="font-medium line-clamp-2">{props.name}</h5>
 
-                    <p className="text-xs text-secondary dark:text-secondary-dark">
+                    <p className="text-xs text-secondary">
                         {interval.toLocaleString(DateTime.DATETIME_MED)}
                     </p>
-                    <p className="text-xs text-secondary dark:text-secondary-dark line-clamp-1">
+                    <p className="text-xs text-secondary line-clamp-1">
                         @ {props.location}
                     </p>
                 </div>

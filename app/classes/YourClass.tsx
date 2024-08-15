@@ -11,7 +11,7 @@ export default function YourClass(props: Section) {
     return (
         <>
             <button
-                className={'px-5 py-3 rounded bg-content-secondary dark:bg-content-secondary-dark border text-left transition duration-150 border-tertiary dark:border-tertiary-dark hover:!border-theme'}
+                className={'px-5 py-3 rounded bg-content-secondary border text-left transition duration-150 border-tertiary hover:!border-theme'}
                 onClick={() => setOpen(true)}
             >
                 <div className="flex gap-2">
@@ -23,7 +23,7 @@ export default function YourClass(props: Section) {
                         ))}
                     </div>
 
-                    <div className="bg-theme/30 dark:bg-theme-dark/30 text-theme dark:text-theme-dark text-xs px-2 py-0.5 mt-0.5 h-max rounded-full font-semibold">
+                    <div className="bg-theme/30 text-theme text-xs px-2 py-0.5 mt-0.5 h-max rounded-full font-semibold">
                         {props.type}
                     </div>
                 </div>

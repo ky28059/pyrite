@@ -73,19 +73,19 @@ export default function HomeContent() {
                         <span className="font-normal text-base">({viewDate.toLocaleString()})</span>
 
                         {events && events.length > 0 && (
-                            <span className="text-xs font-semibold rounded-full px-1.5 py-0.5 bg-theme/30 dark:bg-theme-dark/30 text-theme dark:text-theme-dark">
+                            <span className="text-xs font-semibold rounded-full px-1.5 py-0.5 bg-theme/30 text-theme">
                                 {events.length}
                             </span>
                         )}
                     </h3>
 
-                    <div className="flex flex-col gap-2 overflow-y-auto scrollbar:w-1 scrollbar-thumb:bg-tertiary dark:scrollbar-thumb:bg-tertiary-dark xl:pr-2">
+                    <div className="flex flex-col gap-2 overflow-y-auto scrollbar:w-1 scrollbar-thumb:bg-tertiary xl:pr-2">
                         {!events ? (
-                            <p className="text-sm text-secondary dark:text-secondary-dark">
+                            <p className="text-sm text-secondary">
                                 Loading events...
                             </p>
                         ) : events.length === 0 ? (
-                            <p className="text-sm text-secondary dark:text-secondary-dark">
+                            <p className="text-sm text-secondary">
                                 No events to show.
                             </p>
                         ) : events.map((e) => (

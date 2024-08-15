@@ -55,7 +55,7 @@ export default function BoilerLinkEventModal(props: BoilerLinkEventModalProps) {
         <CenteredModal
             isOpen={open}
             setIsOpen={setOpen}
-            className="relative flex flex-col bg-content dark:bg-content-dark rounded-md w-[48rem] max-h-[90%] mx-2 shadow-xl"
+            className="relative flex flex-col bg-content rounded-md w-[48rem] max-h-[90%] mx-2 shadow-xl"
         >
             <CloseButton
                 className="absolute right-5 top-3"
@@ -76,36 +76,36 @@ export default function BoilerLinkEventModal(props: BoilerLinkEventModalProps) {
                 {(props.categoryNames.length > 0 || props.benefitNames.length > 0) && (
                     <div className="flex gap-1 text-xs font-semibold mb-1.5">
                         {props.categoryNames.map((c) => (
-                            <p className="rounded-full bg-yellow-500/30 text-theme dark:text-theme-dark px-2 py-1 flex-none" key={c}>
+                            <p className="rounded-full bg-theme/30 text-theme px-2 py-1 flex-none" key={c}>
                                 {c}
                             </p>
                         ))}
                         {props.benefitNames.map((b) => (
-                            <p className="rounded-full bg-yellow-500/30 text-theme dark:text-theme-dark px-2 py-1 flex-none" key={b}>
+                            <p className="rounded-full bg-theme/30 text-theme px-2 py-1 flex-none" key={b}>
                                 {b}
                             </p>
                         ))}
                     </div>
                 )}
 
-                <p className="flex gap-2 items-center text-sm text-secondary dark:text-secondary-dark">
+                <p className="flex gap-2 items-center text-sm text-secondary">
                     <BsPeopleFill /> {props.organizationName}
                 </p>
-                <p className="flex gap-2 items-center text-sm text-secondary dark:text-secondary-dark">
+                <p className="flex gap-2 items-center text-sm text-secondary">
                     <FaCalendar />
                     {interval.toLocaleString(DateTime.DATETIME_MED)}
                 </p>
-                <p className="flex gap-2 items-center text-sm text-secondary dark:text-secondary-dark">
+                <p className="flex gap-2 items-center text-sm text-secondary">
                     <FaLocationDot /> {props.location}
                 </p>
 
                 <div
-                    className="text-sm space-y-2 mt-4 min-h-0 overflow-y-auto scrollbar:w-1 scrollbar-thumb:bg-tertiary dark:scrollbar-thumb:bg-tertiary-dark [&_a]:text-theme dark:[&_a]:text-theme-dark [&_a:hover]:underline"
+                    className="text-sm space-y-2 mt-4 min-h-0 overflow-y-auto scrollbar:w-1 scrollbar-thumb:bg-tertiary [&_a]:text-theme [&_a:hover]:underline"
                     dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(props.description) }}
                 />
 
                 <a
-                    className="block mt-4 text-sm text-secondary dark-text-secondary-dark italic hover:underline w-max"
+                    className="block mt-4 text-sm text-secondary italic hover:underline w-max"
                     href={`https://boilerlink.purdue.edu/event/${props.id}`}
                     target="_blank"
                     rel="noopener noreferrer"

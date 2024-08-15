@@ -10,6 +10,7 @@ import ClassesContext from '@/contexts/ClassesContext';
 // Utils
 import type { Building } from '@/util/buildings';
 import InteractiveMarker from '@/app/map/InteractiveMarker';
+import { mapStyle } from '@/app/map/mapStyle';
 
 
 type InteractiveMapProps = {
@@ -47,13 +48,7 @@ export default function InteractiveMap(props: InteractiveMapProps) {
                 mapTypeControl: false,
                 clickableIcons: false,
                 zoomControl: false,
-                // styles: [
-                //     {
-                //         featureType: "all",
-                //         elementType: "labels",
-                //         stylers: [{ visibility: "off" }],
-                //     },
-                // ],
+                styles: mapStyle
             }}
             onClick={() => setOpenBuilding('')}
         >

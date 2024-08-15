@@ -22,8 +22,8 @@ export default function Map() {
                 <h1 className="text-4xl font-bold mb-2">
                     Class map
                 </h1>
-                <p className="text-secondary dark:text-secondary-dark italic text-sm">
-                    Classes you add to your <Link href="/classes" className="text-theme dark:text-theme-dark hover:underline">schedule</Link>{' '}
+                <p className="text-secondary italic text-sm">
+                    Classes you add to your <Link href="/classes" className="text-theme hover:underline">schedule</Link>{' '}
                     will show up on the map as markers.
                 </p>
             </div>

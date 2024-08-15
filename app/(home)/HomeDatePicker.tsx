@@ -30,13 +30,13 @@ export default function HomeDatePicker(props: HomeDatePickerProps) {
 
     return (
         <div className="flex gap-2 justify-center mb-10">
-            <button className="text-secondary dark:text-secondary-dark p-2" onClick={decDay}>
+            <button className="text-secondary p-2" onClick={decDay}>
                 <FaChevronLeft />
             </button>
 
             <DatePicker viewDate={viewDate} setViewDate={setViewDate} />
 
-            <button className="text-secondary dark:text-secondary-dark p-2" onClick={incDay}>
+            <button className="text-secondary p-2" onClick={incDay}>
                 <FaChevronRight />
             </button>
         </div>

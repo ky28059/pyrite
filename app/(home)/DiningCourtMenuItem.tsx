@@ -25,7 +25,7 @@ export default function DiningCourtMenuItem(props: MenuItem) {
 
     return (
         <button
-            className="group w-full hover:bg-content-secondary dark:hover:bg-content-secondary-dark px-2 py-0.5 text-secondary dark:text-secondary-dark flex flex-wrap items-center"
+            className="group w-full hover:bg-content-secondary px-2 py-0.5 text-secondary flex flex-wrap items-center"
             onClick={toggleFavorite}
         >
             <span className="mr-1.5">{props.Name}</span>
@@ -39,9 +39,9 @@ export default function DiningCourtMenuItem(props: MenuItem) {
             ))}
 
             {active ? (
-                <FaStar className="text-theme dark:text-theme-dark ml-auto" />
+                <FaStar className="text-theme ml-auto" />
             ) : (
-                <FaRegStar className="hidden group-hover:block text-secondary dark:text-secondary-dark ml-auto" />
+                <FaRegStar className="hidden group-hover:block text-secondary ml-auto" />
             )}
         </button>
     )

@@ -17,13 +17,13 @@ type DiningCourtMealProps = {
 export default function DiningCourtMeal(props: DiningCourtMealProps) {
     return props.meal?.Status === 'Open' ? (
         <Disclosure>
-            <Disclosure.Button className="flex gap-3 items-center rounded border border-tertiary dark:border-tertiary-dark hover:border-secondary dark:hover:border-secondary-dark px-4 py-2 transition duration-150">
+            <Disclosure.Button className="flex gap-3 items-center rounded border border-tertiary hover:border-secondary px-4 py-2 transition duration-150">
                 {({ open }) => (
                     <>
                         <FaCircleCheck className="text-lime-500" />
                         {props.location}
 
-                        <FaChevronDown className={`bg-content-secondary dark:bg-content-secondary-dark rounded-full p-1 transition duration-100` + (open ? ' rotate-180' : '')} />
+                        <FaChevronDown className={`bg-content-secondary rounded-full p-1 transition duration-100` + (open ? ' rotate-180' : '')} />
                     </>
                 )}
             </Disclosure.Button>
@@ -31,10 +31,10 @@ export default function DiningCourtMeal(props: DiningCourtMealProps) {
             <Disclosure.Panel className="text-sm">
                 {props.meal.Stations.map((s) => (
                     <section
-                        className="rounded overflow-clip border border-tertiary dark:border-tertiary-dark divide-y divide-tertiary dark:divide-tertiary-dark mb-2"
+                        className="rounded overflow-clip border border-tertiary divide-y divide-tertiary mb-2"
                         key={s.Name + props.meal?.ID}
                     >
-                        <h5 className="font-medium px-2 py-1 bg-content-secondary dark:bg-content-secondary-dark">
+                        <h5 className="font-medium px-2 py-1 bg-content-secondary">
                             {s.Name}
                         </h5>
                         {s.Items.map((i) => (
@@ -45,7 +45,7 @@ export default function DiningCourtMeal(props: DiningCourtMealProps) {
             </Disclosure.Panel>
         </Disclosure>
     ) : (
-        <div className="flex gap-3 items-center rounded border border-tertiary dark:border-tertiary-dark px-4 py-2">
+        <div className="flex gap-3 items-center rounded border border-tertiary px-4 py-2">
             <FaCircleXmark className="text-red-500" />
             {props.location}
         </div>

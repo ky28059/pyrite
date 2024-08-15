@@ -5,10 +5,10 @@ export default function Loading() {
                 <input
                     disabled
                     type="text"
-                    className="border border-tertiary dark:border-tertiary-dark rounded px-3 py-1.5 focus:outline-none focus-visible:ring-[3px] w-full mb-1 dark:bg-content-secondary-dark placeholder:text-secondary dark:placeholder:text-secondary-dark"
+                    className="border border-tertiary rounded px-3 py-1.5 focus:outline-none focus-visible:ring-[3px] w-full mb-1 dark:bg-content-secondary placeholder:text-secondary"
                     placeholder="Search organizations"
                 />
-                <p className="text-xs font-light text-secondary dark:text-secondary-dark">
+                <p className="text-xs font-light text-secondary">
                     Viewing ... of ... organizations.
                 </p>
             </section>
