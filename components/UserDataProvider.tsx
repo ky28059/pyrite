@@ -5,6 +5,9 @@ import UserDataContext, { defaultUserData, UserData } from '@/contexts/UserDataC
 import { useFirestore, useUser } from 'reactfire';
 import { doc, setDoc } from 'firebase/firestore';
 
+// Utils
+import { THEME_COOKIE_NAME } from '@/util/config';
+
 
 // Local-caching & cloud-backed algorithm borrowed from
 // https://github.com/SVWEFSBRWHWBCOTSEID/game-website/blob/main/components/PreferencesProvider.tsx
@@ -27,6 +30,7 @@ export default function UserDataProvider(props: { children: ReactNode }) {
 
     // Update theme on mount and data change
     useLayoutEffect(() => {
+        document.cookie = `${THEME_COOKIE_NAME}=${data.options.theme}`;
         document.documentElement.className = data.options.theme;
     }, [data.options.theme]);
 

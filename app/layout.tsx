@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import type { Metadata, Viewport } from 'next';
+import { cookies } from 'next/headers';
 import { Inter } from 'next/font/google';
 
 // Components
@@ -14,6 +15,7 @@ import InstallModal from '@/components/InstallModal';
 
 // Utils
 import { loadClasses } from '@/util/unitime';
+import { THEME_COOKIE_NAME } from '@/util/config';
 
 import './globals.css';
 
@@ -55,10 +57,11 @@ export const viewport: Viewport = {
 }
 
 export default async function Layout(props: { children: ReactNode }) {
+    const theme = cookies().get(THEME_COOKIE_NAME)?.value;
     const classes = await loadClasses();
 
     return (
-        <html lang="en" className="dark">
+        <html lang="en" className={theme === 'dark' ? 'dark' : ''}>
             <body className="bg-content text-primary" style={inter.style}>
                 <FirebaseProviders>
                     <UserDataProvider>
