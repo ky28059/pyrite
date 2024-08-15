@@ -1,4 +1,4 @@
-import { readFileSync, writeFileSync } from 'fs';
+import { readFile } from 'node:fs/promises';
 import { cache } from 'react';
 
 
@@ -44,7 +44,7 @@ export const loadClasses = cache(async () => {
     // 1. each row ends in `,\n` (so split the text file by that)
     // 2. values in each column are wrapped by double quotes; therefore, assume a comma indicates a new column only if
     //    it is succeeded by a double quote or another comma.
-    const rows = readFileSync('./util/classes.csv').toString().split(',\n')
+    const rows = (await readFile(process.cwd() + '/util/classes.csv')).toString().split(',\n');
 
     // Drop first row (header) and last row (empty string)
     for (const r of rows.slice(1, rows.length - 1)) {
