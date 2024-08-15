@@ -8,6 +8,7 @@ import InteractiveMap from '@/app/map/InteractiveMap';
 // Utils
 import buildings from '@/util/buildings';
 import { THEME_COOKIE_NAME } from '@/util/config';
+import { classes } from '@/util/unitime';
 
 
 export const metadata: Metadata = {
@@ -17,7 +18,7 @@ export const metadata: Metadata = {
     }
 }
 
-export default function Map() {
+export default async function Map() {
     const theme = cookies().get(THEME_COOKIE_NAME)?.value;
 
     return (
@@ -35,6 +36,7 @@ export default function Map() {
             <InteractiveMap
                 buildings={buildings}
                 theme={theme}
+                classes={classes}
             />
         </main>
     )

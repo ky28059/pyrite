@@ -2,6 +2,7 @@
 
 import { DateTime } from 'luxon';
 import { useHotkeys } from 'react-hotkeys-hook';
+import type { Section } from '@/util/unitime';
 
 // Components
 import DatePicker from '@/app/(home)/DatePicker';
@@ -12,7 +13,8 @@ import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
 type HomeDatePickerProps = {
     viewDate: DateTime,
-    setViewDate: (d: DateTime) => void
+    setViewDate: (d: DateTime) => void,
+    classes: { [p: string]: Section }
 }
 export default function HomeDatePicker(props: HomeDatePickerProps) {
     const { viewDate, setViewDate } = props;
@@ -34,7 +36,11 @@ export default function HomeDatePicker(props: HomeDatePickerProps) {
                 <FaChevronLeft />
             </button>
 
-            <DatePicker viewDate={viewDate} setViewDate={setViewDate} />
+            <DatePicker
+                viewDate={viewDate}
+                setViewDate={setViewDate}
+                classes={props.classes}
+            />
 
             <button className="text-secondary p-2" onClick={incDay}>
                 <FaChevronRight />

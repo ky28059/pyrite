@@ -1,6 +1,7 @@
 import HomeContent from '@/app/(home)/HomeContent';
+import { classes } from '@/util/unitime';
 
 
-export default async function Home() {
-    return <HomeContent />;
+export default function Home() {
+    return <HomeContent classes={classes} />;
 }

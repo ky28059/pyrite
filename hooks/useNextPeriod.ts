@@ -3,10 +3,10 @@ import { useContext } from 'react';
 // Contexts
 import CurrentTimeContext from '@/contexts/CurrentTimeContext';
 import UserDataContext from '@/contexts/UserDataContext';
-import ClassesContext from '@/contexts/ClassesContext';
 import EventsContext from '@/contexts/EventsContext';
 
 // Utils
+import type { Section } from '@/util/unitime';
 import { getPeriodsForDay, ZONE } from '@/util/schedule';
 
 
@@ -16,8 +16,7 @@ import { getPeriodsForDay, ZONE } from '@/util/schedule';
  *
  * @returns The next period, the minutes to its start and end, and its length and length of break preceding it.
  */
-export function useNextPeriod() {
-    const classes = useContext(ClassesContext);
+export function useNextPeriod(classes: { [p: string]: Section }) {
     const { data } = useContext(UserDataContext);
 
     const time = useContext(CurrentTimeContext);
