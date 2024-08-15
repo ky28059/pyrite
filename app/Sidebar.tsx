@@ -11,7 +11,6 @@ import FirebaseUserDataUpdater from '@/components/FirebaseUserDataUpdater';
 // Icons
 import { FaBookmark, FaCalendar, FaCircleInfo, FaMap, FaUser } from 'react-icons/fa6';
 import { BsPeopleFill } from 'react-icons/bs';
-import { MdLogin } from 'react-icons/md';
 
 
 export default function Sidebar() {

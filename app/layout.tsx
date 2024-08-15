@@ -62,20 +62,18 @@ export default async function Layout(props: { children: ReactNode }) {
 
     return (
         <html lang="en" className={theme === 'dark' ? 'dark' : ''}>
-            <body className="bg-content text-primary" style={inter.style}>
+            <body className="bg-content text-primary flex" style={inter.style}>
                 <FirebaseProviders>
                     <UserDataProvider>
                         <CurrentTimeProvider>
                             <ClassesProvider classes={classes}>
                                 <EventsProvider>
-                                    <div className="flex">
-                                        <Sidebar />
+                                    <Sidebar />
 
-                                        {props.children}
+                                    {props.children}
 
-                                        <FaviconHandler />
-                                        <InstallModal />
-                                    </div>
+                                    <FaviconHandler />
+                                    <InstallModal />
                                 </EventsProvider>
                             </ClassesProvider>
                         </CurrentTimeProvider>
