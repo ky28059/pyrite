@@ -8,12 +8,13 @@ import Sidebar from '@/app/Sidebar';
 import FirebaseProviders from '@/components/FirebaseProviders';
 import UserDataProvider from '@/components/UserDataProvider';
 import CurrentTimeProvider from '@/components/CurrentTimeProvider';
-import ClassesProviderWrapper from '@/components/ClassesProviderWrapper';
+import ClassesProvider from '@/components/ClassesProvider';
 import EventsProvider from '@/components/EventsProvider';
 import FaviconHandler from '@/components/FaviconHandler';
 import InstallModal from '@/components/InstallModal';
 
 // Utils
+import { loadClasses } from '@/util/unitime';
 import { THEME_COOKIE_NAME } from '@/util/config';
 
 import './globals.css';
@@ -57,6 +58,7 @@ export const viewport: Viewport = {
 
 export default async function Layout(props: { children: ReactNode }) {
     const theme = cookies().get(THEME_COOKIE_NAME)?.value;
+    const classes = await loadClasses();
 
     return (
         <html lang="en" className={theme === 'dark' ? 'dark' : ''}>
@@ -64,7 +66,7 @@ export default async function Layout(props: { children: ReactNode }) {
                 <FirebaseProviders>
                     <UserDataProvider>
                         <CurrentTimeProvider>
-                            <ClassesProviderWrapper>
+                            <ClassesProvider classes={classes}>
                                 <EventsProvider>
                                     <Sidebar />
 
@@ -73,7 +75,7 @@ export default async function Layout(props: { children: ReactNode }) {
                                     <FaviconHandler />
                                     <InstallModal />
                                 </EventsProvider>
-                            </ClassesProviderWrapper>
+                            </ClassesProvider>
                         </CurrentTimeProvider>
                     </UserDataProvider>
                 </FirebaseProviders>
