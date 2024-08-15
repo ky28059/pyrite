@@ -1,21 +1,20 @@
 'use client'
 
-import { useAuth, useUser } from 'reactfire';
-import { Auth, signOut } from 'firebase/auth';
+import Link from 'next/link';
+import { useUser } from 'reactfire';
 import { useIsMounted } from '@/hooks/useIsMounted';
 
 // Components
 import SidebarItem from '@/app/SidebarItem';
-import SignInButton from '@/components/SignInButton';
 import FirebaseUserDataUpdater from '@/components/FirebaseUserDataUpdater';
 
 // Icons
-import { FaBookmark, FaCalendar, FaCircleInfo, FaGear, FaMap } from 'react-icons/fa6';
+import { FaBookmark, FaCalendar, FaCircleInfo, FaMap, FaUser } from 'react-icons/fa6';
 import { BsPeopleFill } from 'react-icons/bs';
+import { MdLogin } from 'react-icons/md';
 
 
 export default function Sidebar() {
-    const auth = useAuth();
     const { data: user, status } = useUser();
 
     const mounted = useIsMounted();
@@ -37,53 +36,40 @@ export default function Sidebar() {
             <SidebarItem href="/map" icon={FaMap}>
                 Map
             </SidebarItem>
-            <SidebarItem href="/preferences" icon={FaGear}>
-                Preferences
-            </SidebarItem>
             <SidebarItem href="/about" icon={FaCircleInfo} desktopOnly>
                 About
             </SidebarItem>
 
-            <div className="mt-auto">
+            <Link
+                className="mt-auto w-full px-2 py-1 sm:-ml-1 sm:mr-2 rounded flex gap-2 items-center font-semibold text-secondary hover:text-primary hover:bg-theme/30 transition duration-200"
+                href="/profile"
+            >
                 {!mounted || status === 'loading' ? (
-                    <div className="w-full px-2 py-1 sm:-ml-1 sm:mr-2 flex gap-2 items-center">
+                    <>
                         <div className="size-10 rounded-full bg-pulse dark:bg-pulse-dark animate-pulse" />
                         <span className="hidden sm:block h-6 flex-grow mr-3 rounded bg-pulse dark:bg-pulse-dark animate-pulse" />
-                    </div>
+                    </>
                 ) : !user ? (
-                    <SignInButton />
+                    <>
+                        <FaUser className="size-10 rounded-full bg-gray-200 dark:bg-content p-3 flex-none" />
+                        <span className="hidden sm:block">
+                            Profile
+                        </span>
+                    </>
                 ) : (
-                    <button
-                        className="w-full px-2 py-1 sm:-ml-1 sm:mr-2 rounded flex gap-2 items-center font-semibold text-secondary hover:bg-theme/30 transition duration-200"
-                        onClick={() => signOutAndClearCache(auth)}
-                    >
+                    <>
                         <FirebaseUserDataUpdater />
 
-                        <div className="size-10 rounded-full bg-gray-200 dark:bg-content flex items-center justify-center text-lg">
+                        <div className="size-10 rounded-full bg-gray-200 dark:bg-content flex items-center justify-center text-lg text-secondary">
                             {user.displayName?.[0].toUpperCase()}
                         </div>
 
                         <span className="hidden sm:block">
                             {user.displayName}
                         </span>
-                    </button>
+                    </>
                 )}
-            </div>
+            </Link>
         </aside>
     )
-}
-
-function signOutAndClearCache(auth: Auth) {
-    void signOut(auth);
-
-    // Clear firebase cache to prevent re-signing-in as the same user from crashing the app immediately
-    // due to "missing permission" errors in `FirebaseUserDataUpdater`.
-    // See https://github.com/FirebaseExtended/reactfire/issues/485
-    // and https://github.com/FirebaseExtended/reactfire/discussions/228#discussioncomment-182830.
-    // @ts-ignore
-    const map = globalThis['_reactFirePreloadedObservables'];
-    Array.from(map.keys()).forEach(
-        // @ts-ignore
-        (key) => key.includes('firestore') && map.delete(key),
-    );
 }

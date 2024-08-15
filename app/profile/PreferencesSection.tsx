@@ -6,7 +6,7 @@ import UserDataContext, { UserData } from '@/contexts/UserDataContext';
 import { BsMoonFill, BsSunFill } from 'react-icons/bs';
 
 
-export default function PreferencesContent() {
+export default function PreferencesSection() {
     const { data, setData } = useContext(UserDataContext);
 
     function changeTheme(theme: UserData['options']['theme']) {
@@ -24,7 +24,7 @@ export default function PreferencesContent() {
     return (
         <div className="space-y-6">
             <RadioGroup value={data.options.theme} onChange={changeTheme} className="flex flex-col">
-                <RadioGroup.Label className="mb-2 font-semibold">
+                <RadioGroup.Label className="mb-2 font-semibold text-secondary">
                     Color theme
                 </RadioGroup.Label>
 
@@ -39,7 +39,7 @@ export default function PreferencesContent() {
             </RadioGroup>
 
             <RadioGroup value={data.options.time} onChange={changeTime} className="flex flex-col">
-                <RadioGroup.Label className="mb-2 font-semibold">
+                <RadioGroup.Label className="mb-2 font-semibold text-secondary">
                     Time format
                 </RadioGroup.Label>
 
