@@ -8,7 +8,7 @@ import InteractiveMap from '@/app/map/InteractiveMap';
 // Utils
 import buildings from '@/util/buildings';
 import { THEME_COOKIE_NAME } from '@/util/config';
-import { loadClasses } from '@/util/unitime';
+import { classes } from '@/util/unitime';
 
 
 export const metadata: Metadata = {
@@ -20,7 +20,6 @@ export const metadata: Metadata = {
 
 export default async function Map() {
     const theme = cookies().get(THEME_COOKIE_NAME)?.value;
-    const classes = await loadClasses()
 
     return (
         <main className="flex-grow flex flex-col xl:flex-row-reverse h-dvh gap-y-3">

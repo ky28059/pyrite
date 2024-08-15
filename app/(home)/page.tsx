@@ -1,8 +1,7 @@
 import HomeContent from '@/app/(home)/HomeContent';
-import { loadClasses } from '@/util/unitime';
+import { classes } from '@/util/unitime';
 
 
-export default async function Home() {
-    const classes = await loadClasses();
+export default function Home() {
     return <HomeContent classes={classes} />;
 }
