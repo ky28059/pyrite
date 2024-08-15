@@ -32,7 +32,7 @@ export default function ScheduleClass(props: SectionPeriod) {
                         ))}
                     </div>
 
-                    <div className="flex gap-1 flex-none text-xs font-semibold">
+                    <div className="flex gap-1 flex-none text-xs font-semibold h-max">
                         <p className="hidden sm:block rounded-full bg-black/5 dark:bg-black/15 px-2 py-1 flex-none">
                             {section.type}
                         </p>

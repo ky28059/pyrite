@@ -23,7 +23,7 @@ export default function YourClasses() {
             </h2>
 
             {data.courseIds.length === 0 ? (
-                <p className="text-secondary dark:text-secondary-dark font-light italic text-sm">
+                <p className="text-secondary dark:text-secondary-dark font-light italic text-sm text-pretty">
                     No classes to show. Add classes by selecting them on the left.
                 </p>
             ) : (

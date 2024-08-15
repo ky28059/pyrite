@@ -37,7 +37,7 @@ export default function DayAlert(props: DayAlertProps) {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
         >
-            <div className="absolute z-50 left-3 right-3 top-10 sm:top-14 flex items-center max-w-6xl mx-auto shadow-lg border-none bg-content-secondary dark:bg-content-secondary-dark rounded px-5 py-3 pr-16">
+            <div className="absolute z-50 left-3 right-3 top-10 sm:top-14 flex gap-2 items-center max-w-6xl mx-auto shadow-lg border-none bg-content-secondary dark:bg-content-secondary-dark rounded px-5 py-3 pr-16">
                 {makeDateString()}
 
                 <button className="ml-auto" onClick={jumpToPres}>

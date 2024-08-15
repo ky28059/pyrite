@@ -1,12 +1,6 @@
-import HomeClock from '@/app/(home)/HomeClock';
-import Schedule from '@/app/(home)/Schedule';
+import HomeContent from '@/app/(home)/HomeContent';
 
 
 export default async function Home() {
-    return (
-        <>
-            <HomeClock />
-            <Schedule />
-        </>
-    )
+    return <HomeContent />;
 }

@@ -4,6 +4,7 @@ import { useContext, useEffect, useState } from 'react';
 import { DateTime } from 'luxon';
 
 // Components
+import HomeClock from '@/app/(home)/HomeClock';
 import HomeDatePicker from '@/app/(home)/HomeDatePicker';
 import Calendar from '@/app/(home)/Calendar';
 import NextClassProgressBar from '@/app/(home)/NextClassProgressBar';
@@ -19,7 +20,7 @@ import type { EventsResponse } from '@/util/boilerlink';
 import { ZONE } from '@/util/schedule';
 
 
-export default function Schedule() {
+export default function HomeContent() {
     const [viewDate, setViewDate] = useState(DateTime.now().setZone(ZONE).startOf('day'));
 
     // Current time check to see if viewDate is not the current date
@@ -49,13 +50,14 @@ export default function Schedule() {
                 />
             )}
 
-            <HomeDatePicker
-                viewDate={viewDate}
-                setViewDate={setViewDate}
-            />
-
             <div className="flex flex-col xl:flex-row gap-12">
                 <div className="flex-grow">
+                    <HomeClock />
+                    <HomeDatePicker
+                        viewDate={viewDate}
+                        setViewDate={setViewDate}
+                    />
+
                     <NextClassProgressBar />
                     <Calendar
                         viewDate={viewDate}
@@ -63,7 +65,7 @@ export default function Schedule() {
                     />
                 </div>
 
-                <div className="flex flex-col gap-2 flex-none xl:w-80 xl:max-h-[1448px] xl:-mr-2">
+                <div className="h-max xl:sticky xl:top-12 flex flex-col gap-2 flex-none xl:w-80 xl:max-h-[calc(100vh_-_5rem)] xl:-mr-2">
                     <h3 className="flex gap-1.5 items-center font-semibold text-lg mb-1">
                         BoilerLink Events
                         <span className="font-normal text-base">({viewDate.toLocaleString()})</span>
