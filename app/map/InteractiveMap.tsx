@@ -3,23 +3,25 @@
 import { useContext, useEffect, useState } from 'react';
 import { GoogleMap, useLoadScript } from '@react-google-maps/api';
 
+// Components
+import InteractiveMarker from '@/app/map/InteractiveMarker';
+
 // Contexts
 import UserDataContext from '@/contexts/UserDataContext';
-import ClassesContext from '@/contexts/ClassesContext';
 
 // Utils
 import type { Building } from '@/util/buildings';
-import InteractiveMarker from '@/app/map/InteractiveMarker';
+import type { Section } from '@/util/unitime';
 import { mapStyle, mapStyleDark } from '@/app/map/mapStyle';
 
 
 type InteractiveMapProps = {
     buildings: Building[],
     theme?: string,
+    classes: { [id: string]: Section }
 }
 export default function InteractiveMap(props: InteractiveMapProps) {
     const { data } = useContext(UserDataContext);
-    const classes = useContext(ClassesContext);
 
     // Use initial theme from cookies to avoid FOUC, but update theme on preferences change as well.
     const [theme, setTheme] = useState(props.theme);
@@ -32,7 +34,7 @@ export default function InteractiveMap(props: InteractiveMapProps) {
     // User classes, grouped by building code. Assumes that the first word in the course `location` field is the
     // building abbreviation (e.g. WALC).
     const groupedUserClasses = Object.groupBy(
-        data.courseIds.map((i) => classes[i]),
+        data.courseIds.map((i) => props.classes[i]),
         (c) => c.location.split(' ')[0]
     );
 

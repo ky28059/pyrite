@@ -12,22 +12,22 @@ import ScheduleTest from '@/app/(home)/ScheduleTest';
 
 // Contexts
 import UserDataContext from '@/contexts/UserDataContext';
-import ClassesContext from '@/contexts/ClassesContext';
 import EventsContext from '@/contexts/EventsContext';
 import CurrentTimeContext from '@/contexts/CurrentTimeContext';
 
 // Utils
 import type { MealsResponse } from '@/util/menus';
+import type { Section } from '@/util/unitime';
 import { getPeriodsForDay, HOUR_END, HOUR_START, ZONE } from '@/util/schedule';
 
 
 type CalendarProps = {
     viewDate: DateTime,
-    daysRelToCur: number
+    daysRelToCur: number,
+    classes: { [p: string]: Section }
 };
 export default function Calendar(props: CalendarProps) {
     const { data } = useContext(UserDataContext);
-    const classes = useContext(ClassesContext);
     const { events } = useContext(EventsContext);
 
     const time = useContext(CurrentTimeContext);
@@ -41,7 +41,7 @@ export default function Calendar(props: CalendarProps) {
         });
     }, [props.viewDate]);
 
-    const periods = getPeriodsForDay(props.viewDate, data, classes, events);
+    const periods = getPeriodsForDay(props.viewDate, data, props.classes, events);
 
     return (
         <div
