@@ -45,7 +45,7 @@ export default function Calendar(props: CalendarProps) {
 
     return (
         <div
-            className="-mx-2 relative grid grid-cols-[4rem_1fr_0.5rem] sm:grid-cols-[5rem_1fr_2rem]"
+            className="relative grid grid-cols-[4.5rem_1fr_0.5rem] sm:grid-cols-[7rem_1fr_2rem]"
             style={{ gridTemplateRows: `repeat(${(HOUR_END - HOUR_START) * 12 + 1}, 0.5rem)` }}
         >
             <ScheduleMeal start="7:00a" end="10:00a" meal="Breakfast" meals={meals} viewDate={props.viewDate} />
@@ -73,9 +73,12 @@ export default function Calendar(props: CalendarProps) {
 
             {/* Horizontal rules (one every two grid rows, or 10 minutes) */}
             {/* TODO: incredibly hacky */}
-            <div className="absolute inset-0 flex flex-col ml-14 sm:ml-[4.5rem] pointer-events-none">
+            <div className="absolute inset-0 flex flex-col ml-14 sm:ml-[6rem] pointer-events-none">
                 {Array((HOUR_END - HOUR_START) * 6 + 1).fill(0).map((_, i) => (
-                    <hr className="h-4 flex-none border-t border-tertiary dark:border-tertiary-dark" key={i} />
+                    <hr
+                        className={'h-4 flex-none border-t border-tertiary dark:border-tertiary-dark' + (i % 6 !== 0 ? ' opacity-65' : '')}
+                        key={i}
+                    />
                 ))}
 
                 {props.daysRelToCur === 0 && (

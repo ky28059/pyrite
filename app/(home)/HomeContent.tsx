@@ -50,13 +50,15 @@ export default function HomeContent() {
                 />
             )}
 
-            <div className="flex flex-col xl:flex-row gap-12">
+            <div className="flex flex-col xl:flex-row gap-x-8 gap-y-12 xl:pr-8">
                 <div className="flex-grow">
-                    <HomeClock />
-                    <HomeDatePicker
-                        viewDate={viewDate}
-                        setViewDate={setViewDate}
-                    />
+                    <div className="xl:pl-8">
+                        <HomeClock />
+                        <HomeDatePicker
+                            viewDate={viewDate}
+                            setViewDate={setViewDate}
+                        />
+                    </div>
 
                     <NextClassProgressBar />
                     <Calendar
@@ -65,7 +67,7 @@ export default function HomeContent() {
                     />
                 </div>
 
-                <div className="h-max xl:sticky xl:top-12 flex flex-col gap-2 flex-none xl:w-80 xl:max-h-[calc(100vh_-_5rem)] xl:-mr-2">
+                <div className="container xl:p-0 h-max xl:sticky xl:top-12 flex flex-col gap-2 flex-none xl:w-80 xl:max-h-[calc(100vh_-_5rem)]">
                     <h3 className="flex gap-1.5 items-center font-semibold text-lg mb-1">
                         BoilerLink Events
                         <span className="font-normal text-base">({viewDate.toLocaleString()})</span>

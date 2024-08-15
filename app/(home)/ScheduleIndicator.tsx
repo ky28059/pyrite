@@ -37,7 +37,7 @@ export default function ScheduleIndicator() {
             style={{ top: `${progress}%` }}
             className="absolute inset-x-0 col-start-2 col-end-4 border-t border-red-500"
         >
-            <p className="absolute right-full inset-y-0 my-auto h-max w-max text-xs text-red-500 text-right pr-3">
+            <p className="absolute right-full inset-y-0 my-auto h-max w-max text-xs text-red-500 text-right pr-2">
                 {timeEst.toFormat(format)}
                 {diffZone && (
                     <><br /> (EST)</>

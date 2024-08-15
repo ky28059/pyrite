@@ -5,5 +5,10 @@ const withSerwist = require("@serwist/next").default({
 });
 
 module.exports = withSerwist({
-    reactStrictMode: true
+    reactStrictMode: true,
+    logging: {
+        fetches: {
+            fullUrl: true
+        }
+    }
 });
