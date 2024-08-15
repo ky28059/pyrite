@@ -29,7 +29,7 @@ export default function Organizations(props: OrganizationsProps) {
     }, [query, data.pinnedOrgIds]);
 
     return (
-        <div>
+        <>
             <section className="mb-8">
                 <input
                     type="text"
@@ -54,6 +54,6 @@ export default function Organizations(props: OrganizationsProps) {
                     <Organization {...o} key={o.Id} />
                 ))}
             </div>
-        </div>
+        </>
     )
 }

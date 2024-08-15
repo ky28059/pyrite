@@ -42,7 +42,7 @@ export default function HomeContent() {
     }, [viewDate]);
 
     return (
-        <div>
+        <main className="relative pt-16 pb-24 sm:pt-24 flex-grow">
             {relDays !== 0 && (
                 <DayAlert
                     daysRelToCur={relDays}
@@ -94,6 +94,6 @@ export default function HomeContent() {
                     </div>
                 </div>
             </div>
-        </div>
+        </main>
     )
 }

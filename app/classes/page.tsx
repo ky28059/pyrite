@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export default async function ClassesPage() {
     return (
-        <>
+        <main className="relative container pt-16 pb-24 sm:pt-24">
             <h1 className="text-4xl font-bold mb-3">
                 Classes
             </h1>
@@ -21,6 +21,6 @@ export default async function ClassesPage() {
                 <Classes />
                 <YourClasses />
             </div>
-        </>
+        </main>
     )
 }

@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function About() {
     return (
-        <>
+        <main className="relative container pt-16 pb-24 sm:pt-24">
             <h1 className="text-4xl font-bold mb-6">
                 About
             </h1>
@@ -35,6 +35,6 @@ export default function About() {
                 Thanks also to <a href="https://github.com/elnardu" target="_blank" rel="noopener noreferrer" className="text-theme dark:text-theme-dark hover:underline">elnardu</a>{' '}
                 for showing me the UniTime exports API.
             </p>
-        </>
+        </main>
     )
 }

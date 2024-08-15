@@ -67,9 +67,8 @@ export default async function Layout(props: { children: ReactNode }) {
                                 <EventsProvider>
                                     <div className="flex">
                                         <Sidebar />
-                                        <main className="relative container pt-16 pb-24 sm:pt-24">
-                                            {props.children}
-                                        </main>
+
+                                        {props.children}
 
                                         <FaviconHandler />
                                         <InstallModal />
