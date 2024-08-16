@@ -1,3 +1,3 @@
-# purdue-app
+# pyrite
 
-Catchier name forthcoming.
+A student-made schedule app for Purdue University.

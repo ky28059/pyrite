@@ -51,7 +51,7 @@ export default function Organization(props: BoilerLinkOrganizationData) {
             <CenteredModal
                 isOpen={open}
                 setIsOpen={setOpen}
-                className="relative flex flex-col bg-content rounded-md w-[48rem] max-h-[90%] mx-2 py-6 px-8 sm:px-10 shadow-xl"
+                className="relative flex flex-col bg-content rounded-md w-[48rem] min-w-0 max-h-[90%] mx-2 py-6 px-8 sm:px-10 shadow-xl"
             >
                 <CloseButton
                     className="absolute right-6 top-5"
@@ -84,7 +84,7 @@ export default function Organization(props: BoilerLinkOrganizationData) {
                 {/*</p>*/}
 
                 <div
-                    className="text-sm space-y-2 mt-4 break-all overflow-y-auto scrollbar:w-1 scrollbar-thumb:bg-tertiary"
+                    className="text-sm space-y-2 mt-4 break-words overflow-y-auto scrollbar:w-1 scrollbar-thumb:bg-tertiary"
                     dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(props.Description || props.Summary || '') }}
                 />
 
