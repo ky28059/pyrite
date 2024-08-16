@@ -40,7 +40,7 @@ export default function Sidebar() {
             </SidebarItem>
 
             <Link
-                className="mt-auto w-full px-2 py-1 sm:-ml-1 sm:mr-2 rounded flex gap-2 items-center font-semibold text-secondary hover:text-primary hover:bg-theme/30 transition duration-200"
+                className="mt-auto sm:w-full px-2 py-1 sm:-ml-1 sm:mr-2 rounded flex gap-2 items-center font-semibold text-secondary hover:text-primary hover:bg-theme/30 transition duration-200"
                 href="/profile"
             >
                 {!mounted || status === 'loading' ? (
