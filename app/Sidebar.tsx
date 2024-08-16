@@ -19,7 +19,7 @@ export default function Sidebar() {
     const mounted = useIsMounted();
 
     return (
-        <aside className="fixed bottom-0 w-screen sm:w-[12rem] flex-none px-4 sm:pl-3 sm:pr-0 py-2 sm:pt-24 sm:pb-12 border-r border-tertiary flex gap-4 sm:gap-1 justify-center sm:justify-start sm:flex-col sm:sticky sm:top-0 sm:h-screen z-30 bg-content-secondary">
+        <aside className="fixed bottom-0 w-screen sm:w-[12rem] flex-none px-4 sm:pl-3 sm:pr-0 pt-2 pb-4 sm:pt-24 sm:pb-12 border-r border-tertiary flex gap-4 sm:gap-1 justify-center sm:justify-start sm:flex-col sm:sticky sm:top-0 sm:h-screen z-30 bg-content-secondary">
             <SidebarItem href="/" icon={FaCalendar} desktopOnly>
                 Home
             </SidebarItem>
@@ -40,7 +40,7 @@ export default function Sidebar() {
             </SidebarItem>
 
             <Link
-                className="mt-auto sm:w-full px-2 py-1 sm:-ml-1 sm:mr-2 rounded flex gap-2 items-center font-semibold text-secondary hover:text-primary hover:bg-theme/30 transition duration-200"
+                className="mt-auto sm:w-full px-[5px] sm:px-2 py-1 sm:-ml-1 sm:mr-2 rounded flex gap-2 items-center font-semibold text-secondary hover:text-primary hover:bg-theme/30 transition duration-200"
                 href="/profile"
             >
                 {!mounted || status === 'loading' ? (
