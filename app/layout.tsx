@@ -14,6 +14,7 @@ import InstallModal from '@/components/InstallModal';
 
 // Utils
 import { THEME_COOKIE_NAME } from '@/util/config';
+import { classes } from '@/util/unitime';
 
 import './globals.css';
 
@@ -68,7 +69,7 @@ export default async function Layout(props: { children: ReactNode }) {
 
                                 {props.children}
 
-                                {/*<FaviconHandler />*/}
+                                <FaviconHandler classes={classes} />
                                 <InstallModal />
                             </EventsProvider>
                         </CurrentTimeProvider>
