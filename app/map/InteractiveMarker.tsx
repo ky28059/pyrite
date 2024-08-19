@@ -21,7 +21,7 @@ export default function InteractiveMarker(props: InteractiveMarkerProps) {
                 <OverlayView
                     position={{ lat: props.building.lat, lng: props.building.lng }}
                     mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
-                    getPixelPositionOffset={getPixelPositionOffset}
+                    // getPixelPositionOffset={getPixelPositionOffset}
                 >
                     <div>
                         <div className="popup-bubble">
@@ -42,8 +42,3 @@ export default function InteractiveMarker(props: InteractiveMarkerProps) {
         </Marker>
     )
 }
-
-const getPixelPositionOffset = (width: number, height: number) => ({
-    x: -(width / 2),
-    y: -(height / 2)
-});

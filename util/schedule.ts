@@ -5,7 +5,7 @@ import type { Test, Section, SectionType } from '@/util/unitime';
 import type { BoilerLinkEventData } from '@/util/boilerlink';
 
 
-export const ZONE = 'America/Indiana/Indianapolis';
+export const ZONE = 'America/Indianapolis'; // TODO: browser standards?
 
 // TODO: generate these?
 export const YEAR_START = DateTime.fromISO('2024-08-19', { zone: ZONE });
