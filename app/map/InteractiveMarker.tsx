@@ -1,4 +1,4 @@
-import { InfoWindow, Marker } from '@react-google-maps/api';
+import { Marker, OverlayView } from '@react-google-maps/api';
 import type { Section } from '@/util/unitime';
 import type { Building } from '@/util/buildings';
 
@@ -18,17 +18,32 @@ export default function InteractiveMarker(props: InteractiveMarkerProps) {
             onClick={() => props.setOpenBuilding(props.building.abbr)}
         >
             {props.openBuilding === props.building.abbr && (
-                <InfoWindow
+                <OverlayView
                     position={{ lat: props.building.lat, lng: props.building.lng }}
-                    onCloseClick={() => props.setOpenBuilding('')}
+                    mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
+                    getPixelPositionOffset={getPixelPositionOffset}
                 >
-                    <div className="flex gap-2 overflow-x-auto overflow-y-clip w-max">
-                        {props.classes.map((c) => (
-                            <p>{c.names.join('')}</p>
-                        ))}
+                    <div>
+                        <div className="popup-bubble">
+                            <div className="w-max max-w-md bg-content px-5 py-4 rounded-lg shadow-xl">
+                                <h1 className="text-lg font-semibold mb-1">
+                                    {props.building.name} ({props.building.abbr})
+                                </h1>
+
+                                {props.classes.map((c) => (
+                                    <p>{c.names.join(' / ')}</p>
+                                ))}
+                            </div>
+                        </div>
+                        <div className="popup-bubble-anchor" />
                     </div>
-                </InfoWindow>
+                </OverlayView>
             )}
         </Marker>
     )
 }
+
+const getPixelPositionOffset = (width: number, height: number) => ({
+    x: -(width / 2),
+    y: -(height / 2)
+});
