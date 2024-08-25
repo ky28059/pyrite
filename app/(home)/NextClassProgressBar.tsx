@@ -29,7 +29,7 @@ export default function NextClassProgressBar(props: NextClassProgressBarProps) {
         const startUnit = `${-toStart < 1 ? 'second' : 'minute'}${startQuantity !== 1 ? 's' : ''}`;
 
         return (
-            <div className="mb-8">
+            <div className="mb-8 px-5 sm:px-14 xl:pr-0">
                 <p className="mb-1">
                     <strong>{next.name}</strong>{' '}
                     ending in {endQuantity} {endUnit}, started {startQuantity} {startUnit} ago.
