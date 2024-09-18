@@ -1,6 +1,6 @@
 "use client"
 
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useMemo, useState } from 'react';
 import { GoogleMap, useLoadScript } from '@react-google-maps/api';
 
 // Components
@@ -33,10 +33,18 @@ export default function InteractiveMap(props: InteractiveMapProps) {
 
     // User classes, grouped by building code. Assumes that the first word in the course `location` field is the
     // building abbreviation (e.g. WALC).
-    const groupedUserClasses = Object.groupBy(
-        data.courseIds.map((i) => props.classes[i]),
-        (c) => c.location.split(' ')[0]
-    );
+    const groupedUserClasses = useMemo(() => {
+        const ret: { [key: string]: Section[] } = {};
+        const classes = data.courseIds.map((i) => props.classes[i]);
+
+        for (const c of classes) {
+            const key = c.location.split(' ')[0];
+            if (!ret[key]) ret[key] = [];
+            ret[key].push(c);
+        }
+
+        return ret;
+    }, []);
 
     const { isLoaded } = useLoadScript({
         googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY!,
