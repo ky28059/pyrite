@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import { cookies } from 'next/headers';
 import Link from 'next/link';
 
 // Components
@@ -7,7 +6,6 @@ import InteractiveMap from '@/app/map/InteractiveMap';
 
 // Utils
 import buildings from '@/util/buildings';
-import { THEME_COOKIE_NAME } from '@/util/config';
 import { classes } from '@/util/unitime';
 
 
@@ -18,8 +16,8 @@ export const metadata: Metadata = {
     }
 }
 
-export default async function Map() {
-    const theme = cookies().get(THEME_COOKIE_NAME)?.value;
+export default function Map() {
+    // const theme = cookies().get(THEME_COOKIE_NAME)?.value;
 
     return (
         <main className="flex-grow flex flex-col xl:flex-row-reverse h-dvh gap-y-3">
@@ -35,7 +33,7 @@ export default async function Map() {
 
             <InteractiveMap
                 buildings={buildings}
-                theme={theme}
+                // theme={theme}
                 classes={classes}
             />
         </main>
