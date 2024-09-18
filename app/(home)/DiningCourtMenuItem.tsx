@@ -25,23 +25,26 @@ export default function DiningCourtMenuItem(props: MenuItem) {
 
     return (
         <button
-            className="group w-full hover:bg-content-secondary px-2 py-0.5 text-secondary flex flex-wrap items-center"
+            className="relative group w-full hover:bg-content-secondary pl-2 pr-6 py-0.5 text-secondary text-left"
             onClick={toggleFavorite}
         >
-            <span className="mr-1.5">{props.Name}</span>
-            {props.Allergens?.filter((a) => a.Value).map((a) => (
-                <img
-                    src={allergenIconUrl(a)}
-                    key={props.ID + a.Name}
-                    className="size-4"
-                    alt={a.Name}
-                />
-            ))}
+            <span>
+                {props.Name}{' '}
+
+                {props.Allergens?.filter((a) => a.Value).map((a) => (
+                    <img
+                        src={allergenIconUrl(a)}
+                        key={props.ID + a.Name}
+                        className="inline size-4"
+                        alt={a.Name}
+                    />
+                ))}
+            </span>
 
             {active ? (
-                <FaStar className="text-theme ml-auto" />
+                <FaStar className="absolute right-2 inset-y-0 my-auto text-theme ml-auto flex-none" />
             ) : (
-                <FaRegStar className="hidden group-hover:block text-secondary ml-auto" />
+                <FaRegStar className="absolute right-2 inset-y-0 my-auto hidden group-hover:block text-secondary ml-auto flex-none" />
             )}
         </button>
     )

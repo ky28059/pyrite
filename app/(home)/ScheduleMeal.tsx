@@ -1,6 +1,6 @@
 'use client'
 
-import { useContext, useMemo, useState } from 'react';
+import { Fragment, useContext, useMemo, useState } from 'react';
 import { DateTime } from 'luxon';
 import UserDataContext from '@/contexts/UserDataContext';
 
@@ -85,13 +85,18 @@ export default function ScheduleMeal(props: ScheduleBackgroundBlockProps) {
 
                     {favoriteCounts && favoriteCounts.length > 0 ? (
                         <section className="flex flex-col gap-0.5 mt-1">
-                            {favoriteCounts?.map(({ name, favorites }) => (
-                                <p className="text-xs text-secondary flex gap-1">
-                                    <strong>{name}</strong> is serving
-                                    {favorites?.map(i => (
-                                        <span className="text-theme">
-                                            {i.Name}
-                                        </span>
+                            {favoriteCounts.map(({ name, favorites }) => (
+                                <p className="text-xs text-secondary">
+                                    <strong>{name}</strong> is serving{' '}
+                                    <span className="text-theme">
+                                        {favorites![0].Name}
+                                    </span>
+                                    {favorites?.slice(1).map((i) => (
+                                        <Fragment key={i.ID}>
+                                            , <span className="text-theme">
+                                                {i.Name}
+                                            </span>
+                                        </Fragment>
                                     ))}
                                 </p>
                             ))}
