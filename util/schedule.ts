@@ -14,7 +14,7 @@ export const YEAR_END = DateTime.fromISO('2025-05-10', { zone: ZONE });
 export const FALL_FINALS = Interval.fromISO('2024-12-09/2024-12-14', { zone: ZONE })
 export const SPRING_FINALS = Interval.fromISO('2025-05-05/2025-05-10', { zone: ZONE })
 
-export const FALL_BREAK = Interval.fromISO('2024-10-07/2024-10-08', { zone: ZONE })
+export const FALL_BREAK = Interval.fromISO('2024-10-07/2024-10-09', { zone: ZONE })
 export const THANKSGIVING_BREAK = Interval.fromISO('2024-11-27/2024-11-30', { zone: ZONE });
 export const WINTER_BREAK = Interval.fromISO('2024-12-14/2025-01-13', { zone: ZONE });
 export const SPRING_BREAK = Interval.fromISO('2025-03-17/2025-03-22', { zone: ZONE });
@@ -62,9 +62,11 @@ export function getPeriodsForDay(
     events: Events
 ) {
     // Classes, midterms, and finals for the given day
-    const classPeriods = data.courseIds.map((id) => classes[id]).map((c) => {
+    const classPeriods = data.courseIds.map((id) => classes[id]).flatMap((c) => {
+        const res = [];
+
         const midterm = c.midterms.flatMap(m => m).find((m) => m.date === date.toFormat('MM/dd/yyyy'));
-        if (midterm) return {
+        if (midterm) res.push({
             type: 'Midterm',
             name: c.names[0] + ' (Midterm)',
             location: midterm.location,
@@ -72,10 +74,10 @@ export function getPeriodsForDay(
             e: parseUnitimeMinutes(midterm.end),
             test: midterm,
             section: c
-        } satisfies TestPeriod;
+        } satisfies TestPeriod);
 
         const final = c.finals.find((m) => m.date === date.toFormat('MM/dd/yyyy'));
-        if (final) return {
+        if (final) res.push({
             type: 'Final',
             name: c.names[0] + ' (Final)',
             location: final.location,
@@ -83,9 +85,9 @@ export function getPeriodsForDay(
             e: parseUnitimeMinutes(final.end),
             test: final,
             section: c
-        } satisfies TestPeriod;
+        } satisfies TestPeriod);
 
-        // Otherwise, if no test is occurring, filter out classes that don't regularly occur on this day of week
+        // Filter out classes that don't regularly occur on this day of week
         // (or filter out all regular classes if it's a break or finals week).
         if (
             !occursOnDay(c, date)
@@ -97,17 +99,19 @@ export function getPeriodsForDay(
             || SPRING_BREAK.contains(date)
             || date < YEAR_START
             || date > YEAR_END
-        ) return null;
+        ) return res;
 
-        return {
+        res.push({
             type: c.type,
             name: c.names[0], // TODO?
             location: c.location,
             s: parseUnitimeMinutes(c.start),
             e: parseUnitimeMinutes(c.end),
             section: c
-        } satisfies SectionPeriod;
-    }).filter((p): p is SectionPeriod | TestPeriod => !!p);
+        } satisfies SectionPeriod);
+
+        return res;
+    });
 
     // Events for the given day
     const blEventPeriods = events[date.toISODate()!]?.filter((e) => data.eventIds.includes(e.id)).map<EventPeriod>((e) => {

@@ -63,7 +63,7 @@ export default function ClassModal(props: ClassModalProps) {
                     </h3>
                     {props.midterms.map((g, i) => (
                         g.map((m) => (
-                            <div className="bg-content-secondary rounded px-3 py-1.5">
+                            <div className="bg-content-secondary rounded px-3 py-1.5" key={m.date + m.location + m.start}>
                                 <h5 className="text-sm">
                                     Midterm {i + 1}
                                 </h5>
@@ -82,7 +82,7 @@ export default function ClassModal(props: ClassModalProps) {
                         Final exam ({props.finals.length})
                     </h3>
                     {props.finals.map((m) => (
-                        <div className="bg-content-secondary rounded px-3 py-1.5">
+                        <div className="bg-content-secondary rounded px-3 py-1.5" key={m.date + m.location + m.start}>
                             <h5 className="text-sm">
                                 Final
                             </h5>

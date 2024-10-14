@@ -97,9 +97,9 @@ export default function Calendar(props: CalendarProps) {
                         return <ScheduleBoilerLinkEvent {...p} key={p.event.id} />
                     case 'Midterm':
                     case 'Final':
-                        return <ScheduleTest {...p} key={p.section.sections[0]} />
+                        return <ScheduleTest {...p} key={p.section.sections[0] + p.type} />
                     default:
-                        return <ScheduleClass {...p} key={p.section.sections[0]} />
+                        return <ScheduleClass {...p} key={p.section.sections[0] + p.type} />
                 }
             })}
         </div>
