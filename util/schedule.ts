@@ -148,7 +148,6 @@ export function getPeriodsForDay(
 export function parseUnitimeMinutes(time: string) {
     if (time === 'noon') return 720;
 
-    // Parse AM/PM time string, subtracting 84 because the grid starts at 7:00 AM and adding one for indexing.
     let [hour, minute] = time.slice(0, time.length - 1).split(':').map(s => Number(s));
     if (time.endsWith('p') && hour != 12) hour += 12;
 
