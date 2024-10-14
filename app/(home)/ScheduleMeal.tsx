@@ -86,7 +86,7 @@ export default function ScheduleMeal(props: ScheduleBackgroundBlockProps) {
                     {favoriteCounts && favoriteCounts.length > 0 ? (
                         <section className="flex flex-col gap-0.5 mt-1">
                             {favoriteCounts.map(({ name, favorites }) => (
-                                <p className="text-xs text-secondary">
+                                <p className="text-xs text-secondary" key={name}>
                                     <strong>{name}</strong> is serving{' '}
                                     <span className="text-theme">
                                         {favorites![0].Name}

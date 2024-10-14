@@ -75,6 +75,7 @@ export default function InteractiveMap(props: InteractiveMapProps) {
                     classes={classes!}
                     openBuilding={openBuilding}
                     setOpenBuilding={setOpenBuilding}
+                    key={code}
                 />
             ))}
         </GoogleMap>
