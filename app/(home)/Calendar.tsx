@@ -16,8 +16,8 @@ import EventsContext from '@/contexts/EventsContext';
 import CurrentTimeContext from '@/contexts/CurrentTimeContext';
 
 // Utils
-import type { MealsResponse } from '@/util/menus';
 import type { Section } from '@/util/unitime';
+import { getMenu, MealsResponse } from '@/util/menus';
 import { getPeriodsForDay, HOUR_END, HOUR_START, ZONE } from '@/util/schedule';
 
 
@@ -35,10 +35,13 @@ export default function Calendar(props: CalendarProps) {
 
     const [meals, setMeals] = useState<MealsResponse[] | null>(null);
     useEffect(() => {
-        fetch(`/api/menu/${props.viewDate.toISODate()}`).then(res => res.json()).then(res => {
-            console.log(res);
-            setMeals(res);
-        });
+        Promise.all([
+            getMenu(props.viewDate.toISODate()!, 'Wiley'),
+            getMenu(props.viewDate.toISODate()!, 'Ford'),
+            getMenu(props.viewDate.toISODate()!, 'Hillenbrand'),
+            getMenu(props.viewDate.toISODate()!, 'Earhart'),
+            getMenu(props.viewDate.toISODate()!, 'Windsor'),
+        ]).then(res => setMeals(res));
     }, [props.viewDate]);
 
     const periods = getPeriodsForDay(props.viewDate, data, props.classes, events);

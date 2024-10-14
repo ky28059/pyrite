@@ -16,8 +16,8 @@ import CurrentTimeContext from '@/contexts/CurrentTimeContext';
 import EventsContext from '@/contexts/EventsContext';
 
 // Utils
-import type { EventsResponse } from '@/util/boilerlink';
 import type { Section } from '@/util/unitime';
+import { fetchEvents } from '@/util/boilerlink';
 import { ZONE } from '@/util/schedule';
 
 
@@ -39,9 +39,8 @@ export default function HomeContent(props: HomeContentProps) {
     const events = eventsMap[viewDate.toISODate()!];
 
     useEffect(() => {
-        fetch(`/api/events/${viewDate.toISO()}`)
-            .then((res) => res.json())
-            .then((res: EventsResponse) => setEventsForDay(viewDate.toISODate()!, res.value))
+        fetchEvents(viewDate.toISO()!)
+            .then((res) => setEventsForDay(viewDate.toISODate()!, res.value))
             .catch((e) => { /* TODO */ });
     }, [viewDate]);
 

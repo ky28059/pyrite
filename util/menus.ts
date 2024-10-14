@@ -1,3 +1,5 @@
+'use server'
+
 export type MealType = 'Breakfast' | 'Lunch' | 'Late Lunch' | 'Dinner';
 export type DiningCourt = 'Wiley' | 'Ford' | 'Hillenbrand' | 'Earhart' | 'Windsor';
 

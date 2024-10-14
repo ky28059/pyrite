@@ -1,3 +1,9 @@
+'use server'
+
+import { DateTime } from 'luxon';
+import { ZONE } from '@/util/schedule';
+
+
 export type EventsResponse = {
     '@odata.count': number,
     '@search.coverage': null,
@@ -69,4 +75,14 @@ export type BoilerLinkOrganizationData = {
 export async function fetchOrganizations() {
     const data = await (await fetch('https://boilerlink.purdue.edu/api/discovery/search/organizations?orderBy%5B0%5D=UpperName%20asc&filter=&query=&skip=0&top=2000')).json()
     return data as OrganizationsResponse;
+}
+
+export async function fetchEvents(date: string) {
+    // Query only for events that start *on* the requested day.
+    // Set zone when parsing because BoilerLink is incapable of handling timezones other than Indianapolis.
+    const rangeStart = DateTime.fromISO(date, { zone: ZONE });
+    const rangeEnd = rangeStart.plus({ days: 1 });
+
+    const res = await (await fetch(`https://boilerlink.purdue.edu/api/discovery/event/search?startsAfter=${rangeStart.toISO()}&startsBefore=${rangeEnd.toISO()}&orderByField=startsOn&orderByDirection=ascending&status=Approved&take=100&query=`)).json()
+    return res as EventsResponse;
 }
