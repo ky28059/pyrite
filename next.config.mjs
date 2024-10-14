@@ -1,11 +1,13 @@
-const withSerwist = require("@serwist/next").default({
+import withSerwistInit from "@serwist/next";
+
+const withSerwist = withSerwistInit({
     swSrc: "app/sw.ts",
     swDest: "public/sw.js",
     disable: process.env.NODE_ENV !== 'production',
     reloadOnOnline: true,
 });
 
-module.exports = withSerwist({
+export default withSerwist({
     reactStrictMode: true,
     logging: {
         fetches: {
