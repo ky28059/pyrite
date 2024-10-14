@@ -1,12 +1,22 @@
 'use client'
 
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+
+// Components
 import ClassModal from '@/app/classes/ClassModal';
+
+// Utils
 import type { Section } from '@/util/unitime';
+import UserDataContext from '@/contexts/UserDataContext';
 
 
 export default function YourClass(props: Section) {
     const [open, setOpen] = useState(false);
+
+    const { data, setData } = useContext(UserDataContext);
+    function removeClass() {
+        setData({ ...data, courseIds: data.courseIds.filter(s => s !== props.sections[0]) });
+    }
 
     return (
         <>
@@ -37,6 +47,7 @@ export default function YourClass(props: Section) {
                 {...props}
                 open={open}
                 setOpen={setOpen}
+                removeClass={removeClass}
             />
         </>
     )

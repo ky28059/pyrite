@@ -2,6 +2,7 @@
 
 import CenteredModal from '@/components/CenteredModal';
 import CloseButton from '@/components/CloseButton';
+import { DangerOutlineButton } from '@/components/OutlineButton';
 
 // Icons
 import { BsPeopleFill } from 'react-icons/bs';
@@ -13,7 +14,9 @@ import type { Section } from '@/util/unitime';
 
 type ClassModalProps = Section & {
     open: boolean,
-    setOpen: (o: boolean) => void
+    setOpen: (o: boolean) => void,
+
+    removeClass?: () => void
 }
 export default function ClassModal(props: ClassModalProps) {
     const { open, setOpen } = props;
@@ -88,6 +91,14 @@ export default function ClassModal(props: ClassModalProps) {
                             </p>
                         </div>
                     ))}
+                </section>
+            )}
+
+            {props.removeClass && (
+                <section className="mt-4">
+                    <DangerOutlineButton onClick={props.removeClass}>
+                        Remove class
+                    </DangerOutlineButton>
                 </section>
             )}
         </CenteredModal>
