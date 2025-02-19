@@ -62,7 +62,7 @@ export function getPeriodsForDay(
     events: Events
 ) {
     // Classes, midterms, and finals for the given day
-    const classPeriods = data.courseIds.map((id) => classes[id]).flatMap((c) => {
+    const classPeriods = data.courseIds.map((id) => classes[id]).filter(x => x).flatMap((c) => {
         const res = [];
 
         const midterm = c.midterms.flatMap(m => m).find((m) => m.date === date.toFormat('MM/dd/yyyy'));

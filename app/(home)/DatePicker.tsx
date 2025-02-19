@@ -110,12 +110,15 @@ function Calendar(props: CalendarProps) {
                 </h4>
                 <div className="grid grid-cols-7">
                     {days.map((day, i) => {
-                        const noSchool = getPeriodsForDay(day, data, props.classes, events).length === 0;
+                        const periods = getPeriodsForDay(day, data, props.classes, events);
+
+                        const noSchool = periods.length === 0;
+                        const testDay = periods.some((s) => s.type === 'Midterm' || s.type === 'Final');
 
                         const active = currTime.hasSame(day, 'day');
                         return (
                             <button
-                                className={'flex items-center justify-center cursor-pointer py-0.5' + (noSchool && !active ? ' text-secondary' : '') + (active ? ' bg-theme text-white rounded-full' : '')}
+                                className={'flex items-center justify-center cursor-pointer py-0.5' + (active ? ' bg-theme text-white rounded-full' : noSchool ? ' text-secondary' : testDay ? ' text-theme' : '')}
                                 onClick={() => setDate(day)}
                                 key={day.toISO()}
                                 style={i === 0 ? { gridColumnStart: (day.weekday % 7) + 1 } : undefined}
