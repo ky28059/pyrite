@@ -41,9 +41,8 @@ export type Allergen = {
 }
 
 export async function getMenu(date: string, location: DiningCourt) {
-    // Revalidate menu fetches every 24 hours
     const res = await (await fetch(`https://api.hfs.purdue.edu/menus/v2/locations/${location}/${date}`, {
-        next: { revalidate: 60 * 60 * 24 }
+        cache: 'no-store'
     })).json();
 
     return res as MealsResponse;
