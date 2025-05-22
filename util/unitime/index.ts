@@ -5,7 +5,7 @@ import { readFileSync } from 'node:fs';
 // https://timetable.mypurdue.purdue.edu/Timetabling/export?output=events.csv&type=room&term=${TERM}&flags=${FLAGS}
 // https://timetable.mypurdue.purdue.edu/Timetabling/export?output=events.csv&type=room&term=Spring2024PWL&flags=26499
 
-const TERM = 'Spring2025PWL';
+const TERM = 'Fall2025PWL';
 const FLAGS = 0b110011110000011;
 
 export type Section = {
