@@ -29,8 +29,8 @@ export default function FaviconHandler(props: FaviconHandlerProps) {
     const { next, toStart, toEnd, span } = useNextPeriod(props.classes);
 
     // Reference to the favicon element
-    const favicon = useRef<HTMLLinkElement>();
-    const canvas = useRef<HTMLCanvasElement>();
+    const favicon = useRef<HTMLLinkElement>(null);
+    const canvas = useRef<HTMLCanvasElement>(null);
 
     const FAVICON_SIZE = 32;
     const borderRadius = FAVICON_SIZE * 0.15;
