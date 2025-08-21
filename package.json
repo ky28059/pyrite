@@ -9,9 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@headlessui/react": "^1.7.18",
+    "@headlessui/react": "^2.2.4",
     "@headlessui/tailwindcss": "^0.2.0",
-    "@react-google-maps/api": "^2.19.3",
+    "@react-google-maps/api": "^2.20.6",
     "@serwist/next": "^9.0.9",
     "@serwist/precaching": "^9.0.9",
     "@serwist/sw": "^9.0.9",
@@ -19,10 +19,10 @@
     "he": "^1.2.0",
     "isomorphic-dompurify": "^2.14.0",
     "luxon": "^3.4.4",
-    "next": "^15.1.7",
+    "next": "^15.3.2",
     "postcss": "^8.4.47",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
     "react-hotkeys-hook": "^4.4.3",
     "react-icons": "^5.0.0",
     "reactfire": "^4.2.3",
@@ -32,8 +32,8 @@
     "@types/he": "^1.2.3",
     "@types/luxon": "^3.4.2",
     "@types/node": "^20.11.16",
-    "@types/react": "^18.2.55",
-    "@types/react-dom": "^18.2.18",
-    "typescript": "^5.5.4"
+    "@types/react": "^19.1.5",
+    "@types/react-dom": "^19.1.5",
+    "typescript": "^5.8.3"
   }
 }

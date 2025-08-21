@@ -13,6 +13,7 @@ import UserDataContext from '@/contexts/UserDataContext';
 import type { Building } from '@/util/buildings';
 import type { Section } from '@/util/unitime';
 import { mapStyle, mapStyleDark } from '@/app/map/mapStyle';
+import useUserClasses from '@/hooks/useUserClasses';
 
 
 type InteractiveMapProps = {
@@ -22,6 +23,7 @@ type InteractiveMapProps = {
 }
 export default function InteractiveMap(props: InteractiveMapProps) {
     const { data } = useContext(UserDataContext);
+    const courseIds = useUserClasses(props.classes);
 
     // Use initial theme from cookies to avoid FOUC, but update theme on preferences change as well.
     const [theme, setTheme] = useState(props.theme);
@@ -35,7 +37,7 @@ export default function InteractiveMap(props: InteractiveMapProps) {
     // building abbreviation (e.g. WALC).
     const groupedUserClasses = useMemo(() => {
         const ret: { [key: string]: Section[] } = {};
-        const classes = data.courseIds.map((i) => props.classes[i]);
+        const classes = courseIds.map((i) => props.classes[i]);
 
         for (const c of classes) {
             const key = c.location.split(' ')[0];
