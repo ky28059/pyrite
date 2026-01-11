@@ -1,8 +1,6 @@
 'use client'
 
 import { useContext, useEffect, useRef } from 'react';
-import resolveConfig from 'tailwindcss/resolveConfig';
-import tailwindConfig from '@/tailwind.config';
 
 // Contexts
 import UserDataContext from '@/contexts/UserDataContext';
@@ -14,8 +12,6 @@ import type { Section } from '@/util/unitime';
 import { useNextPeriod } from '@/hooks/useNextPeriod';
 import { hexToRgb } from '@/util/color';
 
-
-const config = resolveConfig(tailwindConfig);
 
 // Ported mostly from https://github.com/GunnWATT/watt/blob/main/client/src/components/schedule/FaviconHandler.tsx
 type FaviconHandlerProps = {
@@ -169,28 +165,25 @@ export default function FaviconHandler(props: FaviconHandlerProps) {
 }
 
 function periodTypeToColor(type: Period['type']) {
+    const styles = getComputedStyle(document.documentElement);
+
     switch (type) {
         case 'Lecture':
         case 'Lecture (Hybrid)':
-            return '#f1b42f'
+            return styles.getPropertyValue('--color-lecture')
         case 'Laboratory':
         case 'Laboratory (Hybrid)':
-            // @ts-ignore TODO
-            return config.theme.colors.laboratory;
+            return styles.getPropertyValue('--color-laboratory');
         case 'Pso':
-            // @ts-ignore TODO
-            return config.theme.colors.pso;
+            return styles.getPropertyValue('--color-pso');
         case 'Recitation':
         case 'Recitation (Hybrid)':
-            // @ts-ignore TODO
-            return config.theme.colors.recitation;
+            return styles.getPropertyValue('--color-recitation');
         case 'Event':
-            // @ts-ignore TODO
-            return config.theme.colors.event;
+            return styles.getPropertyValue('--color-event');
         case 'Midterm':
-            // @ts-ignore TODO
-            return config.theme.colors.midterm;
-        default: // TODO: travel time?
-            return '#f1b42f'
+            return styles.getPropertyValue('--color-midterm');
+        default:
+            return styles.getPropertyValue('--color-lecture')
     }
 }

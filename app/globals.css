@@ -31,6 +31,10 @@
 }
 
 @layer base {
+    button {
+        @apply cursor-pointer;
+    }
+
     :root {
         --theme: #F8C537;
 
