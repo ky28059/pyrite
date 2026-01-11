@@ -4,9 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev --webpack",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "build": "next build --webpack",
+    "start": "next start"
   },
   "dependencies": {
     "@headlessui/react": "^2.2.9",
