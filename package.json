@@ -10,29 +10,28 @@
   },
   "dependencies": {
     "@headlessui/react": "^2.2.4",
-    "@headlessui/tailwindcss": "^0.2.0",
     "@react-google-maps/api": "^2.20.6",
     "@serwist/next": "^9.5.0",
-    "autoprefixer": "^10.4.20",
     "he": "^1.2.0",
     "isomorphic-dompurify": "^2.26.0",
     "luxon": "^3.4.4",
     "next": "^16.1.1",
-    "postcss": "^8.4.47",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
     "react-hotkeys-hook": "^4.4.3",
     "react-icons": "^5.0.0",
-    "reactfire": "^4.2.3",
-    "tailwindcss": "^3.4.13"
+    "reactfire": "^4.2.3"
   },
   "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.18",
     "@types/he": "^1.2.3",
     "@types/luxon": "^3.4.2",
     "@types/node": "^20.11.16",
     "@types/react": "^19.1.5",
     "@types/react-dom": "^19.1.5",
+    "postcss": "^8.5.6",
     "serwist": "^9.5.0",
+    "tailwindcss": "^4.1.18",
     "typescript": "^5.8.3"
   }
 }

@@ -1,27 +1,55 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@custom-variant slider-thumb (&::-webkit-slider-thumb);
+@custom-variant scrollbar (&::-webkit-scrollbar);
+@custom-variant scrollbar-thumb (&::-webkit-scrollbar-thumb);
+
+@theme {
+    --color-theme: var(--theme);
+
+    --color-primary: var(--primary);
+    --color-secondary: var(--secondary);
+    --color-tertiary: var(--tertiary);
+
+    --color-content: var(--content);
+    --color-content-secondary: var(--content-secondary);
+
+    /* Period colors */
+    --color-lecture: #f1b42f;
+    --color-laboratory: #7851A9;
+    --color-pso: #6A5ACD;
+    --color-recitation: #f56fa1;
+    --color-event: #73C2FB;
+    --color-midterm: #FF8F00;
+}
+
+@utility container {
+    @apply px-6 sm:px-8 lg:px-16 xl:px-20 2xl:px-24;
+    margin: 0 auto;
+}
 
 @layer base {
     :root {
-        --theme: 248 197 55; /* #F8C537 */
+        --theme: #F8C537;
 
-        --primary: 33 33 33; /* #212121 */
-        --secondary: 117 117 117; /* #757575 */
-        --tertiary: 229 231 235;
+        --primary: #212121;
+        --secondary: #757575;
+        --tertiary: rgb(229 231 235);
 
-        --content: 255 255 255; /* #ffffff */
-        --content-secondary: 243 244 246; /* #f3f4f6 */
+        --content: #ffffff;
+        --content-secondary: #f3f4f6;
     }
 
     :root.dark {
-        --theme: 241 180 47; /* #f1b42f */
+        --theme: #f1b42f;
 
-        --primary: 255 255 255; /* #ffffff */
-        --secondary: 137 137 137; /* #898989 */
-        --tertiary: 64 64 64; /* #404040 */
+        --primary: #ffffff;
+        --secondary: #898989;
+        --tertiary: #404040;
 
-        --content: 27 27 27; /* #1b1b1b */
-        --content-secondary: 19 19 19; /* #131313 */
+        --content: #1b1b1b;
+        --content-secondary: #131313;
     }
 }
