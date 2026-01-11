@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@headlessui/react": "^2.2.4",
+    "@headlessui/react": "^2.2.9",
     "@react-google-maps/api": "^2.20.6",
     "@serwist/next": "^9.5.0",
     "he": "^1.2.0",

@@ -16,6 +16,8 @@
     --color-content: var(--content);
     --color-content-secondary: var(--content-secondary);
 
+    --color-pulse: var(--pulse);
+
     /* Period colors */
     --color-lecture: #f1b42f;
     --color-laboratory: #7851A9;
@@ -37,23 +39,21 @@
 
     :root {
         --theme: #F8C537;
-
         --primary: #212121;
         --secondary: #757575;
         --tertiary: rgb(229 231 235);
-
         --content: #ffffff;
         --content-secondary: #f3f4f6;
+        --pulse: #d1d5db;
     }
 
     :root.dark {
         --theme: #f1b42f;
-
         --primary: #ffffff;
         --secondary: #898989;
         --tertiary: #404040;
-
         --content: #1b1b1b;
         --content-secondary: #131313;
+        --pulse: #313135;
     }
 }

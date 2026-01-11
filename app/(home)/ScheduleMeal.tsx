@@ -69,11 +69,11 @@ export default function ScheduleMeal(props: ScheduleBackgroundBlockProps) {
                 <section className="flex flex-col gap-2">
                     {!props.meals ? (
                         <>
-                            <div className="bg-pulse dark:bg-pulse-dark rounded h-10 animate-pulse" />
-                            <div className="bg-pulse dark:bg-pulse-dark rounded h-10 animate-pulse" />
-                            <div className="bg-pulse dark:bg-pulse-dark rounded h-10 animate-pulse" />
-                            <div className="bg-pulse dark:bg-pulse-dark rounded h-10 animate-pulse" />
-                            <div className="bg-pulse dark:bg-pulse-dark rounded h-10 animate-pulse" />
+                            <div className="bg-pulse rounded h-10 animate-pulse" />
+                            <div className="bg-pulse rounded h-10 animate-pulse" />
+                            <div className="bg-pulse rounded h-10 animate-pulse" />
+                            <div className="bg-pulse rounded h-10 animate-pulse" />
+                            <div className="bg-pulse rounded h-10 animate-pulse" />
                         </>
                     ) : props.meals.map((l) => (
                         <DiningCourtMeal

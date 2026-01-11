@@ -45,8 +45,8 @@ export default function Sidebar() {
             >
                 {!mounted || status === 'loading' ? (
                     <>
-                        <div className="size-10 rounded-full bg-pulse dark:bg-pulse-dark animate-pulse" />
-                        <span className="hidden sm:block h-6 flex-grow mr-3 rounded bg-pulse dark:bg-pulse-dark animate-pulse" />
+                        <div className="size-10 rounded-full bg-pulse animate-pulse" />
+                        <span className="hidden sm:block h-6 flex-grow mr-3 rounded bg-pulse animate-pulse" />
                     </>
                 ) : !user ? (
                     <>
